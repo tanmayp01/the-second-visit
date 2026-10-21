@@ -1,0 +1,19 @@
+{
+  "name": "the-second-visit",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Second Visit — hospitality mentorship by Deepak Thapliyal. Website by Klytos Labs.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/martian-mono": "^5.3.0",
+    "@fontsource/tiro-devanagari-hindi": "^5.3.0",
+    "astro": "^5.18.2"
+  }
+}

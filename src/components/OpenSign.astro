@@ -1,0 +1,20 @@
+---
+// Café sign hanging on a nail: "Closed · Training" flips to "Open · Doors 12:00". Decorative.
+---
+<div class="sign-swing open-sign" aria-hidden="true">
+  <svg width="76" height="34" viewBox="0 0 76 34" overflow="visible"><path d="M38 4 L7 34 M38 4 L69 34" stroke="#C9A15A" stroke-width="1.5" fill="none" /><circle cx="38" cy="4" r="4.5" fill="#C9A15A" /></svg>
+  <div class="sign-flip open-sign__card">
+    <div class="open-sign__face open-sign__face--open"><span class="open-sign__word">Open</span><span class="mono">Doors 12:00</span></div>
+    <div class="open-sign__face open-sign__face--closed"><span class="open-sign__word">Closed</span><span class="mono">Training</span></div>
+  </div>
+</div>
+
+<style>
+  .open-sign { position: absolute; top: -6px; right: clamp(20px, 4vw, 48px); width: 132px; display: flex; flex-direction: column; align-items: center; perspective: 600px; z-index: 2; }
+  .open-sign__card { position: relative; width: 132px; height: 60px; transform-style: preserve-3d; }
+  .open-sign__face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 2px solid var(--brass); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; line-height: 1; }
+  .open-sign__face--open { background: var(--paper); color: var(--ink); }
+  .open-sign__face--open .mono { color: var(--muted); }
+  .open-sign__face--closed { background: var(--action); color: var(--paper); transform: rotateY(180deg); }
+  .open-sign__word { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 26px; }
+</style>

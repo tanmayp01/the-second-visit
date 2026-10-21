@@ -1,0 +1,384 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
+import Faq from '../components/Faq.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import OrderRail from '../components/OrderRail.astro';
+import ChaiGlass from '../components/ChaiGlass.astro';
+import OpenSign from '../components/OpenSign.astro';
+import { site, telHref, mailHref, phHtml } from '../config/site';
+
+const price = phHtml(site.priceFrom, 'X,XXX');
+const phone = phHtml(site.phoneDisplay, '+91 XXXXX XXXXX');
+
+const gaps = [
+  ['The welcome depends on who’s on shift.', 'Without a shared standard, every guest meets a different café.'],
+  ['Feedback is heard, then forgotten.', 'Comments arrive, but nothing in the daily routine changes.'],
+  ['Stock is managed by memory.', 'Items run out mid-service, or expire at the back of the shelf.'],
+  ['Staff learn by guessing.', 'Good people want to do well. Nobody has shown them what “well” looks like.'],
+];
+const menu = [
+  ['The welcome & guest experience', 'FRONT', 'How guests are greeted, served and seen off — and the small details that make a place feel like theirs.'],
+  ['Feedback & complaints', 'FRONT', 'Collecting feedback, reading it honestly, and recovering well when something goes wrong.'],
+  ['Training your team', 'TEAM', 'Hands-on coaching for teams of any size — even one or two people.'],
+  ['Service standards', 'TEAM', 'Simple, shared habits so every shift delivers the same café.'],
+  ['Stock & inventory', 'BACK', 'Stock control, ordering and cutting waste — without complicated software.'],
+  ['Workflows & routines', 'BACK', 'Opening, closing and service routines that make the day run smoother.'],
+];
+const steps = [
+  ['01 · FREE', 'A chai pe charcha', 'A no-obligation conversation, by phone or in person, about your café and what’s on your mind.'],
+  ['02 · OBSERVE', 'Deepak sees your service', 'He visits during working hours and experiences your café the way a guest would.'],
+  ['03 · TRAIN', 'Morning sessions', 'On-site, before opening — with you, your team, or both — focused on what he saw.'],
+  ['04 · FOLLOW UP', 'A check-in', 'Once you’ve put it into practice, Deepak checks what’s working and adjusts.'],
+];
+const morning = [
+  ['08:30', 'Team arrives. Chai, then we begin.'],
+  ['09:00', 'Session — one focus, explained simply.'],
+  ['10:30', 'Practise it on your own floor.'],
+  ['12:00', 'Doors open. Use it on real guests.'],
+];
+const faqs = [
+  { q: 'Is the first conversation really free?', a: 'Yes. The first chat — a call, or a cup of chai — is free and comes with no obligation. It’s a chance for Deepak to understand your café, and for you to decide whether the mentorship is right for you.' },
+  { q: 'My team is just two people. Is this for me?', a: 'Very much. The mentorship is built for small, independent cafés. Training one or two people well often makes the biggest difference to how a guest feels.' },
+  { q: 'Will sessions get in the way of running my café?', a: 'Sessions are planned for the morning, before you open — usually wrapping up before 12 or 1 PM, depending on your café. Your team learns first, then practises on real guests the same day.' },
+  { q: 'What does it cost?', a: `The mentorship starts from ₹${price}. The final fee depends on your team size, the number of sessions and your location, and is agreed with you before anything begins.` },
+  { q: 'We haven’t opened yet. Is it too early?', a: 'Not at all — it’s one of the best times. Habits are easier to build before the first guest walks in than to change afterwards. Deepak can help you plan service, roles and routines before opening day.' },
+  { q: 'Can you guarantee more customers?', a: 'No — and be wary of anyone who does. What we can promise is honest, practical work on the things guests notice: how they’re welcomed, served and listened to. Those are the reasons people come back.' },
+];
+---
+<Base title="Home" active="home">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="container split split--center">
+      <div class="hero__text">
+        <p class="eyebrow hero__eyebrow rise d1"><span class="live-dot" aria-hidden="true"></span>Now serving · Hospitality mentorship · {site.city}</p>
+        <h1 id="hero-h" class="h1 rise d2">Beautiful cafés get the first visit. <span class="accent sweep">Hospitality earns the second.</span></h1>
+        <p class="lead hero__lead rise d3">Practical, on-site mentorship for café and restaurant owners — guest experience, staff training, feedback and stock — taught in your own café, in the morning, before you open.</p>
+        <div class="hero__ctas rise d4">
+          <a class="btn btn-primary btn--lg" href="#enquire">Book a free chai pe charcha <Icon name="arrow" /></a>
+          <a class="btn btn-ghost btn--lg" href="#how">How it works</a>
+        </div>
+        <p class="mono muted hero__small rise d5">First conversation free · No obligation</p>
+      </div>
+      <div class="hero__visual">
+        <ChaiGlass class="hero__chai" />
+        <Photo class="hero-img rise d3" eager alt="Deepak briefing a café team at the counter in early morning light" brief="Deepak briefing a café team at the counter, early morning light, before the doors open. Candid, warm, unposed." ratio="4 / 5" />
+        <div class="hero-ticket">
+          <div class="printer" aria-hidden="true"><span></span></div>
+          <div class="ticket print hero-ticket__paper">
+            <div class="ticket__row mono"><span>Table 04</span><span>07:30 AM</span></div>
+            <hr class="perf" />
+            <ul class="hero-ticket__lines">
+              <li><span>1 × Team briefing</span><span class="mono muted">PRE</span></li>
+              <li><span>1 × Welcome walk-through</span><span class="mono muted">FRONT</span></li>
+              <li><span>1 × Feedback routine</span><span class="mono muted">FLOOR</span></li>
+              <li><span>1 × Stock check</span><span class="mono muted">BACK</span></li>
+            </ul>
+            <hr class="perf" />
+            <div class="ticket__row"><span class="mono">Doors open 12:00</span><span class="stamp-mark stamp">ORDER UP</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE GAP -->
+  <section class="section section--paper perf-top" aria-labelledby="gap-h">
+    <div class="container split split--start">
+      <div style="flex: 1 1 420px; min-width: 0;">
+        <p class="eyebrow">01 — The gap</p>
+        <h2 id="gap-h" class="h2">The interiors bring them in. Everything else brings them back.</h2>
+        <p class="measure body-2" style="margin-top: 24px;">Most new cafés spend months on the fit-out — the counter, the chairs, the coffee machine, the logo. Then the doors open and the real work begins: a team that greets well on a busy Sunday, a complaint handled before it becomes a review, stock that doesn’t run out or quietly spoil.</p>
+      </div>
+      <div class="floor-check" style="flex: 1 1 460px; min-width: 0;">
+        <div class="floor-check__head mono"><span>Floor check · What we often see</span><span>Common, not inevitable</span></div>
+        <ol class="floor-check__list">
+          {gaps.map(([t, d], i) => (
+            <li><span class="mono floor-check__n">0{i + 1}</span><div><p class="floor-check__t">{t}</p><p class="small muted" style="margin-top: 6px;">{d}</p></div></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="section--dark belief on-dark" aria-labelledby="belief-h">
+    <OrderRail />
+    <svg class="ring-draw belief__ring" aria-hidden="true" width="380" height="380" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#C9A15A" stroke-width="9" stroke-linecap="round" pathLength="1000" stroke-dasharray="1000" stroke-dashoffset="70" transform="rotate(-80 100 100)" />
+      <circle cx="100" cy="100" r="69" fill="none" stroke="#C9A15A" stroke-width="2" pathLength="1000" stroke-dasharray="300 80 420 200" opacity="0.6" />
+    </svg>
+    <div class="container belief__inner">
+      <p class="eyebrow" style="margin-bottom: 28px;">02 — What we believe</p>
+      <h2 id="belief-h" class="h2 belief__quote">A café shouldn’t only attract people once. It should give them <span class="accent-dark">a reason to return.</span></h2>
+      <div class="grid-auto belief__details">
+        <div><p class="mono" style="color: var(--brass);">Small detail</p><p class="belief__d">How someone is greeted in the first ten seconds.</p></div>
+        <div><p class="mono" style="color: var(--brass);">Small detail</p><p class="belief__d">Whether a concern is actually heard — and acted on.</p></div>
+        <div><p class="mono" style="color: var(--brass);">Small detail</p><p class="belief__d">Whether they leave feeling like they were welcome.</p></div>
+        <div><p lang="hi" class="hindi" style="font-size: 22px; line-height: 1.2; color: var(--brass);">अतिथि देवो भव</p><p class="belief__d" style="font-size: 16px; color: var(--dark-soft);">Every Indian host knows the idea. We turn it into habits a team can repeat on a busy day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET DEEPAK -->
+  <section class="section" aria-labelledby="meet-h">
+    <div class="container split split--center">
+      <Photo warm style="flex: 1 1 340px; min-width: 0; max-height: 520px;" ratio="1 / 1" alt="Deepak on a café floor, mid-conversation with a guest" brief="Deepak on a café floor, mid-conversation with a guest. Natural light, not a studio headshot." />
+      <div style="flex: 1 1 520px; min-width: 0;">
+        <p class="eyebrow">03 — Your mentor</p>
+        <h2 id="meet-h" class="h2">Fifteen years on the floor. Not behind a desk.</h2>
+        <p class="measure body-2" style="margin-top: 24px;">Deepak Thapliyal has spent more than fifteen years in hospitality and management, working across different levels of the industry — learning how hotels, restaurants and cafés run from the ground up, from the guest at the table to the stockroom at the back.</p>
+        <p class="measure body-2" style="margin-top: 16px;">Today he works with SOCIAL in a guest-experience and client-relationship role: listening to guests, understanding what they felt, spotting where service fell short and helping teams put it right.</p>
+        <p class="muted" style="margin-top: 14px; font-size: 14px; max-width: 40em;">The Second Visit is Deepak’s own independent initiative and is not affiliated with or endorsed by SOCIAL.</p>
+        <div class="chips">
+          <span class="chip">15+ years in hospitality</span>
+          <span class="chip">Front of house &amp; back of house</span>
+          <span class="chip">Based in {site.city}</span>
+        </div>
+        <a class="textlink" href="/about/" style="margin-top: 20px;">Read Deepak’s story <Icon name="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE MENTORSHIP -->
+  <section class="section section--forest on-dark" aria-labelledby="menu-h">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">04 — The mentorship</p>
+          <h2 id="menu-h" class="h2">One mentorship, shaped around your café.</h2>
+        </div>
+        <p style="font-size: 18px; line-height: 1.55; color: var(--forest-soft);">No fixed course, no slide decks. Deepak starts with how your café actually runs, then works with you and your team on the parts that matter most.</p>
+      </div>
+      <div class="menu-card">
+        <span class="stamp-view menu-card__stamp" aria-hidden="true">MADE TO ORDER<span>FOR YOUR CAFÉ</span></span>
+        <div class="menu-card__head"><p class="menu-card__title">The menu</p><p class="mono muted">What we can work on · Chosen together</p></div>
+        <div class="menu-card__grid">
+          {menu.map(([name, tag, desc]) => (
+            <div class="menu-item">
+              <div class="menu-item__row"><h3 class="menu-item__name">{name}</h3><span class="leader" aria-hidden="true"></span><span class={`mono menu-item__tag tag-${tag.toLowerCase()}`}>{tag}</span></div>
+              <p class="small muted" style="margin-top: 8px;">{desc}</p>
+            </div>
+          ))}
+        </div>
+        <p class="small muted" style="margin-top: 20px;">Also on the menu: building regular guests the honest way, and pre-opening guidance for new cafés.</p>
+        <div class="menu-card__foot">
+          <div class="price">
+            <p class="mono muted">Starting from</p>
+            <p class="price__num">₹<span set:html={price} /></p>
+            <p class="price__note">Final fee depends on team size, number of sessions and location — agreed with you before anything begins.</p>
+          </div>
+          <div class="menu-card__ctas">
+            <a class="btn btn-primary" href="#enquire">Book a free chat</a>
+            <a class="btn btn-ghost" href="/mentorship/">See the full mentorship</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section" aria-labelledby="how-h">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">05 — How it works</p>
+          <h2 id="how-h" class="h2">Learn it in the morning. Use it at lunch.</h2>
+        </div>
+        <p style="font-size: 18px; line-height: 1.55; color: var(--body-2);">Sessions happen in your café, before you open — so you and your team practise on real guests the same day.</p>
+      </div>
+      <ol class="grid-auto steps" style="--min: 240px;">
+        {steps.map(([n, t, d]) => (
+          <li class="step"><p class="mono step__n">{n}</p><h3 class="h3" style="margin-top: 12px;">{t}</h3><p class="muted" style="margin-top: 10px; font-size: 16px;">{d}</p></li>
+        ))}
+      </ol>
+      <div class="morning on-dark">
+        <OpenSign />
+        <div class="morning__head mono"><span style="color: var(--brass);">A typical session morning</span><span style="color: var(--dark-muted);">Indicative · timings agreed per café</span></div>
+        <ol class="grid-auto rail-steps" style="--min: 200px; --gap: 24px;">
+          {morning.map(([time, text], i) => (
+            <li class={i === 3 ? 'is-open' : ''}><span class="tick-dot" aria-hidden="true"></span><p class="morning__time">{time}</p><p class="morning__text">{text}</p></li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section section--paper perf-top" aria-labelledby="who-h">
+    <div class="container">
+      <p class="eyebrow">06 — Who it’s for</p>
+      <h2 id="who-h" class="h2" style="max-width: 18ch;">Made for owners who care how it feels.</h2>
+      <div class="grid-auto who" style="--min: 420px; --gap: 40px 64px;">
+        <div>
+          <p class="who__head">This is for you if…</p>
+          <ul class="ticks">
+            <li><Icon name="check" size={20} class="tick tick--yes" />You’re planning a café and want to open with the right habits.</li>
+            <li><Icon name="check" size={20} class="tick tick--yes" />Your café opened recently and you’re still finding your rhythm.</li>
+            <li><Icon name="check" size={20} class="tick tick--yes" />You run a small team — even just one or two people.</li>
+            <li><Icon name="check" size={20} class="tick tick--yes" />You run a restaurant and want service to feel consistent, shift after shift.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="who__head">It’s probably not for you if…</p>
+          <ul class="ticks ticks--no">
+            <li><Icon name="x" size={20} stroke={2.2} class="tick tick--no" />You need interiors, menu design or social media. That isn’t what we do.</li>
+            <li><Icon name="x" size={20} stroke={2.2} class="tick tick--no" />You want guaranteed numbers. We’ll be honest about what can change — we won’t promise percentages.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-auto why" style="--min: 260px;">
+        <div><p class="mono muted">Why it’s different</p><h3 class="h3 why__t">In your café, not a hall.</h3><p class="muted" style="margin-top: 10px; font-size: 16px;">Training happens where the work happens — your counter, your menu, your team.</p></div>
+        <div><p class="mono muted">Why it’s different</p><h3 class="h3 why__t">Built for small teams.</h3><p class="muted" style="margin-top: 10px; font-size: 16px;">Most hospitality training is designed for chains. This is designed for a café with two people on shift.</p></div>
+        <div><p class="mono muted">Why it’s different</p><h3 class="h3 why__t">From someone still on the floor.</h3><p class="muted" style="margin-top: 10px; font-size: 16px;">Deepak works in guest experience today. The advice is current, not remembered.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section" aria-labelledby="faq-h">
+    <div class="container split split--start">
+      <div style="flex: 1 1 320px; min-width: 0;">
+        <p class="eyebrow">07 — Questions</p>
+        <h2 id="faq-h" class="h2">Questions owners ask.</h2>
+        <p class="body-2" style="margin-top: 20px;">Something else on your mind? Call or WhatsApp <a href={telHref()} set:html={phone} />.</p>
+      </div>
+      <div style="flex: 2 1 560px; min-width: 0;">
+        <Faq group="home-faq" items={faqs} />
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY -->
+  <section id="enquire" class="section section--red on-dark" aria-labelledby="enq-h">
+    <div class="container split split--start">
+      <div style="flex: 1 1 400px; min-width: 0;">
+        <div class="bell-row">
+          <Icon name="bell" size={64} stroke={1.2} class="bell" />
+          <span class="mono">Ring the bell — we’ll call you back</span>
+        </div>
+        <p class="eyebrow">Free first conversation</p>
+        <h2 id="enq-h" class="h2" style="font-size: clamp(36px, 4.6vw, 64px); line-height: 1.05;">Pull up a chair. The first chai’s on us.</h2>
+        <p style="margin-top: 24px; font-size: 18px; line-height: 1.55; max-width: 32em;">Tell us a little about your café. Deepak will call you to set up a free, no-obligation conversation.</p>
+        <ul class="contact-list">
+          <li><a href={telHref()}><span class="contact-list__icon"><Icon name="phone" /></span><span class="contact-list__txt"><span class="mono">Call or WhatsApp</span><span class="contact-list__val" set:html={phone} /></span></a></li>
+          <li><a href={mailHref()}><span class="contact-list__icon"><Icon name="mail" /></span><span class="contact-list__txt"><span class="mono">Email</span><span class="contact-list__val" set:html={phHtml(site.email, 'email address')} /></span></a></li>
+          <li class="contact-list__pair">
+            <a href={site.instagram?.url ?? '/contact/'}><span class="contact-list__icon"><Icon name="instagram" /></span><span class="contact-list__val">Instagram <span set:html={phHtml(site.instagram?.handle, '@handle')} /></span></a>
+            <a href={site.linkedin?.url ?? '/contact/'}><span class="contact-list__icon"><Icon name="linkedin" /></span><span class="contact-list__val">LinkedIn <span set:html={phHtml(site.linkedin?.label, 'profile')} /></span></a>
+          </li>
+        </ul>
+        <p style="margin-top: 28px;"><span lang="hi" class="hindi" style="font-size: 20px;">आपका स्वागत है।</span> You’re welcome here.</p>
+      </div>
+      <div style="flex: 1 1 460px; min-width: 0;">
+        <EnquiryForm id="home" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .body-2 { color: var(--body-2); }
+
+  /* hero */
+  .hero { padding: clamp(36px, 5vw, 80px) 0 clamp(64px, 7vw, 104px); }
+  .hero__text { flex: 1 1 540px; min-width: 0; }
+  .hero__eyebrow { margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--action); flex: none; }
+  .hero__lead { margin-top: 28px; }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .hero__small { margin-top: 20px; }
+  .hero__visual { flex: 1 1 380px; min-width: 0; position: relative; }
+  .hero :global(.hero__chai) { position: absolute; bottom: -18px; right: 24px; z-index: 3; }
+  .hero-ticket { position: absolute; left: -44px; bottom: 44px; width: 280px; z-index: 2; }
+  .printer { height: 14px; margin: 0 -10px; background: var(--ink); border-radius: 4px; position: relative; z-index: 1; }
+  .printer span { position: absolute; left: 14px; right: 14px; bottom: 3px; height: 2px; background: var(--steel-dark); }
+  .hero-ticket__paper { margin-top: -3px; border-top: 0; border-radius: 0 0 4px 4px; padding: 16px 18px; }
+  .hero-ticket__lines { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.4; }
+  .hero-ticket__lines li { display: flex; justify-content: space-between; gap: 8px; }
+  .hero-ticket .ticket__row { align-items: center; }
+  @media (max-width: 899px) {
+    .hero :global(.hero-img) { aspect-ratio: 4 / 3 !important; }
+    .hero-ticket { position: relative; left: auto; bottom: auto; margin: -64px 16px 0 auto; }
+    .hero :global(.hero__chai) { bottom: auto; top: -48px; right: 16px; transform: scale(.8); transform-origin: top right; }
+  }
+
+  /* gap */
+  .floor-check { border: 1px solid var(--ink); border-radius: var(--radius); background: var(--field); }
+  .floor-check__head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 24px; border-bottom: 1px dashed var(--ink); color: var(--muted); }
+  .floor-check__list { padding: 8px 24px; }
+  .floor-check__list li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line-soft); }
+  .floor-check__list li:last-child { border-bottom: 0; }
+  .floor-check__n { font-size: 12px; color: var(--red-text); padding-top: 4px; }
+  .floor-check__t { font-family: var(--font-display); font-size: 21px; line-height: 1.25; }
+
+  /* belief */
+  .belief { position: relative; overflow: clip; padding-bottom: clamp(64px, 8vw, 112px); }
+  .belief__ring { position: absolute; right: -70px; top: 230px; opacity: .32; pointer-events: none; }
+  .belief__inner { position: relative; z-index: 1; padding-top: clamp(48px, 6vw, 80px); }
+  .belief__quote { font-size: clamp(34px, 4.8vw, 68px); max-width: 20ch; }
+  .belief__details { margin-top: clamp(40px, 5vw, 64px); border-top: 1px dashed var(--muted); padding-top: 32px; }
+  .belief__d { margin-top: 10px; font-size: 18px; line-height: 1.5; }
+
+  /* meet */
+  .chips { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* menu card */
+  .menu-card { margin-top: clamp(36px, 4.5vw, 56px); background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: clamp(24px, 4vw, 48px); position: relative; }
+  .menu-card__stamp { --r: 6deg; position: absolute; top: -30px; right: clamp(16px, 4vw, 48px); display: inline-flex; flex-direction: column; align-items: center; padding: 8px 14px; border: 2.5px solid var(--action); outline: 1.5px solid var(--action); outline-offset: 3px; background: var(--paper); color: var(--action); transform: rotate(6deg); font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .1em; line-height: 1.5; text-align: center; }
+  .menu-card__stamp span { font-size: 11px; color: var(--red-text); }
+  .menu-card__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
+  .menu-card__title { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 32px; line-height: 1.1; }
+  .menu-card__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); column-gap: 56px; }
+  .menu-item { padding: 22px 0; border-bottom: 1px dashed var(--line-dash); }
+  .menu-item__row { display: flex; align-items: baseline; gap: 12px; }
+  .menu-item__name { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.25; }
+  .leader { flex: 1; min-width: 16px; border-bottom: 2px dotted var(--line-dash); transform: translateY(-4px); }
+  .menu-item__tag { letter-spacing: .08em; }
+  .tag-front { color: var(--red-text); } .tag-team { color: var(--forest); } .tag-back { color: var(--muted); }
+  .menu-card__foot { margin-top: 28px; padding-top: 28px; border-top: 2px solid var(--ink); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+  .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; }
+  .price__num { font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(36px, 4vw, 48px); line-height: 1; }
+  .price__note { flex-basis: 100%; font-size: 14px; color: var(--muted); max-width: 46ch; }
+  .menu-card__ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* how */
+  .steps { margin-top: clamp(36px, 4.5vw, 56px); }
+  .step { border-top: 2px solid var(--ink); padding-top: 20px; }
+  .step__n { font-size: 12px; color: var(--red-text); }
+  .morning { margin-top: clamp(40px, 5vw, 64px); background: var(--ink); color: var(--ground); border-radius: var(--radius); padding: clamp(24px, 3.5vw, 40px); position: relative; }
+  .morning__head { display: flex; flex-direction: column; gap: 6px; max-width: calc(100% - 170px); }
+  .rail-steps { margin-top: 44px; }
+  .rail-steps li { border-top: 2px solid var(--muted); padding-top: 16px; position: relative; }
+  .tick-dot { position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--ground); }
+  .morning__time { font-family: var(--font-mono); font-size: 20px; }
+  .morning__text { margin-top: 6px; font-size: 16px; color: var(--dark-soft); }
+  .rail-steps li.is-open { border-top-color: var(--coral); }
+  .rail-steps li.is-open .tick-dot { background: var(--coral); }
+  .rail-steps li.is-open .morning__time { color: var(--coral); }
+  .rail-steps li.is-open .morning__text { color: var(--ground); }
+
+  /* who */
+  .who { margin-top: clamp(32px, 4vw, 48px); }
+  .who__head { margin-bottom: 8px; font-weight: 600; }
+  .ticks li { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+  .ticks li:last-child { border-bottom: 0; }
+  .ticks--no li { color: var(--body-3); }
+  :global(.tick) { flex: none; margin-top: 3px; }
+  :global(.tick--yes) { color: var(--forest); }
+  :global(.tick--no) { color: var(--red-text); }
+  .why { margin-top: clamp(48px, 6vw, 72px); border-top: 2px solid var(--ink); padding-top: 32px; }
+  .why__t { margin-top: 12px; font-size: 26px; }
+
+  /* enquiry */
+  .bell-row { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; color: var(--paper); }
+  .contact-list { margin-top: 36px; display: flex; flex-direction: column; border-top: 1px solid rgba(251,248,242,.35); }
+  .contact-list li { border-bottom: 1px solid rgba(251,248,242,.35); }
+  .contact-list a { display: flex; align-items: center; gap: 16px; min-height: 64px; color: var(--paper); text-decoration: none; }
+  .contact-list a:hover .contact-list__val { text-decoration: underline; text-underline-offset: 4px; }
+  .contact-list__pair { display: flex; flex-wrap: wrap; gap: 0 32px; }
+  .contact-list__icon { width: 40px; height: 40px; flex: none; border: 1.5px solid var(--paper); border-radius: 50%; display: grid; place-items: center; }
+  .contact-list__txt { display: flex; flex-direction: column; line-height: 1.3; }
+  .contact-list__val { font-size: 17px; font-weight: 600; }
+</style>

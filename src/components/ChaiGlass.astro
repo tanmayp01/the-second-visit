@@ -1,0 +1,18 @@
+---
+// A steaming cutting-chai glass. Decorative.
+interface Props { class?: string; style?: string }
+const { class: cls = '', style } = Astro.props;
+---
+<svg class={`chai ${cls}`} style={style} aria-hidden="true" width="88" height="112" viewBox="0 0 88 112" overflow="visible">
+  <g class="steam" fill="none" stroke="#8C857E" stroke-width="2.2" stroke-linecap="round" opacity="0.7">
+    <path d="M32 28 C26 21, 38 14, 32 5" />
+    <path d="M44 28 C38 21, 50 14, 44 3" />
+    <path d="M56 28 C50 21, 62 14, 56 5" />
+  </g>
+  <ellipse cx="44" cy="106" rx="27" ry="3.5" fill="rgba(31,26,23,0.16)" />
+  <path d="M16 34 L72 34 L64 104 L24 104 Z" fill="#FBF8F2" />
+  <path d="M18.6 52 L69.4 52 L64 104 L24 104 Z" fill="#B7793A" />
+  <path d="M18.6 52 L69.4 52" stroke="#E5C88C" stroke-width="3" />
+  <path d="M30 37 L32 101 M44 37 L44 101 M58 37 L56 101" stroke="rgba(31,26,23,0.22)" stroke-width="1.5" />
+  <path d="M16 34 L72 34 L64 104 L24 104 Z" fill="none" stroke="#1F1A17" stroke-width="2" stroke-linejoin="round" />
+</svg>

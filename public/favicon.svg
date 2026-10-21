@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#F4EDE2"/>
+  <g transform="rotate(-8 32 32)">
+    <circle cx="32" cy="32" r="24" fill="none" stroke="#C23B22" stroke-width="4"/>
+    <text x="32" y="38.5" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="700" fill="#C23B22">2nd</text>
+  </g>
+</svg>

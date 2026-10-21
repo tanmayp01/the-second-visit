@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+import { site, telHref, mailHref, phHtml } from '../config/site';
+const year = new Date().getFullYear();
+---
+<footer class="footer on-dark">
+  <div class="container">
+    <div class="footer__cta">
+      <p class="footer__line">Give them a reason <span class="accent-dark">to return.</span></p>
+      <a class="btn btn-light" href="/contact/">Book a free chai pe charcha <Icon name="arrow" /></a>
+    </div>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <span class="footer__stamp" aria-hidden="true">2nd</span>
+          <span class="footer__name">{site.name}</span>
+        </div>
+        <p class="footer__muted">Practical hospitality mentorship for cafés and restaurants in {site.city}, led by {site.owner}.</p>
+      </div>
+      <nav aria-label="Footer" class="footer__col">
+        <p class="mono footer__head">Explore</p>
+        <a class="ulink" href="/">Home</a>
+        <a class="ulink" href="/mentorship/">The mentorship</a>
+        <a class="ulink" href="/about/">About Deepak</a>
+        <a class="ulink" href="/contact/">Contact</a>
+      </nav>
+      <div class="footer__col">
+        <p class="mono footer__head">Talk to us</p>
+        <a href={telHref()}>Call / WhatsApp <span set:html={phHtml(site.phoneDisplay, '+91 XXXXX XXXXX')} /></a>
+        <a href={mailHref()} set:html={phHtml(site.email, 'email address')} />
+        <a href={site.instagram?.url ?? '/contact/'} rel={site.instagram ? 'me noopener' : undefined}>Instagram <span set:html={phHtml(site.instagram?.handle, '@handle')} /></a>
+        <a href={site.linkedin?.url ?? '/contact/'} rel={site.linkedin ? 'me noopener' : undefined}>LinkedIn <span set:html={phHtml(site.linkedin?.label, 'profile')} /></a>
+      </div>
+      <div class="footer__col">
+        <p class="mono footer__head">Where</p>
+        <p>Based in {site.city}, {site.region}.</p>
+        <p class="footer__muted">Sessions across {site.city}. Other cities on request, for suitable engagements.</p>
+        <p lang="hi" class="hindi footer__hindi">अतिथि देवो भव</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© {year} {site.name} · {site.owner}</span>
+      <span>Designed by {site.agency.url ? <a class="ulink" href={site.agency.url}>{site.agency.name}</a> : site.agency.name}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--ink); color: var(--ground); font-size: 16px; padding: clamp(56px, 6.5vw, 88px) 0 32px; }
+  .footer a:not(.btn) { color: var(--ground); text-decoration: none; display: block; padding-block: 4px; }
+  .footer a.ulink, .footer__bottom a { text-decoration: underline; text-underline-offset: 4px; }
+  .footer a:not(.btn):hover { color: var(--paper); text-decoration: underline; text-underline-offset: 4px; }
+  .footer__cta { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px; padding-bottom: clamp(40px, 5vw, 64px); border-bottom: 1px dashed var(--muted); }
+  .footer__line { font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(36px, 5vw, 68px); line-height: 1.04; letter-spacing: -0.01em; max-width: 14ch; }
+  .footer__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 40px 32px; padding-block: clamp(40px, 5vw, 56px); }
+  .footer__brand { display: flex; flex-direction: column; gap: 16px; }
+  .footer__logo { display: flex; align-items: center; gap: 12px; }
+  .footer__stamp { width: 40px; height: 40px; flex: none; border: 2px solid var(--coral); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--coral); font-family: var(--font-mono); font-size: 11px; font-weight: 500; transform: rotate(-8deg); }
+  .footer__name { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 22px; }
+  .footer__muted { color: var(--dark-muted); font-size: 15px; max-width: 30ch; }
+  .footer__col { display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+  .footer__head { color: var(--brass); margin-bottom: 12px; }
+  .footer__hindi { margin-top: 8px; font-size: 18px; color: var(--brass); }
+  .footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 24px; border-top: 1px dashed var(--muted); font-size: 13px; color: var(--dark-muted); }
+</style>

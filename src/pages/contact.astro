@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { site, telHref, waHref, mailHref, phHtml } from '../config/site';
+---
+<Base title="Contact" description="Book a free, no-obligation chai pe charcha with Deepak Thapliyal about your café or restaurant in Dehradun." active="contact" mobileBar={false}>
+  <section class="c-page" aria-labelledby="c-h">
+    <div class="container split split--start">
+      <div style="flex: 1 1 420px; min-width: 0;">
+        <p class="eyebrow rise d1" style="margin-bottom: 24px;">Contact · Free first conversation</p>
+        <h1 id="c-h" class="h1 rise d2" style="font-size: clamp(40px, 5.4vw, 76px); line-height: 1.03;">Book your free <span class="accent">chai pe charcha.</span></h1>
+        <p class="lead rise d3" style="margin-top: 24px; max-width: 32em;">Tell us about your café in a couple of lines. There’s nothing to prepare and nothing to sign.</p>
+
+        <div style="margin-top: 40px;">
+          <p class="mono muted" style="margin-bottom: 4px;">What happens next</p>
+          <ol class="next">
+            <li><span class="mono">01</span><span>Deepak calls or messages you within <span set:html={phHtml(site.replyDays, 'X')} /> working days.</span></li>
+            <li><span class="mono">02</span><span>You talk about your café — over the phone, or over chai.</span></li>
+            <li><span class="mono">03</span><span>If it’s a good fit, he suggests a plan and a clear quote.</span></li>
+          </ol>
+        </div>
+
+        <div class="talk-now on-dark">
+          <p class="mono" style="color: var(--brass);">Prefer to talk now?</p>
+          <div class="talk-now__btns">
+            <a class="btn btn-primary" href={telHref()}><Icon name="phone" />Call</a>
+            <a class="btn btn-light" href={waHref()} target={site.phoneE164 ? '_blank' : undefined} rel={site.phoneE164 ? 'noopener' : undefined}><Icon name="chat" />WhatsApp</a>
+          </div>
+          <p class="talk-now__num"><span set:html={phHtml(site.phoneDisplay, '+91 XXXXX XXXXX')} /> <span class="talk-now__muted">· same number for calls and WhatsApp</span></p>
+          <p class="talk-now__muted" style="margin-top: 6px; font-size: 15px;">Best time to call: <span set:html={phHtml(site.bestTimeToCall, 'e.g. 3–6 PM, Mon–Sat')} /></p>
+        </div>
+
+        <dl class="details">
+          <div><dt class="mono muted">Email</dt><dd><a href={mailHref()} set:html={phHtml(site.email, 'email address')} /></dd></div>
+          <div><dt class="mono muted">Instagram</dt><dd><a href={site.instagram?.url ?? '#'} set:html={phHtml(site.instagram?.handle, '@handle')} /></dd></div>
+          <div><dt class="mono muted">LinkedIn</dt><dd><a href={site.linkedin?.url ?? '#'} set:html={phHtml(site.linkedin?.label, 'profile link')} /></dd></div>
+          <div><dt class="mono muted">Where</dt><dd>{site.city}, {site.region}. Other cities on request.</dd></div>
+        </dl>
+      </div>
+      <div style="flex: 1 1 460px; min-width: 0;">
+        <EnquiryForm id="contact" />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .c-page { padding: clamp(36px, 5vw, 80px) 0 clamp(64px, 7.5vw, 104px); }
+  .next li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px dashed var(--line-dash); }
+  .next li:last-child { border-bottom: 0; }
+  .next .mono { font-size: 12px; color: var(--red-text); padding-top: 4px; }
+  .talk-now { margin-top: 32px; background: var(--ink); color: var(--ground); border-radius: var(--radius); padding: 24px 28px; }
+  .talk-now__btns { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .talk-now__num { margin-top: 16px; font-size: 17px; font-weight: 600; }
+  .talk-now__muted { font-weight: 400; color: var(--dark-muted); }
+  .details { margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 20px 32px; }
+  .details dd { margin-top: 6px; }
+</style>

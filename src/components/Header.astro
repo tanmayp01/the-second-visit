@@ -1,0 +1,104 @@
+---
+import Icon from './Icon.astro';
+import { site, telHref, phHtml } from '../config/site';
+
+interface Props { active?: string }
+const { active = 'none' } = Astro.props;
+const links = [
+  { key: 'mentorship', label: 'The mentorship', href: '/mentorship/' },
+  { key: 'about', label: 'About Deepak', href: '/about/' },
+  { key: 'contact', label: 'Contact', href: '/contact/' },
+];
+---
+<header class="site-header">
+  <div class="topbar">
+    <div class="container topbar__inner mono">
+      <span>Now mentoring cafés in {site.city} · Sessions before service</span>
+      <a class="only-wide topbar__call" href={telHref()}>Call / WhatsApp <span set:html={phHtml(site.phoneDisplay, '+91 XXXXX XXXXX')} /></a>
+    </div>
+  </div>
+  <div class="bar">
+    <div class="container bar__inner">
+      <a class="brand" href="/" aria-label={`${site.name}, home`}>
+        <span class="logo-stamp" aria-hidden="true">2nd</span>
+        <span class="brand__text">
+          <span class="brand__name">{site.name}</span>
+          <span class="brand__by mono">by {site.owner}</span>
+        </span>
+      </a>
+      <nav class="only-wide nav" aria-label="Main">
+        {links.map((l) => (
+          <a class="nav__link" href={l.href} aria-current={active === l.key ? 'page' : undefined}>{l.label}</a>
+        ))}
+        <a class="btn btn-primary nav__cta" href="/contact/"><Icon name="bell" size={20} class="bell-sm" />Book a free chat</a>
+      </nav>
+      <button class="only-narrow menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="sr-only" data-menu-label>Open menu</span>
+        <span class="menu-btn__open"><Icon name="menu" size={22} /></span>
+        <span class="menu-btn__close"><Icon name="x" size={22} /></span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile" hidden>
+    <div class="container">
+      <a class="mobile-menu__link" href="/" aria-current={active === 'home' ? 'page' : undefined}>Home <Icon name="arrow" size={22} /></a>
+      {links.map((l) => (
+        <a class="mobile-menu__link" href={l.href} aria-current={active === l.key ? 'page' : undefined}>{l.label} <Icon name="arrow" size={22} /></a>
+      ))}
+      <a class="btn btn-primary btn--lg btn--block mobile-menu__cta" href="/contact/">Book a free chai pe charcha</a>
+      <a class="btn btn-ghost btn--lg btn--block" href={telHref()}><Icon name="phone" size={20} />Call or WhatsApp</a>
+      <p class="mobile-menu__note"><span lang="hi" class="hindi">आपका स्वागत है</span> · You're welcome here</p>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .topbar { background: var(--ink); color: var(--brass); }
+  .topbar__inner { min-height: 40px; padding-block: 8px; display: flex; align-items: center; justify-content: space-between; gap: 16px; line-height: 1.5; }
+  .topbar__call { color: var(--ground); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .bar { border-bottom: 1px solid var(--line); background: var(--ground); }
+  .bar__inner { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+  .logo-stamp { width: 44px; height: 44px; flex: none; border: 2px solid var(--action); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--action); font-family: var(--font-mono); font-size: 12px; font-weight: 500; transform: rotate(-8deg); }
+  .brand__text { display: flex; flex-direction: column; line-height: 1.1; }
+  .brand__name { font-family: var(--font-display); font-weight: var(--display-weight); font-size: 22px; }
+  .brand__by { color: var(--muted); margin-top: 5px; }
+  .nav { display: flex; align-items: center; gap: 32px; }
+  .nav__link { color: var(--ink); text-decoration: none; font-size: 16px; font-weight: 500; padding: 10px 0; border-bottom: 2px solid transparent; transition: color .16s ease; }
+  .nav__link:hover { color: var(--action); }
+  .nav__link[aria-current='page'] { border-bottom-color: var(--action); }
+  .nav__cta { min-height: 48px; padding: 0 22px; font-size: 15px; }
+  .menu-btn { width: 48px; height: 48px; flex: none; align-items: center; justify-content: center; border: 1.5px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; padding: 0; }
+  .menu-btn__close { display: none; }
+  .menu-btn[aria-expanded='true'] .menu-btn__open { display: none; }
+  .menu-btn[aria-expanded='true'] .menu-btn__close { display: block; }
+  .mobile-menu { background: var(--ground); border-bottom: 1px solid var(--line); padding: 8px 0 32px; }
+  .mobile-menu__link { font-family: var(--font-display); font-size: 30px; color: var(--ink); text-decoration: none; min-height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+  .mobile-menu__link[aria-current='page'] { color: var(--action); }
+  .mobile-menu__cta { margin: 28px 0 12px; }
+  .mobile-menu__note { margin-top: 28px; text-align: center; color: var(--muted); font-size: 15px; }
+  .mobile-menu__note .hindi { font-size: 18px; color: var(--ink); }
+  @media (min-width: 900px) { .mobile-menu { display: none !important; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .mobile-menu:not([hidden]) { animation: tsv-drop .25s ease both; }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-menu');
+  const label = document.querySelector('[data-menu-label]');
+  if (btn && menu) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      if (label) label.textContent = open ? 'Close menu' : 'Open menu';
+    };
+    btn.addEventListener('click', () => set(menu.hidden));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); }
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+    window.matchMedia('(min-width: 900px)').addEventListener('change', (m) => { if (m.matches) set(false); });
+  }
+</script>
