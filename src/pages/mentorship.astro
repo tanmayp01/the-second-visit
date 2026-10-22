@@ -2,49 +2,51 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
+import Film from '../components/Film.astro';
 import Faq from '../components/Faq.astro';
 import { site, phHtml } from '../config/site';
+import { films } from '../config/media';
 
 const price = phHtml(site.priceFrom, 'X,XXX');
 
 const groups = [
-  { tag: 'Front of house', color: 'var(--red-text)', title: 'How guests feel', items: [
-    ['The welcome.', 'Greeting, seating, serving and seeing guests off.'],
-    ['Talking to guests.', 'Warm, confident communication; knowing your regulars.'],
-    ['Feedback & complaints.', 'Asking, listening, and recovering well.'],
-    ['Bringing guests back.', 'The honest habits that build loyalty.'],
+  { label: 'The guest', title: 'How guests feel', items: [
+    ['The welcome', 'Greeting, seating, serving and seeing guests off.'],
+    ['Talking with guests', 'Warm, confident conversation; knowing your regulars.'],
+    ['Feedback and complaints', 'Asking, listening and recovering well.'],
+    ['Bringing guests back', 'The honest habits that build loyalty.'],
   ] },
-  { tag: 'Your team', color: 'var(--forest)', title: 'How your team works', items: [
-    ['Staff training.', 'Practical coaching, even for one or two people.'],
-    ['Service standards.', 'Simple rules everyone follows, every shift.'],
-    ['Guest-facing behaviour.', 'Body language, tone, and handling a rush.'],
-    ['Better habits.', 'Working practices that last after the sessions end.'],
+  { label: 'The team', title: 'How your team serves', items: [
+    ['Staff training', 'Practical coaching, even for one or two people.'],
+    ['Service standards', 'Simple rules everyone follows, every shift.'],
+    ['On the floor', 'Body language, tone, and handling a rush.'],
+    ['Lasting habits', 'Working practices that stay after the sessions end.'],
   ] },
-  { tag: 'Back of house', color: 'var(--muted)', title: 'How the café runs', items: [
-    ['Stock & inventory.', 'Ordering, stock checks and cutting waste.'],
-    ['Workflows.', 'Opening, closing and service routines.'],
-    ['Tools & software.', 'Getting real use from the systems you already have.'],
-    ['Pre-opening.', 'Roles, routines and service plans for new cafés.'],
+  { label: 'The operation', title: 'How the café runs', items: [
+    ['Stock and inventory', 'Ordering, stock checks and cutting waste.'],
+    ['Workflows', 'Opening, closing and service routines.'],
+    ['Tools and software', 'Getting real use from the systems you already have.'],
+    ['Pre-opening', 'Roles, routines and service plans for new cafés.'],
   ] },
 ];
 const who = [
-  ['OWNER', 'For the person who runs it', 'One-to-one mentorship on the decisions only an owner makes: standards, stock, hiring for attitude, and how to lead a shift.'],
-  ['TEAM', 'For the people on the floor', 'Hands-on training for your staff — however few — on welcoming guests, handling feedback and working as one team.'],
-  ['BOTH · RECOMMENDED', 'Owner and team together', 'Everyone hears the same thing, agrees the same standard, and practises it together before doors open.'],
+  ['The owner', 'One-to-one mentorship on the decisions only an owner makes: standards, stock, hiring for attitude, and how to lead a shift.'],
+  ['The team', 'Hands-on training for your staff, however few, on welcoming guests, handling feedback and working as one team.'],
+  ['Both, recommended', 'Everyone hears the same thing, agrees the same standard, and practises it together before the doors open.'],
 ];
 const flow = [
-  ['STEP 01 · FREE', 'Chai pe charcha', 'A relaxed, no-obligation conversation — by phone or in person — about your café, your team and what’s keeping you up at night.'],
-  ['STEP 02', 'Seeing your service', 'Deepak visits during working hours and experiences your café as a guest would — the welcome, the wait, the bill, the goodbye.'],
-  ['STEP 03', 'A plan and a quote', 'You agree the focus, the number of sessions and the fee together. Nothing starts until you’re happy with it.'],
-  ['STEP 04', 'Morning sessions, on-site', 'In your café, before you open — usually wrapping up before 12 or 1 PM — so the team uses what they learned at lunch.'],
-  ['STEP 05', 'Follow-up', 'A check-in once the habits have had time to settle, to see what’s working and adjust what isn’t.'],
+  ['I', 'A first conversation', 'Free and without obligation, by phone or in person, about your café, your team and what is on your mind.'],
+  ['II', 'Seeing your service', 'Deepak visits during working hours and experiences your café as a guest would: the welcome, the wait, the bill, the goodbye.'],
+  ['III', 'A plan and a quote', 'You agree the focus, the number of sessions and the fee together. Nothing starts until you are happy with it.'],
+  ['IV', 'Morning sessions', 'In your café, before you open, usually finishing before 12 or 1 PM, so the team uses what they learned at lunch.'],
+  ['V', 'A follow-up', 'A check-in once the habits have had time to settle, to see what is working and adjust what isn’t.'],
 ];
 // Set to true once Deepak confirms the session language answer.
 const languageConfirmed = false;
 const allFaqs = [
-  { q: 'Where do the sessions happen?', a: 'In your own café or restaurant, so the training uses your counter, your menu and your floor. That’s what makes it stick.' },
+  { q: 'Where do the sessions happen?', a: 'In your own café or restaurant, so the training uses your counter, your menu and your floor. That is what makes it stick.' },
   { q: 'How many sessions will we need?', a: 'It depends on your café and what you want to work on. Deepak will suggest a number after he has seen your service, and you decide together.' },
-  { q: 'What language are sessions in?', a: 'Hindi, English or a mix — whatever your team is most comfortable with.' },
+  { q: 'What language are sessions in?', a: 'Hindi, English or a mix, whatever your team is most comfortable with.' },
   { q: 'Do you work outside Dehradun?', a: 'Dehradun is home. On-site mentorship in other cities is possible for suitable engagements, subject to travel, availability and terms agreed together.' },
   { q: 'Does my team need to prepare anything?', a: 'No. Just come in as you normally would before a shift. Sessions are practical and done on the floor, not on paper.' },
 ];
@@ -52,109 +54,85 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
 ---
 <Base title="The mentorship" description="One hospitality mentorship, shaped around your café: guest experience, staff training, feedback and stock — on-site in Dehradun, in the morning before service." active="mentorship">
   <section class="m-hero" aria-labelledby="m-h">
-    <div class="container split split--end">
-      <div style="flex: 2 1 620px; min-width: 0;">
-        <p class="eyebrow rise d1" style="margin-bottom: 24px;">The mentorship</p>
-        <h1 id="m-h" class="h1 rise d2" style="font-size: clamp(42px, 6vw, 86px);">Built around your café, <span class="accent">not a syllabus.</span></h1>
-        <p class="lead rise d3" style="margin-top: 28px; max-width: 36em;">One mentorship, shaped to what your café needs. Deepak sees how you work, agrees the focus with you, and trains you and your team on-site, in the morning, before service.</p>
+    <div class="container center narrow">
+      <p class="label in in-1">The mentorship</p>
+      <h1 id="m-h" class="h1 in in-2">Built around your café, <em>not a syllabus</em>.</h1>
+      <p class="lead in in-3" style="margin: 36px auto 0;">Deepak sees how your café works, agrees the focus with you, and trains you and your team on-site, in the morning, before service.</p>
+      <div class="in in-4 m-hero__cta">
+        <a class="btn btn--solid" href="/contact/">Book a consultation <Icon name="arrow" size={16} stroke={1.5} /></a>
       </div>
-      <div class="order rise d4" style="flex: 1 1 300px; min-width: 0;">
-        <div class="printer" aria-hidden="true"><span></span></div>
-        <div class="ticket print order__paper">
-          <div class="ticket__row mono order__top"><span>Your order</span><span>{site.city}</span></div>
-          <div class="order__body">
-            <p class="mono muted">Starting from</p>
-            <p class="order__price">₹<span set:html={price} /></p>
-            <p class="small muted" style="margin-top: 12px;">First conversation is free. Fee agreed before we begin.</p>
-            <a class="btn btn-primary btn--block" href="/contact/" style="margin-top: 20px;">Book a free chat <Icon name="arrow" /></a>
-          </div>
+    </div>
+    <div class="container m-hero__photo">
+      <Photo class="unveil" tag="Morning session" ratio="21 / 9" alt="A morning session in progress with a small café team" brief="Deepak and a two-person café team at a table before opening, chai and notebooks out, chairs still stacked behind them." sizes="(max-width: 1280px) 100vw, 1280px" />
+    </div>
+  </section>
+
+  <section class="section section--ivory" aria-labelledby="menu-h">
+    <div class="container">
+      <div class="split" style="align-items: flex-end;">
+        <div style="flex: 1 1 420px;">
+          <p class="label">What we work on</p>
+          <h2 id="menu-h" class="h2" style="margin-top: 24px;">Choose what matters most <em>to your café</em>.</h2>
         </div>
+        <p class="lead" style="flex: 1 1 380px;">Most engagements focus on two or three areas. Deepak recommends where to start after he has seen your service.</p>
       </div>
-    </div>
-    <div class="container" style="margin-top: clamp(40px, 5vw, 64px);">
-      <Photo class="m-photo" ratio="21 / 9" ratioLabel="21:9 (4:3 on mobile)" alt="A morning session in progress with a small café team" brief="A morning session in progress: Deepak and a two-person team at a café table, chai and notebooks out, chairs still stacked behind them." sizes="(max-width: 1240px) 100vw, 1240px" />
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="menu2-h">
-    <div class="container">
-      <p class="eyebrow">01 — What we work on</p>
-      <h2 id="menu2-h" class="h2" style="max-width: 20ch;">Pick from the menu. We’ll start with what matters most.</h2>
-      <div class="grid-auto" style="--min: 320px; --gap: 24px; margin-top: clamp(32px, 4vw, 48px);">
+      <div class="groups">
         {groups.map((g) => (
-          <div class="menu-col">
-            <p class="mono" style={`color: ${g.color};`}>{g.tag}</p>
-            <h3 class="h3" style="margin-top: 10px;">{g.title}</h3>
-            <ul class="menu-col__list">
-              {g.items.map(([b, t]) => <li><strong>{b}</strong> {t}</li>)}
-            </ul>
+          <div class="group reveal">
+            <p class="label">{g.label}</p>
+            <h3 class="h3">{g.title}</h3>
+            <dl>{g.items.map(([t, d]) => <div><dt>{t}</dt><dd>{d}</dd></div>)}</dl>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section--paper perf-top" aria-labelledby="who2-h">
+  <section class="section" aria-labelledby="who-h">
     <div class="container">
-      <p class="eyebrow">02 — Who’s in the room</p>
-      <h2 id="who2-h" class="h2">You, your team — or both.</h2>
-      <div class="grid-auto" style="--min: 280px; margin-top: clamp(32px, 4vw, 48px);">
-        {who.map(([tag, t, d], i) => (
-          <div class="who-col" style={i === 2 ? 'border-top-color: var(--action);' : ''}>
-            <p class="mono" style="font-size: 12px; color: var(--red-text);">{tag}</p>
-            <h3 class="h3" style="margin-top: 10px; font-size: 24px;">{t}</h3>
-            <p class="muted" style="margin-top: 10px; font-size: 16px;">{d}</p>
-          </div>
-        ))}
+      <p class="label">Who takes part</p>
+      <h2 id="who-h" class="h2" style="margin-top: 24px;">You, your team, <em>or both</em>.</h2>
+      <div class="who">
+        {who.map(([t, d]) => <div class="reveal"><h3 class="h3">{t}</h3><p>{d}</p></div>)}
       </div>
     </div>
   </section>
 
-  <section id="how" class="section" aria-labelledby="how2-h">
-    <div class="container split split--start">
-      <div style="flex: 1 1 340px; min-width: 0;">
-        <p class="eyebrow">03 — How it runs</p>
-        <h2 id="how2-h" class="h2">From first chai to follow-up.</h2>
-        <p class="body-2" style="margin-top: 20px;">Every engagement follows the same simple shape. The number of sessions is agreed with you after Deepak has seen your café.</p>
+  <Film film={films.kitchen} size="medium">
+    <p class="label">The format</p>
+    <h2 class="h2 film-h">Learned in the morning. <em>Served by noon.</em></h2>
+    <p class="film-p">Every session takes place in your own café before the doors open.</p>
+  </Film>
+
+  <section class="section" aria-labelledby="flow-h">
+    <div class="container split">
+      <div style="flex: 1 1 340px;">
+        <p class="label">How it runs</p>
+        <h2 id="flow-h" class="h2" style="margin-top: 24px;">From the first chai <em>to the follow-up</em>.</h2>
       </div>
-      <ol class="flow" style="flex: 2 1 560px; min-width: 0;">
-        {flow.map(([n, t, d], i) => (
-          <li class={i === flow.length - 1 ? 'is-last' : ''}><span class="flow__dot" aria-hidden="true"></span><p class="mono" style="font-size: 12px; color: var(--red-text);">{n}</p><h3 class="h3" style="margin-top: 8px; font-size: 26px;">{t}</h3><p class="muted" style="margin-top: 8px; max-width: 52ch;">{d}</p></li>
-        ))}
+      <ol class="flow" style="flex: 1.6 1 560px;">
+        {flow.map(([n, t, d]) => <li class="reveal"><span class="flow__n">{n}</span><div><h3 class="h3">{t}</h3><p>{d}</p></div></li>)}
       </ol>
     </div>
   </section>
 
-  <section class="section section--forest on-dark" aria-labelledby="price-h">
-    <div class="container split split--start">
-      <div style="flex: 1 1 400px; min-width: 0;">
-        <p class="eyebrow">04 — Fees</p>
-        <h2 id="price-h" class="h2">Honest pricing, agreed up front.</h2>
-        <div class="fee">
-          <span class="mono" style="color: var(--brass-light);">Starting from</span>
-          <span class="fee__num">₹<span set:html={price} /></span>
-        </div>
-        <p style="margin-top: 16px; color: var(--forest-soft); max-width: 36em;">The first conversation is always free. After Deepak has seen your café, you’ll get a clear quote — no surprises later.</p>
-      </div>
-      <div style="flex: 1 1 400px; min-width: 0;">
-        <p style="font-weight: 600; margin-bottom: 4px;">What the fee depends on</p>
-        <ul class="fee-list">
-          <li><span class="mono">01</span><span>Your team size, and whether the owner, the team or both take part</span></li>
-          <li><span class="mono">02</span><span>The number of sessions agreed after the first visit</span></li>
-          <li><span class="mono">03</span><span>Location — {site.city}, or another city for suitable engagements, subject to travel and availability</span></li>
-        </ul>
-        <a class="btn btn-light" href="/contact/" style="margin-top: 28px;">Ask for a quote <Icon name="arrow" /></a>
-      </div>
+  <section class="section section--ivory" aria-labelledby="fee-h">
+    <div class="container center narrow">
+      <p class="label">Fees</p>
+      <h2 id="fee-h" class="h2" style="margin-top: 24px;">Clear pricing, <em>agreed up front</em>.</h2>
+      <p class="fee"><span class="label">From</span> ₹<span set:html={price} /></p>
+      <p class="lead" style="margin: 0 auto;">The first conversation is always free. The fee depends on your team size, the number of sessions and your location, and you receive a clear quote before anything begins.</p>
+      <a class="btn btn--line" href="/contact/" style="margin-top: 44px;">Ask for a quote</a>
     </div>
   </section>
 
   <section class="section" aria-labelledby="mfaq-h">
-    <div class="container split split--start">
-      <div style="flex: 1 1 320px; min-width: 0;">
-        <p class="eyebrow">05 — The practical bits</p>
-        <h2 id="mfaq-h" class="h2">Logistics, answered.</h2>
+    <div class="container split">
+      <div style="flex: 1 1 320px;">
+        <p class="label">Practical details</p>
+        <h2 id="mfaq-h" class="h2" style="margin-top: 24px;">Logistics, <em>answered</em>.</h2>
       </div>
-      <div style="flex: 2 1 560px; min-width: 0;">
+      <div style="flex: 1.6 1 560px;">
         <Faq group="m-faq" items={faqs} />
       </div>
     </div>
@@ -162,27 +140,27 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
 </Base>
 
 <style>
-  .body-2 { color: var(--body-2); }
-  .m-hero { padding: clamp(36px, 5vw, 80px) 0 clamp(40px, 5vw, 64px); }
-  .printer { height: 14px; margin: 0 -10px; background: var(--ink); border-radius: 4px; position: relative; z-index: 1; }
-  .printer span { position: absolute; left: 14px; right: 14px; bottom: 3px; height: 2px; background: var(--steel-dark); }
-  .order__paper { margin-top: -3px; border-top: 0; border-radius: 0 0 4px 4px; }
-  .order__top { padding: 12px 20px; border-bottom: 1px dashed var(--ink); }
-  .order__body { padding: 20px; }
-  .order__price { margin-top: 4px; font-family: var(--font-display); font-weight: var(--display-weight); font-size: 44px; line-height: 1; }
-  @media (max-width: 899px) { .m-hero :global(.m-photo) { aspect-ratio: 4 / 3 !important; } }
-  .menu-col { background: var(--paper); border: 1px solid var(--ink); border-radius: var(--radius); padding: 28px; }
-  .menu-col__list { margin-top: 20px; }
-  .menu-col__list li { padding: 12px 0; border-top: 1px dashed var(--line-dash); }
-  .menu-col__list strong { font-weight: 600; }
-  .who-col { border-top: 2px solid var(--ink); padding-top: 20px; }
-  .flow { border-left: 2px solid var(--ink); }
-  .flow li { position: relative; padding: 0 0 36px 32px; }
-  .flow li.is-last { padding-bottom: 0; }
-  .flow__dot { position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--ground); border: 2px solid var(--ink); }
-  .flow li.is-last .flow__dot { background: var(--action); border-color: var(--action); }
-  .fee { margin-top: 32px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; }
-  .fee__num { font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(48px, 6vw, 80px); line-height: 1; }
-  .fee-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px dashed rgba(244,237,226,.4); }
-  .fee-list .mono { font-size: 12px; color: var(--brass-light); padding-top: 4px; }
+  .m-hero { padding: clamp(40px, 6vw, 96px) 0 clamp(72px, 9vw, 140px); }
+  .m-hero .h1 { margin-top: 28px; }
+  .m-hero__cta { margin-top: 44px; }
+  .m-hero__photo { margin-top: clamp(56px, 7vw, 96px); }
+  @media (max-width: 899px) { .m-hero__photo :global(.photo) { aspect-ratio: 4 / 3 !important; } }
+  .groups { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 32px; }
+  .group { background: var(--white); padding: clamp(32px, 3.5vw, 48px); }
+  .group .h3 { margin-top: 16px; }
+  .group dl { margin-top: 28px; }
+  .group dl div { padding: 16px 0; border-top: 1px solid var(--line); }
+  .group dt { color: var(--ink); font-weight: 450; }
+  .group dd { margin-top: 4px; font-size: 15px; }
+  .who { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 48px; }
+  .who div { border-top: 1px solid var(--ink); padding-top: 28px; }
+  .who p { margin-top: 14px; font-size: 16px; }
+  .film-h { margin-top: 24px; color: var(--on-dark) !important; }
+  .film-p { margin: 24px auto 0; max-width: 34em; font-size: 18px; color: var(--on-dark); }
+  .flow li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 28px 0; border-top: 1px solid var(--line); }
+  .flow li:last-child { border-bottom: 1px solid var(--line); }
+  .flow__n { font-family: var(--font-display); font-style: italic; font-size: 30px; line-height: 1; color: var(--gold); }
+  .flow p { margin-top: 10px; font-size: 16px; max-width: 52ch; }
+  .fee { margin: 44px 0 32px; font-family: var(--font-display); font-weight: 300; font-size: clamp(56px, 7vw, 96px); line-height: 1; color: var(--ink); }
+  .fee .label { display: block; margin-bottom: 16px; }
 </style>

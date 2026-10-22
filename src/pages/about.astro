@@ -1,132 +1,118 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
+import Film from '../components/Film.astro';
 import { site } from '../config/site';
+import { films } from '../config/media';
 
 const expertise = [
-  ['FRONT', 'Guest experience and customer relationships'],
-  ['FRONT', 'Understanding guest expectations and spotting service gaps'],
-  ['FRONT', 'Collecting, reading and acting on feedback'],
-  ['FRONT', 'Encouraging repeat visits and loyal regulars'],
-  ['TEAM', 'Staff training, coaching and service consistency'],
-  ['TEAM', 'Helping teams build better working habits'],
-  ['BACK', 'Inventory, stock control and operational efficiency'],
-  ['BACK', 'Hospitality software and day-to-day workflows'],
-];
-const roles = site.previousRoles.length
-  ? site.previousRoles
-  : [null, null, null];
+  ['The guest', ['Guest experience and customer relationships', 'Understanding expectations and spotting service gaps', 'Collecting, reading and acting on feedback', 'Encouraging repeat visits and loyal regulars']],
+  ['The team', ['Staff training and coaching', 'Consistent service, shift after shift', 'Helping teams build better working habits']],
+  ['The operation', ['Inventory, stock control and efficiency', 'Hospitality software and daily workflows', 'How systems, staff and guest satisfaction connect']],
+] as const;
 // Set to true once Deepak has approved the quote wording.
 const quoteApproved = false;
 ---
 <Base title="About Deepak Thapliyal" description="Deepak Thapliyal has spent more than fifteen years in hospitality and management. Meet the mentor behind The Second Visit, Dehradun." active="about">
   <section class="a-hero" aria-labelledby="about-h">
-    <div class="container split split--end">
-      <div style="flex: 1 1 560px; min-width: 0;">
-        <p class="eyebrow rise d1" style="margin-bottom: 24px;">About Deepak Thapliyal</p>
-        <h1 id="about-h" class="h1 rise d2" style="font-size: clamp(42px, 6vw, 86px);">Hospitality, learned from the <span class="accent">ground up.</span></h1>
-        <p class="lead rise d3" style="margin-top: 28px;">Deepak has spent more than fifteen years in hospitality and management. The Second Visit is how he’s sharing what those years taught him with café and restaurant owners in {site.city}.</p>
+    <div class="container a-hero__grid">
+      <div class="a-hero__text">
+        <p class="label in in-1">About Deepak</p>
+        <h1 id="about-h" class="h1 in in-2">Hospitality, learned <em>from the ground up</em>.</h1>
+        <hr class="rule in in-3" />
+        <p class="lead in in-3">More than fifteen years in hospitality and management, across every level of the industry. The Second Visit is how Deepak shares what those years taught him with café and restaurant owners in {site.city}.</p>
       </div>
-      <Photo warm eager class="rise d3" style="flex: 1 1 360px; min-width: 0; max-height: 600px;" ratio="4 / 5" alt="Deepak in a café before opening" brief="Environmental portrait: Deepak in a café before opening, chairs still up, morning light. Looking at the room, not the camera." />
+      <Photo class="unveil" eager tag="Portrait of Deepak" ratio="4 / 5" alt="Deepak in a café before opening" brief="Environmental portrait: Deepak in a café before opening, chairs still up, morning light." />
     </div>
   </section>
 
-  <section class="section--dark on-dark" aria-label="At a glance">
-    <div class="container grid-auto glance" style="--min: 220px; --gap: 24px;">
-      <div><p class="mono" style="color: var(--brass);">Experience</p><p class="glance__v">15+ years</p></div>
-      <div><p class="mono" style="color: var(--brass);">Range</p><p class="glance__v">Front &amp; back of house</p></div>
-      <div><p class="mono" style="color: var(--brass);">Today</p><p class="glance__v">Guest experience</p></div>
-      <div><p class="mono" style="color: var(--brass);">Home</p><p class="glance__v">{site.city}</p></div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="story-h">
-    <div class="container split split--start">
-      <div style="flex: 1 1 320px; min-width: 0;">
-        <p class="eyebrow">01 — The story</p>
-        <h2 id="story-h" class="h2">The long way round.</h2>
+  <section class="section section--ivory" aria-labelledby="story-h">
+    <div class="container split">
+      <div style="flex: 1 1 320px;">
+        <p class="label">The story</p>
+        <h2 id="story-h" class="h2" style="margin-top: 24px;">The long <em>way round</em>.</h2>
       </div>
-      <div class="story" style="flex: 2 1 560px; min-width: 0;">
-        <p class="story__lead">Deepak didn’t learn hospitality from a textbook. He learned it across different levels of the industry — on the floor, behind the counter and in the back office — seeing how hotels, restaurants and cafés really work, and what happens when they don’t.</p>
-        <p>Over fifteen years he has worked on the guest side — greeting, listening, handling feedback and building relationships with regulars — and on the operational side: training staff, keeping service consistent, managing stock and understanding the software and workflows that hold a hospitality business together.</p>
-        <p>Along the way he saw the same thing again and again: the places guests come back to aren’t always the best-looking. They’re the ones where the team knows what good service looks like, and does it every day.</p>
-        <p class="muted" style="font-size: 16px;">Before hospitality, Deepak studied science — and still approaches service the same way: observe carefully, try something, see what changes.</p>
+      <div class="story" style="flex: 1.6 1 560px;">
+        <p class="story__lead">Deepak didn’t learn hospitality from a textbook. He learned it on the floor, behind the counter and in the back office, seeing how hotels, restaurants and cafés really work, and what happens when they don’t.</p>
+        <p>Over fifteen years he has worked on the guest side, greeting, listening, handling feedback and building relationships with regulars, and on the operational side: training staff, keeping service consistent, managing stock and understanding the software and workflows that hold a hospitality business together.</p>
+        <p>Along the way he saw the same thing again and again. The places guests return to aren’t always the best-looking. They are the ones where the team knows what good service looks like, and does it every day.</p>
+        <p class="muted">Before hospitality, Deepak studied science, and he still approaches service the same way: observe carefully, try something, see what changes.</p>
       </div>
     </div>
   </section>
 
-  <section class="section section--paper perf-top" aria-labelledby="path-h" style="padding-block: clamp(56px, 6.5vw, 88px);">
+  <section class="section" aria-labelledby="path-h">
     <div class="container">
-      <div class="row-head">
-        <h2 id="path-h" class="h2" style="font-size: clamp(28px, 3vw, 40px);">Where he’s worked</h2>
-        {!site.previousRoles.length && <span class="ph mono">Placeholder · awaiting confirmed roles</span>}
+      <div class="split" style="align-items: flex-end;">
+        <div style="flex: 1 1 420px;">
+          <p class="label">Career</p>
+          <h2 id="path-h" class="h2" style="margin-top: 24px;">Where he has <em>worked</em>.</h2>
+        </div>
+        {!site.previousRoles.length && <p style="flex: 0 1 auto;"><span class="ph small">Earlier roles to be confirmed with Deepak</span></p>}
       </div>
       <ol class="path">
-        <li><span class="mono muted">Now</span><span class="path__role">Guest experience &amp; client relations</span><span class="body-2">SOCIAL</span></li>
-        {roles.map((r) => r
-          ? <li><span class="mono muted">{r.years}</span><span class="path__role">{r.role}</span><span class="body-2">{r.place}</span></li>
-          : <li><span class="ph mono">[Years]</span><span class="ph path__role">[Role]</span><span class="ph">[Venue or type of venue]</span></li>
-        )}
+        <li><span class="path__when">Today</span><span class="path__role">Guest experience &amp; client relations</span><span class="path__where">SOCIAL</span></li>
+        {site.previousRoles.length
+          ? site.previousRoles.map((r) => <li><span class="path__when">{r.years}</span><span class="path__role">{r.role}</span><span class="path__where">{r.place}</span></li>)
+          : [1, 2, 3].map(() => <li class="path--ph"><span class="path__when">[Years]</span><span class="path__role">[Role]</span><span class="path__where">[Venue]</span></li>)}
       </ol>
     </div>
   </section>
 
+  <Film film={films.lobby} size="medium">
+    <p class="label">Today</p>
+    <h2 class="h2 film-h">Still on the floor, <em>every week</em>.</h2>
+    <p class="film-p">Deepak currently works with SOCIAL in a guest-experience and client-relationship role. He talks to guests, understands their experiences, picks up on concerns and helps teams keep the experience consistent. That is what keeps his mentorship current.</p>
+    <p class="film-note">The Second Visit is Deepak’s own independent initiative. It is not affiliated with, or endorsed by, SOCIAL.</p>
+  </Film>
+
   <section class="section" aria-labelledby="knows-h">
     <div class="container">
-      <p class="eyebrow">02 — What he knows best</p>
-      <h2 id="knows-h" class="h2" style="max-width: 20ch;">The guest side and the back office — and how they affect each other.</h2>
-      <ul class="knows">
-        {expertise.map(([tag, t]) => (
-          <li><span class={`mono knows__tag tag-${tag.toLowerCase()}`}>{tag}</span><span>{t}</span></li>
+      <div class="center narrow" style="margin-inline: auto; padding: 0;">
+        <p class="label">Expertise</p>
+        <h2 id="knows-h" class="h2" style="margin-top: 24px;">The guest, the team <em>and the back office</em>.</h2>
+      </div>
+      <div class="knows">
+        {expertise.map(([t, items]) => (
+          <div class="reveal"><h3 class="h3">{t}</h3><ul>{items.map((i) => <li>{i}</li>)}</ul></div>
         ))}
-      </ul>
-    </div>
-  </section>
-
-  <section class="section section--forest on-dark" aria-labelledby="now-h">
-    <div class="container split split--start">
-      <div style="flex: 1 1 320px; min-width: 0;">
-        <p class="eyebrow">03 — Today</p>
-        <h2 id="now-h" class="h2" style="font-size: clamp(32px, 4vw, 52px);">Still on the floor, every week.</h2>
       </div>
-      <div style="flex: 2 1 560px; min-width: 0; max-width: 680px;">
-        <p style="font-size: 19px; line-height: 1.6;">Deepak currently works with SOCIAL in a guest-experience and client-relationship role. He talks to guests, understands their experiences, picks up on concerns, coordinates improvements and helps teams keep the experience consistent.</p>
-        <p style="margin-top: 16px; color: var(--forest-soft);">That’s what keeps his mentorship practical: it comes from what’s happening with guests right now, not what used to work.</p>
-        <p class="disclaimer">The Second Visit is Deepak’s own independent initiative. It is not affiliated with, or endorsed by, SOCIAL.</p>
-      </div>
-    </div>
-  </section>
-
-  {quoteApproved && (
-    <section class="section" aria-label="Why The Second Visit">
-      <div class="container" style="max-width: 1040px; text-align: center;">
-        <p class="eyebrow">04 — Why The Second Visit</p>
-        <blockquote>
-          <p class="quote">“Dehradun is full of beautiful new cafés. I want the people who open them to still be serving their regulars years from now.”</p>
-          <footer style="margin-top: 24px;">— {site.owner}</footer>
+      {quoteApproved && (
+        <blockquote class="quote">
+          <p>“{site.city} is full of beautiful new cafés. I want the people who open them to still be serving their regulars years from now.”</p>
+          <footer class="label">{site.owner}</footer>
         </blockquote>
+      )}
+      <div class="center" style="margin-top: clamp(64px, 8vw, 112px);">
+        <a class="btn btn--solid" href="/contact/">Book a consultation <Icon name="arrow" size={16} stroke={1.5} /></a>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 </Base>
 
 <style>
-  .body-2 { color: var(--body-2); }
-  .a-hero { padding: clamp(36px, 5vw, 80px) 0 clamp(56px, 6vw, 88px); }
-  .glance { padding-block: 32px; }
-  .glance__v { margin-top: 6px; font-family: var(--font-display); font-size: 24px; }
-  .story { max-width: 680px; display: flex; flex-direction: column; gap: 20px; color: var(--body-2); }
-  .story__lead { font-size: 19px; line-height: 1.65; color: var(--ink); }
-  .row-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 24px; }
-  .path { margin-top: 28px; border-top: 2px solid var(--ink); }
-  .path li { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 8px 24px; padding: 20px 0; border-bottom: 1px dashed var(--line-dash); align-items: baseline; }
-  .path li:last-child { border-bottom: 0; }
-  .path li > * { justify-self: start; }
-  .path__role { font-family: var(--font-display); font-size: 22px; }
-  .knows { margin-top: clamp(32px, 4vw, 48px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); column-gap: 56px; }
-  .knows li { display: flex; gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); }
-  .knows__tag { flex: none; width: 52px; padding-top: 5px; }
-  .tag-front { color: var(--red-text); } .tag-team { color: var(--forest); } .tag-back { color: var(--muted); }
-  .disclaimer { margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(244,237,226,.4); font-size: 14px; color: var(--forest-soft); }
-  .quote { font-family: var(--font-display); font-size: clamp(28px, 3.6vw, 48px); line-height: 1.2; text-wrap: balance; }
+  .a-hero { padding: clamp(24px, 4vw, 64px) 0 clamp(72px, 9vw, 140px); }
+  .a-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(40px, 7vw, 120px); align-items: end; }
+  .a-hero__text .h1 { margin-top: 28px; font-size: clamp(48px, 6.2vw, 96px); }
+  .a-hero__text .rule { margin-top: 40px; }
+  .a-hero__text .lead { margin-top: 32px; }
+  @media (max-width: 899px) { .a-hero__grid { grid-template-columns: 1fr; } }
+  .story { display: flex; flex-direction: column; gap: 22px; max-width: 680px; }
+  .story__lead { font-family: var(--font-display); font-size: clamp(24px, 2.2vw, 30px); line-height: 1.4; color: var(--ink); }
+  .path { margin-top: clamp(48px, 6vw, 72px); border-top: 1px solid var(--ink); }
+  .path li { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr) minmax(0, 1.2fr); gap: 8px 32px; padding: 28px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .path__when { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .path__role { font-family: var(--font-display); font-size: clamp(22px, 2vw, 28px); color: var(--ink); }
+  .path--ph > * { color: var(--muted) !important; font-style: italic; }
+  @media (max-width: 700px) { .path li { grid-template-columns: 1fr; } }
+  .film-h { margin-top: 24px; color: var(--on-dark) !important; }
+  .film-p { margin: 28px auto 0; max-width: 40em; font-size: 18px; color: var(--on-dark); }
+  .film-note { margin: 28px auto 0; max-width: 40em; font-size: 13px; color: var(--on-dark-muted); }
+  .knows { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 48px; }
+  .knows .h3 { padding-bottom: 20px; border-bottom: 1px solid var(--ink); }
+  .knows li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  .quote { margin: clamp(72px, 9vw, 128px) auto 0; max-width: 900px; text-align: center; }
+  .quote p { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(30px, 3.6vw, 50px); line-height: 1.2; color: var(--ink); }
+  .quote footer { margin-top: 28px; }
 </style>

@@ -1,0 +1,62 @@
+---
+import type { Film } from '../config/media';
+
+interface Props {
+  film: Film;
+  /** Height of the band. */
+  size?: 'tall' | 'medium';
+  align?: 'center' | 'left';
+  id?: string;
+}
+const { film, size = 'tall', align = 'center', id } = Astro.props;
+---
+<section class={`film film--${size} film--${align} dark`} id={id} data-film>
+  <video class="film__video" autoplay muted loop playsinline preload="metadata" poster={film.poster} aria-hidden="true" tabindex="-1" data-film-video>
+    <source src={film.src} type="video/mp4" />
+  </video>
+  <div class="film__shade" aria-hidden="true"></div>
+  <div class="container film__inner">
+    <slot />
+  </div>
+  <button class="film__toggle" type="button" data-film-toggle aria-label="Pause background video">
+    <svg class="film__icon-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="2.4" height="10" fill="currentColor" /><rect x="7.6" y="1" width="2.4" height="10" fill="currentColor" /></svg>
+    <svg class="film__icon-play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor" /></svg>
+  </button>
+  <span class="sr-only">Background video: {film.label}</span>
+</section>
+
+<style>
+  .film { position: relative; overflow: hidden; display: flex; align-items: center; isolation: isolate; background: var(--deep); }
+  .film--tall { min-height: clamp(560px, 92vh, 880px); }
+  .film--medium { min-height: clamp(460px, 70vh, 680px); }
+  .film__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(.85); }
+  .film__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,14,12,.55) 0%, rgba(10,14,12,.35) 45%, rgba(10,14,12,.7) 100%); }
+  .film__inner { width: 100%; padding-block: clamp(88px, 10vw, 140px); color: var(--on-dark); }
+  .film--center .film__inner { text-align: center; }
+  .film__toggle { position: absolute; right: max(16px, var(--gutter)); bottom: 24px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(244,240,233,.5); background: rgba(10,14,12,.25); color: var(--on-dark); display: grid; place-items: center; cursor: pointer; transition: background-color .2s ease; }
+  .film__toggle:hover { background: rgba(10,14,12,.6); }
+  .film__icon-play { display: none; }
+  .film.is-paused .film__icon-play { display: block; }
+  .film.is-paused .film__icon-pause { display: none; }
+</style>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll<HTMLElement>('[data-film]').forEach((band) => {
+    const video = band.querySelector<HTMLVideoElement>('[data-film-video]')!;
+    const btn = band.querySelector<HTMLButtonElement>('[data-film-toggle]')!;
+    let userPaused = false;
+    const setPaused = (paused: boolean) => {
+      band.classList.toggle('is-paused', paused);
+      btn.setAttribute('aria-label', paused ? 'Play background video' : 'Pause background video');
+      if (paused) video.pause(); else video.play().catch(() => {});
+    };
+    if (reduce.matches) { userPaused = true; setPaused(true); }
+    btn.addEventListener('click', () => { userPaused = !band.classList.contains('is-paused'); setPaused(userPaused); });
+    // Only play while on screen, to save data and battery.
+    new IntersectionObserver(([entry]) => {
+      if (userPaused) return;
+      if (entry.isIntersecting) video.play().catch(() => {}); else video.pause();
+    }, { threshold: 0.1 }).observe(band);
+  });
+</script>

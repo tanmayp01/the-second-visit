@@ -1,42 +1,41 @@
 ---
 import Icon from './Icon.astro';
-import { site, phHtml } from '../config/site';
+import { site, telHref, phHtml } from '../config/site';
 
 interface Props { id?: string }
 const { id = 'enquiry' } = Astro.props;
 const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
 const replyHtml = phHtml(site.replyDays, 'X');
 ---
-<div class="enq" data-enquiry data-key={accessKey} data-dev={import.meta.env.DEV ? '1' : ''}>
-  <div class="enq__top mono"><span>Enquiry · Free chat</span><span>Table for your café</span></div>
-
-  <form class="enq__form" action="https://api.web3forms.com/submit" method="POST" novalidate aria-label="Book a free chat" data-form>
+<div class="enq" data-enquiry data-key={accessKey} data-dev={import.meta.env.DEV ? '1' : ''} data-call={telHref()}>
+  <form class="enq__form" action="https://api.web3forms.com/submit" method="POST" novalidate aria-label="Request a consultation" data-form>
     <input type="hidden" name="access_key" value={accessKey} />
     <input type="hidden" name="subject" value="New enquiry — The Second Visit website" />
     <input type="hidden" name="from_name" value="The Second Visit website" />
     <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-    <div class="field-group">
-      <label class="field-label" for={`${id}-name`}>Your name</label>
-      <input class="field" id={`${id}-name`} name="name" type="text" autocomplete="name" required aria-describedby={`${id}-name-err`} />
-      <p class="field-error" id={`${id}-name-err`} data-err="name" hidden><Icon name="alert" size={16} stroke={2} /><span></span></p>
+    <div class="enq__pair">
+      <div class="field-group">
+        <label class="field-label" for={`${id}-name`}>Your name</label>
+        <input class="field" id={`${id}-name`} name="name" type="text" autocomplete="name" required aria-describedby={`${id}-name-err`} />
+        <p class="field-error" id={`${id}-name-err`} data-err="name" hidden><Icon name="alert" size={15} stroke={1.8} /><span></span></p>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for={`${id}-phone`}>Phone or WhatsApp</label>
+        <input class="field" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby={`${id}-phone-hint ${id}-phone-err`} />
+        <span class="field-hint" id={`${id}-phone-hint`}>10 digits, e.g. 98765 43210</span>
+        <p class="field-error" id={`${id}-phone-err`} data-err="phone" hidden><Icon name="alert" size={15} stroke={1.8} /><span></span></p>
+      </div>
     </div>
 
     <div class="field-group">
-      <label class="field-label" for={`${id}-phone`}>Phone or WhatsApp number</label>
-      <input class="field" id={`${id}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby={`${id}-phone-hint ${id}-phone-err`} />
-      <span class="field-hint" id={`${id}-phone-hint`}>Only used to call you back. 10 digits, e.g. 98765 43210.</span>
-      <p class="field-error" id={`${id}-phone-err`} data-err="phone" hidden><Icon name="alert" size={16} stroke={2} /><span></span></p>
-    </div>
-
-    <div class="field-group">
-      <label class="field-label" for={`${id}-cafe`}>Café or restaurant name <span class="opt">(optional)</span></label>
+      <label class="field-label" for={`${id}-cafe`}>Café or restaurant <span class="opt">(optional)</span></label>
       <input class="field" id={`${id}-cafe`} name="cafe" type="text" autocomplete="organization" />
     </div>
 
     <div class="enq__pair">
       <div class="field-group">
-        <label class="field-label" for={`${id}-stage`}>Where are you now?</label>
+        <label class="field-label" for={`${id}-stage`}>Where you are now</label>
         <div class="select-wrap">
           <select class="field" id={`${id}-stage`} name="stage">
             <option>Planning to open</option>
@@ -44,7 +43,7 @@ const replyHtml = phHtml(site.replyDays, 'X');
             <option>Running for over a year</option>
             <option>Running a restaurant</option>
           </select>
-          <Icon name="chevron" />
+          <Icon name="chevron" size={16} />
         </div>
       </div>
       <div class="field-group">
@@ -56,55 +55,51 @@ const replyHtml = phHtml(site.replyDays, 'X');
             <option>3–6 people</option>
             <option>7 or more</option>
           </select>
-          <Icon name="chevron" />
+          <Icon name="chevron" size={16} />
         </div>
       </div>
     </div>
 
     <div class="field-group">
-      <label class="field-label" for={`${id}-msg`}>What's on your mind? <span class="opt">(optional)</span></label>
-      <textarea class="field" id={`${id}-msg`} name="message" rows="3" placeholder="e.g. Our weekend service feels chaotic"></textarea>
+      <label class="field-label" for={`${id}-msg`}>What would you like help with? <span class="opt">(optional)</span></label>
+      <textarea class="field" id={`${id}-msg`} name="message" rows="3" placeholder="For example, our weekend service feels rushed"></textarea>
     </div>
 
     <fieldset class="enq__radios">
       <legend class="field-label">Best way to reach you</legend>
-      <div class="enq__pills">
-        <label class="pill-radio"><input type="radio" name="contact_via" value="Phone call" checked />Phone call</label>
-        <label class="pill-radio"><input type="radio" name="contact_via" value="WhatsApp" />WhatsApp</label>
+      <div class="enq__choices">
+        <label class="choice"><input type="radio" name="contact_via" value="Phone call" checked />Phone call</label>
+        <label class="choice"><input type="radio" name="contact_via" value="WhatsApp" />WhatsApp</label>
       </div>
     </fieldset>
 
-    <button class="btn btn-primary btn--lg btn--block" type="submit" data-submit><span data-submit-label>Request my free chat</span> <Icon name="arrow" /></button>
+    <div class="enq__submit">
+      <button class="btn btn--solid" type="submit" data-submit><span data-submit-label>Request a consultation</span> <Icon name="arrow" size={16} stroke={1.5} /></button>
+      <p class="enq__note">Free and without obligation. Deepak replies personally within <span set:html={replyHtml} /> working days.</p>
+    </div>
     <p class="field-error enq__fail" data-fail role="alert" hidden></p>
-    <p class="enq__note">Free, no obligation. Deepak replies personally within <span set:html={replyHtml} /> working days.</p>
   </form>
 
-  <div class="enq__done print-in" data-done role="status" tabindex="-1" hidden>
-    <span class="stamp-mark stamp stamp-now enq__stamp">ORDER UP</span>
-    <h3 class="enq__title">Thank you, <span data-first>there</span>. Your table is booked.</h3>
-    <p>Deepak will get in touch on the number you shared to set up your free chai pe charcha. Nothing to prepare — just tell him about your café.</p>
-    <div class="enq__status mono"><span>Status · Received</span><span>Next · A call from Deepak</span></div>
-    <button class="btn btn-ghost" type="button" data-again>Send another enquiry</button>
+  <div class="enq__done" data-done role="status" tabindex="-1" hidden>
+    <p class="label">Request received</p>
+    <h3 class="h2 enq__title">Thank you, <em data-first>there</em>.</h3>
+    <p class="lead">Deepak will call you on the number you shared to arrange your free first conversation. There's nothing to prepare.</p>
+    <button class="link" type="button" data-again>Send another enquiry</button>
   </div>
 </div>
 
 <style>
-  .enq { background: var(--paper); color: var(--ink); border: 1px solid var(--ink); border-radius: 6px; box-shadow: 6px 6px 0 var(--ink); font-size: 16px; line-height: 1.5; }
-  .enq__top { display: flex; justify-content: space-between; gap: 12px; padding: 14px clamp(20px, 3vw, 36px); border-bottom: 1px dashed var(--ink); color: var(--muted); }
-  .enq__form { display: flex; flex-direction: column; gap: 20px; padding: clamp(20px, 3vw, 36px); }
-  .enq__pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 20px; }
+  .enq__form { display: flex; flex-direction: column; gap: 36px; }
+  .enq__pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 36px 40px; }
   .enq__radios { border: 0; margin: 0; padding: 0; }
-  .enq__radios legend { padding: 0; margin-bottom: 10px; }
-  .enq__pills { display: flex; flex-wrap: wrap; gap: 12px; }
-  .enq__note { font-size: 14px; color: var(--muted); text-align: center; }
-  .enq__fail { justify-content: center; text-align: center; }
-  .enq__fail a { color: var(--red-text); font-weight: 600; }
-  .enq__done { padding: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 36px); display: flex; flex-direction: column; gap: 20px; outline: none; }
-  .enq__stamp { align-self: flex-start; border-width: 2.5px; padding: 6px 12px; font-size: 14px; letter-spacing: 0.08em; }
-  .enq__title { font-family: var(--font-display); font-weight: var(--display-weight); font-size: clamp(28px, 3vw, 38px); line-height: 1.1; }
-  .enq__done p { font-size: 17px; line-height: 1.6; color: var(--body-2); }
-  .enq__status { border-top: 1px dashed var(--ink); padding-top: 16px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--muted); }
-  .enq__done .btn { align-self: flex-start; min-height: 48px; font-size: 15px; }
+  .enq__radios legend { padding: 0; margin-bottom: 8px; }
+  .enq__choices { display: flex; flex-wrap: wrap; gap: 8px 36px; }
+  .enq__submit { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; padding-top: 8px; }
+  .enq__note { flex: 1 1 260px; font-size: 14px; color: var(--muted); }
+  .enq__fail a { color: var(--error); font-weight: 500; }
+  .enq__done { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; outline: none; padding-block: 24px; }
+  .enq__done .link { border: 0; cursor: pointer; }
+  @media (prefers-reduced-motion: no-preference) { .enq__done:not([hidden]) { animation: fade-up .8s var(--ease) both; } }
 </style>
 
 <script>
@@ -116,7 +111,7 @@ const replyHtml = phHtml(site.replyDays, 'X');
     const submitLabel = root.querySelector<HTMLElement>('[data-submit-label]')!;
     const key = root.dataset.key;
     const isDev = root.dataset.dev === '1';
-    const callHref = (document.querySelector('.topbar__call') as HTMLAnchorElement | null)?.href || '/contact/';
+    const callHref = root.dataset.call || '/contact/';
 
     const showError = (name: string, msg: string) => {
       const input = form.elements.namedItem(name) as HTMLInputElement;
@@ -149,7 +144,7 @@ const replyHtml = phHtml(site.replyDays, 'X');
 
     const setSending = (on: boolean) => {
       submit.setAttribute('aria-disabled', String(on));
-      submitLabel.textContent = on ? 'Sending…' : 'Request my free chat';
+      submitLabel.textContent = on ? 'Sending…' : 'Request a consultation';
     };
 
     form.addEventListener('submit', async (e) => {

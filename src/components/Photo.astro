@@ -8,23 +8,23 @@ interface Props {
   alt: string;
   /** Brief for the photographer, shown on the placeholder. */
   brief: string;
+  /** Label shown on the placeholder, e.g. "Portrait of Deepak". */
+  tag?: string;
   ratio?: string;
-  ratioLabel?: string;
-  warm?: boolean;
   class?: string;
   style?: string;
   eager?: boolean;
   sizes?: string;
 }
-const { src, alt, brief, ratio = '4 / 5', ratioLabel, warm, class: cls = '', style = '', eager, sizes = '(max-width: 900px) 100vw, 50vw' } = Astro.props;
+const { src, alt, brief, tag = 'Photograph', ratio = '4 / 5', class: cls = '', style = '', eager, sizes = '(max-width: 900px) 100vw, 50vw' } = Astro.props;
 ---
 {src ? (
   <div class={`photo ${cls}`} style={`aspect-ratio: ${ratio}; ${style}`}>
-    <Image src={src} alt={alt} widths={[480, 800, 1200, 1600]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />
+    <Image src={src} alt={alt} widths={[480, 800, 1200, 1600, 2000]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />
   </div>
 ) : (
-  <div class={`photo ${warm ? 'photo--warm' : ''} ${cls}`} role="img" aria-label={`Photo to come: ${alt}`} style={`aspect-ratio: ${ratio}; ${style}`}>
-    <div class="photo__meta mono"><span>Photo · {ratioLabel ?? ratio.replace(/\s/g, '').replace('/', ':')}</span><span class="ph">Placeholder</span></div>
+  <div class={`photo photo--ph ${cls}`} role="img" aria-label={`Photo to come: ${alt}`} style={`aspect-ratio: ${ratio}; ${style}`}>
+    <div class="photo__tag"><span>{tag}</span><span>Placeholder</span></div>
     <p class="photo__brief">{brief}</p>
   </div>
 )}

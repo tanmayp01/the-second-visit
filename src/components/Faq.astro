@@ -5,16 +5,14 @@ interface Props {
   group: string;
   openFirst?: boolean;
 }
-const { items, group, openFirst = true } = Astro.props;
+const { items, group, openFirst = false } = Astro.props;
 ---
 <div class="faq">
   {items.map((item, i) => (
     <details name={group} open={openFirst && i === 0}>
       <summary>
         <span>{item.q}</span>
-        <span class="faq__icon" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14" /><path class="v" d="M12 5v14" /></svg>
-        </span>
+        <span class="faq__icon" aria-hidden="true"></span>
       </summary>
       <div class="faq__a"><p set:html={item.a} /></div>
     </details>
