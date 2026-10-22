@@ -2,15 +2,15 @@
 import Icon from './Icon.astro';
 import { site, telHref, phHtml } from '../config/site';
 
-interface Props { active?: string }
-const { active = 'none' } = Astro.props;
+interface Props { active?: string; overlay?: boolean }
+const { active = 'none', overlay = false } = Astro.props;
 const links = [
   { key: 'about', label: 'Deepak', href: '/about/' },
   { key: 'mentorship', label: 'Mentorship', href: '/mentorship/' },
   { key: 'contact', label: 'Contact', href: '/contact/' },
 ];
 ---
-<header class="site-header" data-header>
+<header class:list={["site-header", { "site-header--overlay": overlay }]} data-header data-overlay={overlay ? "1" : undefined}>
   <div class="container bar">
     <a class="brand" href="/" aria-label={`${site.name}, home`}>
       <span class="brand__name">The Second Visit</span>
@@ -43,24 +43,33 @@ const links = [
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: transform .45s var(--ease), border-color .3s ease; }
   .site-header.is-hidden { transform: translateY(-100%); }
+  .site-header { --hdr: 88px; }
+  .site-header--overlay { margin-bottom: calc(-1 * var(--hdr)); }
+  .site-header--overlay:not(.is-solid) { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom-color: rgba(244,240,233,.18); }
+  .site-header--overlay:not(.is-solid) :is(.brand, .nav__link, .menu-btn) { color: var(--on-dark); }
+  .site-header--overlay:not(.is-solid) .brand__by { color: var(--gold-soft); }
+  .site-header--overlay:not(.is-solid) .nav__cta { color: var(--on-dark); border-color: rgba(244,240,233,.6); }
+  .site-header--overlay:not(.is-solid) .nav__cta::before { background: var(--on-dark); }
+  .site-header--overlay:not(.is-solid) .nav__cta:hover { color: var(--ink); }
+  .site-header :is(.brand, .nav__link, .menu-btn, .brand__by) { transition: color .4s ease; }
   .site-header.is-scrolled { border-bottom-color: var(--line); }
   .bar { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
   .brand { display: flex; flex-direction: column; text-decoration: none; color: var(--ink); line-height: 1; }
-  .brand__name { font-family: var(--font-display); font-size: 25px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
-  .brand__by { margin-top: 7px; font-size: 11px; font-weight: 450; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
+  .brand__name { font-family: var(--font-display); font-size: 25px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; }
+  .brand__by { margin-top: 7px; font-family: var(--font-ui); font-size: 11px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
   .nav { display: flex; align-items: center; gap: 40px; }
-  .nav__link { position: relative; padding: 8px 0; color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 450; letter-spacing: 0.18em; text-transform: uppercase; }
+  .nav__link { position: relative; padding: 8px 0; color: var(--ink); text-decoration: none; font-family: var(--font-ui); font-size: 13px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; }
   .nav__link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
   .nav__link:hover::after, .nav__link[aria-current='page']::after { transform: scaleX(1); }
   .nav__cta { min-height: 46px; padding: 0 24px; font-size: 12px; }
-  .menu-btn { min-height: 44px; padding: 0 0 0 16px; border: 0; background: none; cursor: pointer; font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); }
+  .menu-btn { min-height: 44px; padding: 0 0 0 16px; border: 0; background: none; cursor: pointer; font-family: var(--font-ui); font-size: 12px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); }
   .mobile-menu { position: absolute; top: 100%; left: 0; right: 0; height: calc(100vh - 88px); height: calc(100dvh - 88px); background: var(--white); overflow-y: auto; border-top: 1px solid var(--line); }
   .mobile-menu__inner { padding-block: 24px calc(32px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; min-height: 100%; }
   .mobile-menu__link { font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.1; color: var(--ink); text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--line); }
-  .mobile-menu__link[aria-current='page'] { font-style: italic; color: var(--gold); }
+  .mobile-menu__link[aria-current='page'] { color: var(--gold); }
   .mobile-menu__foot { margin-top: auto; padding-top: 40px; display: flex; flex-direction: column; gap: 20px; align-items: center; }
   .mobile-menu__tel { display: inline-flex; align-items: center; gap: 10px; color: var(--body); text-decoration: none; min-height: 44px; }
-  @media (max-width: 520px) { .brand__name { font-size: 20px; letter-spacing: 0.12em; } .bar { min-height: 76px; } .mobile-menu { height: calc(100vh - 76px); height: calc(100dvh - 76px); } }
+  @media (max-width: 520px) { .site-header { --hdr: 76px; } .brand__name { font-size: 20px; letter-spacing: 0.12em; } .bar { min-height: 76px; } .mobile-menu { height: calc(100vh - 76px); height: calc(100dvh - 76px); } }
   @media (min-width: 900px) { .mobile-menu { display: none !important; } }
   @media (prefers-reduced-motion: no-preference) { .mobile-menu:not([hidden]) { animation: fade .35s ease both; } }
 </style>
@@ -71,6 +80,12 @@ const links = [
   const onScroll = () => {
     const y = window.scrollY;
     header?.classList.toggle('is-scrolled', y > 8);
+    if (header?.dataset.overlay) {
+      const hero = document.querySelector<HTMLElement>('[data-hero]');
+      const limit = hero ? hero.offsetHeight - header.offsetHeight - 1 : 0;
+      const menuIsOpen = document.querySelector('[data-menu-toggle]')?.getAttribute('aria-expanded') === 'true';
+      header.classList.toggle('is-solid', menuIsOpen || y > limit);
+    }
     const menuOpen = document.querySelector('[data-menu-toggle]')?.getAttribute('aria-expanded') === 'true';
     if (!menuOpen && Math.abs(y - lastY) > 6) header?.classList.toggle('is-hidden', y > lastY && y > 240);
     lastY = y;
@@ -86,6 +101,7 @@ const links = [
       btn.setAttribute('aria-expanded', String(open));
       menu.hidden = !open;
       document.documentElement.style.overflow = open ? 'hidden' : '';
+      if (open) document.querySelector('[data-header]')?.classList.add('is-solid'); else onScroll();
       if (label) label.textContent = open ? 'Close' : 'Menu';
     };
     btn.addEventListener('click', () => set(menu.hidden));

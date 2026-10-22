@@ -4,13 +4,13 @@ import type { Film } from '../config/media';
 interface Props {
   film: Film;
   /** Height of the band. */
-  size?: 'tall' | 'medium';
+  size?: 'tall' | 'medium' | 'full';
   align?: 'center' | 'left';
   id?: string;
 }
 const { film, size = 'tall', align = 'center', id } = Astro.props;
 ---
-<section class={`film film--${size} film--${align} dark`} id={id} data-film>
+<section class={`film film--${size} film--${align} dark`} id={id} data-film data-hero={size === 'full' ? '' : undefined}>
   <video class="film__video" autoplay muted loop playsinline preload="metadata" poster={film.poster} aria-hidden="true" tabindex="-1" data-film-video>
     <source src={film.src} type="video/mp4" />
   </video>
@@ -29,6 +29,9 @@ const { film, size = 'tall', align = 'center', id } = Astro.props;
   .film { position: relative; overflow: hidden; display: flex; align-items: center; isolation: isolate; background: var(--deep); }
   .film--tall { min-height: clamp(560px, 92vh, 880px); }
   .film--medium { min-height: clamp(460px, 70vh, 680px); }
+  .film--full { min-height: 100vh; min-height: 100svh; }
+  @media (max-width: 899px) { .film--full { min-height: calc(100svh - 56px); } }
+  .film--full .film__inner { padding-top: clamp(140px, 18vh, 200px); }
   .film__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(.85); transform: scale(var(--zoom, 1)); will-change: transform; }
   .film__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,14,12,.55) 0%, rgba(10,14,12,.35) 45%, rgba(10,14,12,.7) 100%); }
   .film__inner { width: 100%; padding-block: clamp(88px, 10vw, 140px); color: var(--on-dark); }

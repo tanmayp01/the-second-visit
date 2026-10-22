@@ -1,6 +1,7 @@
 /* =========================================================
    The Second Visit: design system v2
-   White space, Bodoni Moda for headings, Hanken Grotesk for text.
+   Modelled on luxury hotel type systems: a grand display serif for headlines,
+   spaced capitals for labels and buttons, a neutral sans for reading.
    ========================================================= */
 
 :root {
@@ -21,7 +22,8 @@
   --error: #A3321E;
 
   /* type */
-  --font-display: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, 'Bodoni 72', Georgia, serif;
+  --font-display: 'Gilda Display', Didot, 'Bodoni 72', Georgia, serif;
+  --font-ui: 'Tenor Sans', 'Helvetica Neue', Arial, sans-serif;
   --font-body: 'Hanken Grotesk Variable', 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --font-hindi: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
 
@@ -34,7 +36,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; font-synthesis: none; }
 body {
   margin: 0;
   background: var(--white);
@@ -53,6 +55,7 @@ h1, h2, h3, p, ul, ol, figure, blockquote, dl, dd { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 button, input, select, textarea { font: inherit; color: inherit; }
 strong { font-weight: 500; color: var(--ink); }
+em { font-style: normal; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 .dark :focus-visible { outline-color: var(--gold-soft); }
 ::selection { background: var(--placeholder); color: var(--ink); }
@@ -74,13 +77,15 @@ strong { font-weight: 500; color: var(--ink); }
 .split > * { min-width: 0; }
 
 /* ---------- type ---------- */
-.h1, .h2, .h3, .display { font-family: var(--font-display); font-weight: 400; color: var(--ink); text-wrap: balance; letter-spacing: -0.02em; font-optical-sizing: auto; }
-.h1 { font-size: clamp(52px, 7.2vw, 108px); line-height: 0.96; }
-.h2 { font-size: clamp(36px, 4.4vw, 64px); line-height: 1.04; }
-.h3 { font-size: clamp(22px, 1.9vw, 27px); line-height: 1.22; letter-spacing: -0.01em; }
-.h1 em, .h2 em, .h3 em { font-style: italic; }
+.h1, .h2, .h3, .display { font-family: var(--font-display); font-weight: 400; color: var(--ink); text-wrap: balance; letter-spacing: -0.01em; }
+.h1 { font-size: clamp(52px, 7vw, 104px); line-height: 1; }
+.h2 { font-size: clamp(36px, 4.3vw, 62px); line-height: 1.08; }
+.h3 { font-size: clamp(22px, 1.9vw, 27px); line-height: 1.25; letter-spacing: 0; }
+/* Gilda has no italic: emphasis in headings is gold, never a faked slant */
+.h1 em, .h2 em, .h3 em, .display em { font-style: normal; color: var(--gold); }
+.dark .h1 em, .dark .h2 em, .dark .h3 em, .dark .display em { color: var(--gold-soft); }
 .lead { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.7; color: var(--body); max-width: 36em; }
-.label { font-family: var(--font-body); font-size: 11.5px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
+.label { font-family: var(--font-ui); font-size: 12px; font-weight: 400; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
 .dark .label { color: var(--gold-soft); }
 .muted { color: var(--muted); }
 .small { font-size: 15px; }
@@ -97,7 +102,7 @@ strong { font-weight: 500; color: var(--ink); }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 14px;
   min-height: 54px; padding: 0 32px; border: 1px solid transparent; border-radius: 0;
-  font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  font-family: var(--font-ui); font-size: 13px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
   text-decoration: none; cursor: pointer; transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
 }
 .btn svg { transition: transform .3s var(--ease); flex: none; }
@@ -113,7 +118,7 @@ strong { font-weight: 500; color: var(--ink); }
 
 .link {
   display: inline-flex; align-items: center; gap: 12px; padding-block: 6px;
-  font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--ink);
+  font-family: var(--font-ui); font-size: 13px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; color: var(--ink);
   background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size .35s var(--ease), color .2s ease;
 }
 .link:hover { color: var(--gold); background-size: 40% 1px; }
@@ -126,13 +131,13 @@ strong { font-weight: 500; color: var(--ink); }
 .photo img { width: 100%; height: 100%; object-fit: cover; }
 .photo--ph { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 3vw, 32px); background: #EAE4DA; }
 .photo--ph::after { content: ""; position: absolute; inset: clamp(12px, 1.6vw, 18px); border: 1px solid rgba(138,106,56,.35); pointer-events: none; }
-.photo__tag { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 12px; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-.photo__brief { position: relative; z-index: 1; max-width: 30ch; font-family: var(--font-display); font-style: italic; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4; color: var(--body); }
+.photo__tag { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 12px; font-family: var(--font-ui); font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.photo__brief { position: relative; z-index: 1; max-width: 30ch; font-family: var(--font-display); font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4; color: var(--body); }
 
 /* ---------- FAQ ---------- */
 .faq { border-bottom: 1px solid var(--line); }
 .faq details { border-top: 1px solid var(--line); }
-.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 28px 0; font-family: var(--font-display); font-size: clamp(22px, 2vw, 27px); line-height: 1.3; color: var(--ink); transition: color .2s ease; }
+.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 28px 0; font-family: var(--font-display); font-size: clamp(21px, 1.9vw, 26px); line-height: 1.3; color: var(--ink); transition: color .2s ease; }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary:hover { color: var(--gold); }
 .faq__icon { flex: none; width: 18px; height: 18px; position: relative; }
@@ -143,8 +148,8 @@ strong { font-weight: 500; color: var(--ink); }
 
 /* ---------- forms ---------- */
 .field-group { display: flex; flex-direction: column; gap: 10px; }
-.field-label { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
-.field-label .opt { letter-spacing: 0.05em; text-transform: none; font-weight: 400; color: var(--muted); }
+.field-label { font-family: var(--font-ui); font-size: 12px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+.field-label .opt { font-family: var(--font-body); letter-spacing: 0.02em; text-transform: none; font-weight: 400; color: var(--muted); }
 .field { width: 100%; min-height: 52px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--line-strong); border-radius: 0; background: transparent; color: var(--ink); font-size: 18px; font-weight: 400; transition: border-color .2s ease; }
 textarea.field { resize: vertical; min-height: 96px; line-height: 1.6; }
 select.field { appearance: none; -webkit-appearance: none; padding-right: 32px; cursor: pointer; }

@@ -31,6 +31,6 @@ Do not launch until all of these are true. `npm run launch-check` verifies them:
 
 ## Design system
 
-- Headings: Bodoni Moda (high-contrast display serif, use at 22px and up only). Body and long text: Hanken Grotesk. Both self-hosted via Fontsource.
+- Three-tier type, modelled on luxury hotel sites: Gilda Display for headings (no italic; emphasis is gold), Tenor Sans in spaced capitals for labels, navigation and buttons, Hanken Grotesk for body text. All self-hosted via Fontsource.
 - White and ivory backgrounds, ink text, one gold accent, deep evergreen for dark bands.
-- Motion is restrained: headline words rising from a mask, short fade-ins, button fills, a slow video zoom, cross-fade page transitions. Everything respects `prefers-reduced-motion`.
+- Motion is restrained: headline words rising from a mask, short fade-ins, button fills, a slow video zoom, cross-fade page transitions. Home page interactions: full-screen video hero, mentorship list with picture reveal, horizontal journey (pinned on desktop, swipe on phones), before/after slider (keyboard accessible). Everything respects `prefers-reduced-motion`.

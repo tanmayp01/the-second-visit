@@ -1,6 +1,6 @@
 ---
-import '@fontsource-variable/bodoni-moda/standard.css';
-import '@fontsource-variable/bodoni-moda/standard-italic.css';
+import '@fontsource/gilda-display/400.css';
+import '@fontsource/tenor-sans/400.css';
 import '@fontsource-variable/hanken-grotesk';
 import '@fontsource/tiro-devanagari-hindi/devanagari-400.css';
 import '../styles/global.css';
@@ -15,9 +15,11 @@ interface Props {
   /** Show the sticky Call / Book bar on phones. */
   mobileBar?: boolean;
   noindex?: boolean;
+  /** Transparent header over a full-screen first section. */
+  overlayHeader?: boolean;
 }
 
-const { title, description = site.description, active = 'none', mobileBar = true, noindex = false } = Astro.props;
+const { title, description = site.description, active = 'none', mobileBar = true, noindex = false, overlayHeader = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
 const fullTitle = active === 'home' ? `${site.name} | Hospitality mentorship in Dehradun` : `${title} | ${site.name}`;
@@ -77,7 +79,7 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <Header active={active} />
+    <Header active={active} overlay={overlayHeader} />
     <main id="main">
       <slot />
     </main>
@@ -130,8 +132,9 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
         const sections = document.querySelectorAll('main > section:not(:first-of-type), main > .film');
         const pick = '.label, .h3, .lead, .rule, .photo, blockquote, .film-p, .film-hindi, .timeline li, .pillar, .group, .steps li, .flow li, .gaps > div, .who__list li, .who > div, .knows > div, .faq details, .path li, .price-row, .fee, .contacts > div, .enq, .btn, .link, .story > p';
         const io = new IntersectionObserver((entries) => {
-          entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+          entries.forEach((en) => { if (en.isIntersecting) { (owner.get(en.target) ?? [en.target]).forEach((t) => t.classList.add('is-in')); io.unobserve(en.target); } });
         }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        const owner = new Map<Element, Element[]>();
         sections.forEach((sec) => {
           sec.querySelectorAll<HTMLElement>(pick).forEach((el) => {
             // Skip anything nested in an already-animated block or in hidden UI (e.g. the form's thank-you state).
@@ -139,14 +142,16 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
             el.dataset.reveal = el.classList.contains('photo') ? 'photo' : el.classList.contains('rule') ? 'rule' : 'up';
             const sibs = Array.from(el.parentElement?.children ?? []).filter((c) => c.matches(pick));
             el.style.setProperty('--stagger', `${Math.min(sibs.indexOf(el), 3) * 0.06}s`);
-            io.observe(el);
+            // A fully clipped element never counts as visible, so photos are watched through their parent.
+            if (el.dataset.reveal === 'photo' && el.parentElement) { const list = owner.get(el.parentElement) ?? []; list.push(el); owner.set(el.parentElement, list); io.observe(el.parentElement); }
+            else io.observe(el);
           });
         });
       }
     </script>
     <style>
       .mobile-bar { position: sticky; bottom: 0; z-index: 40; background: var(--ink); padding-bottom: env(safe-area-inset-bottom); }
-      .mobile-bar a { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 56px; color: var(--white); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+      .mobile-bar a { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 56px; color: var(--white); text-decoration: none; font-family: var(--font-ui); font-size: 12px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; }
       .mobile-bar .mobile-bar__main { flex: 2; background: var(--gold); }
     </style>
   </body>
