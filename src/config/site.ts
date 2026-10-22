@@ -2,14 +2,14 @@
  * Site content that still needs confirming.
  *
  * Anything set to `null` shows up on the site as a highlighted [placeholder]
- * and is left out of search-engine data. Fill these in before launch —
+ * and is left out of search-engine data. Fill these in before launch.
  * `npm run build` prints a list of what is still missing.
  */
 export const site = {
   name: 'The Second Visit',
   owner: 'Deepak Thapliyal',
   description:
-    'Practical, on-site hospitality mentorship for café and restaurant owners in Dehradun — guest experience, staff training, feedback and stock — taught in your café, before you open.',
+    'Practical, on-site hospitality mentorship for café and restaurant owners in Dehradun: guest experience, staff training, feedback and stock, taught in your café before you open.',
   city: 'Dehradun',
   region: 'Uttarakhand',
 
@@ -25,7 +25,7 @@ export const site = {
   priceFrom: null as string | null,
   /** How many working days Deepak takes to reply, e.g. "2". */
   replyDays: null as string | null,
-  /** e.g. "3–6 PM, Mon–Sat". */
+  /** e.g. "3 to 6 PM, Monday to Saturday". */
   bestTimeToCall: null as string | null,
 
   /** Confirmed previous roles for the About page, newest first. */
@@ -33,6 +33,21 @@ export const site = {
 
   /** Footer credit. */
   agency: { name: 'Klytos Labs', url: null as string | null },
+
+  /**
+   * Details for the Privacy Policy and Terms pages.
+   * Have a lawyer review both pages before launch.
+   */
+  legal: {
+    /** Who runs the business, as it should appear legally (e.g. a sole proprietor or company name). */
+    operator: null as string | null,
+    /** Postal address for legal notices. */
+    address: null as string | null,
+    /** The date both policies take effect, e.g. "1 December 2026". */
+    effectiveDate: null as string | null,
+    /** How long enquiries are kept if the person does not become a client, e.g. "12 months". */
+    retention: null as string | null,
+  },
 };
 
 export const telHref = () => (site.phoneE164 ? `tel:${site.phoneE164}` : '/contact/');
@@ -60,6 +75,10 @@ export const missingContent = () =>
     replyDays: site.replyDays,
     bestTimeToCall: site.bestTimeToCall,
     previousRoles: site.previousRoles.length ? 'ok' : null,
+    'legal.operator': site.legal.operator,
+    'legal.address': site.legal.address,
+    'legal.effectiveDate': site.legal.effectiveDate,
+    'legal.retention': site.legal.retention,
   })
     .filter(([, v]) => !v)
     .map(([k]) => k);

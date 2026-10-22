@@ -6,7 +6,7 @@
  * CDN. Before launch, download each clip, save it as public/video/<name>.mp4 and
  * change `src` to '/video/<name>.mp4', so the site never depends on another server.
  *
- * Best of all: replace them with 10–15 second clips filmed at a real café in
+ * Best of all: replace them with 10 to 15 second clips filmed at a real café in
  * Dehradun (Deepak greeting a guest, a team briefing, chai being poured).
  */
 export type Film = {

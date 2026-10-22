@@ -1,0 +1,45 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site, mailHref, phHtml } from '../config/site';
+
+const operator = phHtml(site.legal.operator, 'operator name');
+const email = phHtml(site.email, 'email address');
+---
+<Legal title="Terms and Conditions" description="The terms that apply when you use The Second Visit website.">
+  <h2>About these terms</h2>
+  <p>These terms apply to your use of this website, which belongs to The Second Visit, a hospitality mentorship service run by <span set:html={operator} /> in {site.city}, {site.region}, India. By using the website, you agree to them.</p>
+
+  <h2>Information on this website</h2>
+  <p>The website describes the mentorship and how it usually works. It is general information, not an offer or a contract. Details such as the process, timings and examples may change.</p>
+
+  <h2>Fees and engagements</h2>
+  <p>Prices shown as “from” are a starting point. The actual fee depends on your team size, the number of sessions and your location. Every engagement is agreed with you in writing, including its scope, fee and schedule, before any paid work begins. Those written terms take priority over anything on this website.</p>
+  <p>The first conversation is free and places you under no obligation.</p>
+
+  <h2>No guaranteed results</h2>
+  <p>The mentorship offers practical guidance and training based on experience. Results depend on many things outside our control, such as how the guidance is applied, your location and market conditions. We do not guarantee any particular outcome, including increases in customers, revenue or reviews.</p>
+
+  <h2>Using the website</h2>
+  <p>Please use the website and the enquiry form only for genuine enquiries. Do not send spam, misleading information or anything unlawful, and do not try to disrupt or gain unauthorised access to the website.</p>
+
+  <h2>Content and ownership</h2>
+  <p>The text, design and branding on this website belong to The Second Visit and may not be copied or reused without permission. Background videos are used under the Pixabay Content License. Fonts are used under their open licences.</p>
+
+  <h2>Links to other websites</h2>
+  <p>Links to other websites, such as WhatsApp, Instagram or LinkedIn, are provided for convenience. We are not responsible for their content or privacy practices.</p>
+
+  <h2>Independence</h2>
+  <p>The Second Visit is the independent initiative of {site.owner}. It is not affiliated with, or endorsed by, SOCIAL or any other employer.</p>
+
+  <h2>Liability</h2>
+  <p>To the extent permitted by law, we are not liable for any loss arising from your use of this website or reliance on its general information. Nothing in these terms limits any liability that cannot be limited under Indian law.</p>
+
+  <h2>Privacy</h2>
+  <p>How we handle the information you send us is explained in our <a href="/privacy/">Privacy Policy</a>.</p>
+
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of India. Any dispute will be subject to the jurisdiction of the courts at {site.city}, {site.region}.</p>
+
+  <h2>Changes and contact</h2>
+  <p>We may update these terms from time to time; the date at the top shows the latest version. Questions about these terms can be sent to <a href={mailHref()} set:html={email} />.</p>
+</Legal>

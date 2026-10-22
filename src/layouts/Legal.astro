@@ -1,0 +1,35 @@
+---
+import Base from './Base.astro';
+import { site, phHtml } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<Base title={title} description={description} mobileBar={false}>
+  <article class="legal">
+    <div class="container narrow">
+      <p class="label">Legal</p>
+      <h1 class="h1 legal__h">{title}</h1>
+      <p class="legal__date">Effective from <span set:html={phHtml(site.legal.effectiveDate, 'date')} /></p>
+      <div class="legal__body">
+        <slot />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .legal { padding: clamp(48px, 7vw, 112px) 0 var(--section); }
+  .legal__h { margin-top: 24px; font-size: clamp(44px, 5.4vw, 76px); }
+  .legal__date { margin-top: 24px; font-size: 14px; color: var(--muted); }
+  .legal__body { margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
+  .legal__body :global(h2) { margin-top: 48px; font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.4vw, 32px); line-height: 1.2; color: var(--ink); }
+  .legal__body :global(p), .legal__body :global(ul) { margin-top: 16px; max-width: 68ch; }
+  .legal__body :global(ul) { padding-left: 20px; list-style: disc; }
+  .legal__body :global(li) { margin-top: 8px; }
+  .legal__body :global(a) { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line-strong); }
+  .legal__body :global(a:hover) { text-decoration-color: currentColor; }
+</style>

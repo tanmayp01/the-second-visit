@@ -1,15 +1,29 @@
-# The Second Visit — website
+# The Second Visit website
 
 Hospitality mentorship by **Deepak Thapliyal**, Dehradun. Built by Klytos Labs with [Astro](https://astro.build) as a fast, static site.
 
-- **Pages:** Home, The mentorship, About Deepak, Contact, 404
+- **Pages:** Home, The mentorship, About Deepak, Contact, Privacy Policy, Terms and Conditions, 404
 - **No server needed.** Enquiries are emailed through [Web3Forms](https://web3forms.com).
 - **Fonts:** Cormorant Garamond (headings) and Jost (body), both free Google Fonts, self-hosted via Fontsource so there are no external font requests. Tiro Devanagari Hindi for the Hindi touches.
 - **Background videos:** three full-width film bands. See *Videos* below.
 
+## Launch rules
+
+Read `CLAUDE.md` for the house rules (no gradients, pill buttons, fake reviews or numbers, emoji, em dashes, AI imagery or heavy animation).
+
+We do not launch until all of these are done. Run the gate to check:
+
+```bash
+SITE_URL=https://yourdomain.in PUBLIC_WEB3FORMS_KEY=your-key npm run launch-check
+```
+
+It fails until: a custom domain is set, the favicons exist, there are no "made with" or AI tags, the Privacy Policy and Terms pages exist, every placeholder in `src/config/site.ts` (including the `legal` details) is filled in, the form key is set and the videos are self-hosted.
+
+The Privacy Policy (`/privacy/`) and Terms and Conditions (`/terms/`) were written to match exactly what this site does. They are not legal advice: have a lawyer review both before launch, and update them if you add analytics, cookies or payments.
+
 ## Run it locally
 
-Requires Node 18.20+ (Node 22 recommended — see `.nvmrc`).
+Requires Node 18.20+ (Node 22 recommended, see `.nvmrc`).
 
 ```bash
 npm install
@@ -27,13 +41,15 @@ Everything Deepak still needs to confirm lives in **`src/config/site.ts`**. Any 
 
 | Field | Example |
 |---|---|
-| `phoneDisplay` / `phoneE164` | `+91 98765 43210` / `+919876543210` — also used for WhatsApp |
+| `phoneDisplay` / `phoneE164` | `+91 98765 43210` / `+919876543210`, also used for WhatsApp |
 | `email` | `hello@thesecondvisit.in` |
 | `instagram`, `linkedin` | `{ handle: '@thesecondvisit', url: 'https://instagram.com/…' }` |
 | `priceFrom` | `4,999` |
 | `replyDays`, `bestTimeToCall` | `2`, `3–6 PM, Mon–Sat` |
 | `previousRoles` | `[{ years: '2016–2019', role: '…', place: '…' }]` |
 | `agency.url` | Klytos Labs website for the footer credit |
+| `legal.operator`, `legal.address` | Legal name of whoever runs the business, and a postal address |
+| `legal.effectiveDate`, `legal.retention` | Date the policies take effect; how long enquiries are kept, e.g. `12 months` |
 
 Held back until approved (switch on in code once confirmed):
 
@@ -86,7 +102,7 @@ Submissions include name, phone, café name, stage, team size, message and prefe
 
 Set these environment variables on the host:
 
-- `SITE_URL` — the live address, e.g. `https://thesecondvisit.in` (used for canonical links, the sitemap and social cards)
+- `SITE_URL`: the live address, e.g. `https://thesecondvisit.in` (used for canonical links, the sitemap and social cards)
 - `PUBLIC_WEB3FORMS_KEY`
 
 **Vercel:** Add New → Project → import the GitHub repo. The framework is detected as Astro; `vercel.json` sets the headers. Add the environment variables, then deploy.
@@ -105,7 +121,7 @@ src/
   config/media.ts       background video clips
   components/           Header, Footer, EnquiryForm, Faq, Photo, Film (video band), Icon
   pages/                index, mentorship, about, contact, 404, robots.txt
-public/                 favicon.svg, apple-touch-icon.png, og.png (social card)
+public/                 favicon.svg, favicon.ico, apple-touch-icon.png, og.png (social card)
 scripts/                render-images.py re-renders og.png and the touch icon
 ```
 

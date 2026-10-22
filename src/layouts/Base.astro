@@ -23,7 +23,7 @@ interface Props {
 const { title, description = site.description, active = 'none', mobileBar = true, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
-const fullTitle = active === 'home' ? `${site.name} — Hospitality mentorship in Dehradun` : `${title} — ${site.name}`;
+const fullTitle = active === 'home' ? `${site.name} | Hospitality mentorship in Dehradun` : `${title} | ${site.name}`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -46,7 +46,7 @@ const g = globalThis as any;
 if (import.meta.env.PROD && !g.__tsvWarned) {
   g.__tsvWarned = true;
   const missing = missingContent();
-  if (missing.length) console.warn(`\n[The Second Visit] Placeholders still showing for: ${missing.join(', ')} — fill them in src/config/site.ts\n`);
+  if (missing.length) console.warn(`\n[The Second Visit] Placeholders still showing for: ${missing.join(', ')}. Fill them in src/config/site.ts\n`);
 }
 ---
 <!doctype html>
@@ -59,6 +59,7 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#FFFFFF" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -75,22 +76,10 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
     <meta name="twitter:card" content="summary_large_image" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    <script is:inline>
-      (function () {
-        var d = document.documentElement;
-        d.classList.add('js');
-        try {
-          var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (!calm && !sessionStorage.getItem('tsv-curtain')) { d.classList.add('has-curtain'); sessionStorage.setItem('tsv-curtain', '1'); }
-        } catch (e) {}
-      })();
-    </script>
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="curtain" aria-hidden="true" data-curtain>
-      <span class="curtain__mark"><span class="curtain__name">The Second Visit</span><span class="curtain__by">by {site.owner}</span><span class="curtain__line"></span></span>
-    </div>
     <Header active={active} />
     <main id="main">
       <slot />
@@ -103,14 +92,6 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
       </div>
     )}
     <script>
-      // Curtain: only on the first page of a visit.
-      const curtain = document.querySelector<HTMLElement>('[data-curtain]');
-      if (curtain) {
-        if (!document.documentElement.classList.contains('has-curtain')) curtain.remove();
-        else curtain.addEventListener('animationend', (e) => { if (e.target === curtain) curtain.remove(); });
-        setTimeout(() => curtain.isConnected && curtain.remove(), 3500);
-      }
-
       // Scroll reveals: tag the building blocks of every section after the first,
       // with a short stagger between siblings.
       if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
@@ -125,7 +106,7 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
             if (el.parentElement?.closest('[data-reveal], [hidden]')) return;
             el.dataset.reveal = el.classList.contains('photo') ? 'photo' : el.classList.contains('rule') ? 'rule' : 'up';
             const sibs = Array.from(el.parentElement?.children ?? []).filter((c) => c.matches(pick));
-            el.style.setProperty('--stagger', `${Math.min(sibs.indexOf(el), 5) * 0.09}s`);
+            el.style.setProperty('--stagger', `${Math.min(sibs.indexOf(el), 3) * 0.06}s`);
             io.observe(el);
           });
         });

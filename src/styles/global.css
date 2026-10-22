@@ -1,5 +1,5 @@
 /* =========================================================
-   The Second Visit — design system v2 ("Quiet luxury")
+   The Second Visit: design system v2
    White space, a refined Garamond for headings, Jost for text.
    ========================================================= */
 
@@ -12,7 +12,7 @@
   --muted: #6F6860;
   --line: #E7E1D8;
   --line-strong: #CFC6B9;
-  --gold: #8A6A38;          /* labels, small accents — 5:1 on white */
+  --gold: #8A6A38;          /* labels, small accents, 5:1 on white */
   --gold-soft: #C9AE7E;     /* on dark only */
   --deep: #14201B;          /* deep evergreen for dark bands */
   --on-dark: #F4F0E9;
@@ -89,7 +89,7 @@ strong { font-weight: 500; color: var(--ink); }
 .center .rule { margin-inline: auto; }
 .stack > * + * { margin-top: var(--space, 24px); }
 
-/* placeholder for content still to come — visible on purpose */
+/* placeholder for content still to come, visible on purpose */
 .ph { background: var(--placeholder); color: var(--ink) !important; padding: 0 .3em; box-decoration-break: clone; -webkit-box-decoration-break: clone; font-style: normal; }
 
 /* ---------- buttons & links ---------- */
@@ -123,7 +123,7 @@ strong { font-weight: 500; color: var(--ink); }
 /* ---------- photos & placeholders ---------- */
 .photo { position: relative; overflow: hidden; background: var(--ivory); max-width: 100%; }
 .photo img { width: 100%; height: 100%; object-fit: cover; }
-.photo--ph { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 3vw, 32px); background: linear-gradient(160deg, #EFEAE2 0%, #E4DDD2 100%); }
+.photo--ph { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 3vw, 32px); background: #EAE4DA; }
 .photo--ph::after { content: ""; position: absolute; inset: clamp(12px, 1.6vw, 18px); border: 1px solid rgba(138,106,56,.35); pointer-events: none; }
 .photo__tag { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 12px; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 .photo__brief { position: relative; z-index: 1; max-width: 30ch; font-family: var(--font-display); font-style: italic; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4; color: var(--body); }
@@ -166,7 +166,7 @@ select.field { appearance: none; -webkit-appearance: none; padding-right: 32px; 
 }
 
 /* =========================================================
-   Motion — professional, gentle, and only when allowed
+   Motion: restrained, and only when allowed
    ========================================================= */
 
 /* Buttons: a fill that sweeps in from the left */
@@ -184,45 +184,25 @@ select.field { appearance: none; -webkit-appearance: none; padding-right: 32px; 
 .site-header { transition: transform .45s var(--ease), border-color .3s ease; }
 .site-header.is-hidden { transform: translateY(-100%); }
 
-/* Opening curtain (first visit of a session only) */
-.curtain { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--white); pointer-events: none; }
-.curtain__mark { text-align: center; }
-.curtain__name { display: block; font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
-.curtain__by { display: block; margin-top: 12px; font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); }
-.curtain__line { display: block; width: 72px; height: 1px; margin: 22px auto 0; background: var(--gold); transform-origin: left; }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
-  .curtain { display: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
   @keyframes unveil { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
-  @keyframes img-settle { from { transform: scale(1.12); } to { transform: scale(1); } }
   @keyframes line-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-  @keyframes curtain-up { to { transform: translateY(-100%); } }
-  @keyframes mark-in { from { opacity: 0; letter-spacing: .5em; } to { opacity: 1; } }
 
-  .in { animation: fade-up 1.1s var(--ease) both; }
+  .in { animation: fade-up .9s var(--ease) both; }
   .in-1 { animation-delay: .1s; } .in-2 { animation-delay: .25s; } .in-3 { animation-delay: .4s; } .in-4 { animation-delay: .55s; } .in-5 { animation-delay: .7s; }
   .unveil { animation: unveil 1.4s cubic-bezier(.7, 0, .2, 1) .1s both; }
-  .unveil > * { animation: img-settle 2.2s var(--ease) .1s both; }
-
-  /* While the curtain plays, hold the page's own entrance until it lifts */
-  .has-curtain .in, .has-curtain .unveil, .has-curtain .unveil > * { animation-delay: calc(var(--d, 0s) + 1.5s); }
-  .has-curtain .in-1 { --d: .1s; } .has-curtain .in-2 { --d: .25s; } .has-curtain .in-3 { --d: .4s; } .has-curtain .in-4 { --d: .55s; } .has-curtain .in-5 { --d: .7s; }
-  .curtain { animation: curtain-up 1s cubic-bezier(.76, 0, .24, 1) 1.25s both; }
-  .curtain__name { animation: mark-in 1s var(--ease) .1s both; }
-  .curtain__by { animation: fade .8s ease .45s both; }
-  .curtain__line { animation: line-grow .9s cubic-bezier(.7, 0, .2, 1) .5s both; }
 
   /* Scroll reveals (tagged by script; content stays visible without JavaScript) */
-  .js [data-reveal] { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1.1s var(--ease); transition-delay: var(--stagger, 0s); }
+  .js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--stagger, 0s); }
   .js [data-reveal].is-in { opacity: 1; transform: none; }
-  .js [data-reveal="photo"] { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); transition: clip-path 1.4s cubic-bezier(.7, 0, .2, 1); }
+  .js [data-reveal="photo"] { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); transition: clip-path 1.1s cubic-bezier(.7, 0, .2, 1); }
   .js [data-reveal="photo"].is-in { clip-path: inset(0 0 0 0); }
   .js [data-reveal="rule"] { opacity: 1; transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.7, 0, .2, 1) var(--stagger, 0s); }
   .js [data-reveal="rule"].is-in { transform: scaleX(1); }

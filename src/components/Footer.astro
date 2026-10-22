@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div class="footer__bottom">
-      <span>© {year} {site.name}</span>
+      <span class="footer__legal">© {year} {site.name}<a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms and Conditions</a></span>
       <span>Designed by {site.agency.url ? <a href={site.agency.url}>{site.agency.name}</a> : site.agency.name}</span>
     </div>
   </div>
@@ -60,4 +60,5 @@ const year = new Date().getFullYear();
   .footer__hindi { margin-top: 10px; font-size: 18px; color: var(--gold-soft) !important; }
   .footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 28px; border-top: 1px solid rgba(244,240,233,.14); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
   .footer__bottom a { display: inline; padding: 0; text-decoration: underline; text-underline-offset: 4px; }
+  .footer__legal { display: inline-flex; flex-wrap: wrap; gap: 8px 24px; }
 </style>

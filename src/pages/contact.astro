@@ -24,7 +24,7 @@ import { site, telHref, waHref, mailHref, phHtml } from '../config/site';
             <dd><a href={telHref()} set:html={phHtml(site.phoneDisplay, '+91 XXXXX XXXXX')} /></dd>
             <dd class="contacts__more">
               <a class="link" href={waHref()} target={site.phoneE164 ? '_blank' : undefined} rel={site.phoneE164 ? 'noopener' : undefined}><Icon name="chat" size={15} /> WhatsApp</a>
-              <span class="muted small">Best time: <span set:html={phHtml(site.bestTimeToCall, 'e.g. 3–6 PM, Mon–Sat')} /></span>
+              <span class="muted small">Best time: <span set:html={phHtml(site.bestTimeToCall, 'e.g. 3 to 6 PM, Mon to Sat')} /></span>
             </dd>
           </div>
           <div><dt class="label">Email</dt><dd><a href={mailHref()} set:html={phHtml(site.email, 'email address')} /></dd></div>

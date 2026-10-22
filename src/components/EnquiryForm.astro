@@ -10,7 +10,7 @@ const replyHtml = phHtml(site.replyDays, 'X');
 <div class="enq" data-enquiry data-key={accessKey} data-dev={import.meta.env.DEV ? '1' : ''} data-call={telHref()}>
   <form class="enq__form" action="https://api.web3forms.com/submit" method="POST" novalidate aria-label="Request a consultation" data-form>
     <input type="hidden" name="access_key" value={accessKey} />
-    <input type="hidden" name="subject" value="New enquiry — The Second Visit website" />
+    <input type="hidden" name="subject" value="New enquiry from The Second Visit website" />
     <input type="hidden" name="from_name" value="The Second Visit website" />
     <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
@@ -51,8 +51,8 @@ const replyHtml = phHtml(site.replyDays, 'X');
         <div class="select-wrap">
           <select class="field" id={`${id}-team`} name="team_size">
             <option>Just me</option>
-            <option>1–2 people</option>
-            <option>3–6 people</option>
+            <option>1 or 2 people</option>
+            <option>3 to 6 people</option>
             <option>7 or more</option>
           </select>
           <Icon name="chevron" size={16} />
@@ -75,7 +75,7 @@ const replyHtml = phHtml(site.replyDays, 'X');
 
     <div class="enq__submit">
       <button class="btn btn--solid" type="submit" data-submit><span data-submit-label>Request a consultation</span> <Icon name="arrow" size={16} stroke={1.5} /></button>
-      <p class="enq__note">Free and without obligation. Deepak replies personally within <span set:html={replyHtml} /> working days.</p>
+      <p class="enq__note">Free and without obligation. Deepak replies personally within <span set:html={replyHtml} /> working days. Your details are used only to reply to you; see the <a class="ulink" href="/privacy/">Privacy Policy</a>.</p>
     </div>
     <p class="field-error enq__fail" data-fail role="alert" hidden></p>
   </form>
@@ -174,7 +174,7 @@ const replyHtml = phHtml(site.replyDays, 'X');
       } catch (err) {
         fail.innerHTML = (err as Error).message === 'not-configured'
           ? `The form isn't switched on yet. Please <a href="${callHref}">call or WhatsApp Deepak</a> instead.`
-          : `Sorry — that didn't go through. Please try again, or <a href="${callHref}">call or WhatsApp Deepak</a>.`;
+          : `Sorry, that didn't go through. Please try again, or <a href="${callHref}">call or WhatsApp Deepak</a>.`;
         fail.hidden = false;
       } finally {
         setSending(false);

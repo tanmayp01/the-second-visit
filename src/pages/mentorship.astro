@@ -32,13 +32,13 @@ const groups = [
 const who = [
   ['The owner', 'One-to-one mentorship on the decisions only an owner makes: standards, stock, hiring for attitude, and how to lead a shift.'],
   ['The team', 'Hands-on training for your staff, however few, on welcoming guests, handling feedback and working as one team.'],
-  ['Both, recommended', 'Everyone hears the same thing, agrees the same standard, and practises it together before the doors open.'],
+  ['Owner and team together', 'Everyone hears the same thing, agrees the same standard, and practises it together before the doors open.'],
 ];
 const flow = [
   ['I', 'A first conversation', 'Free and without obligation, by phone or in person, about your café, your team and what is on your mind.'],
   ['II', 'Seeing your service', 'Deepak visits during working hours and experiences your café as a guest would: the welcome, the wait, the bill, the goodbye.'],
   ['III', 'A plan and a quote', 'You agree the focus, the number of sessions and the fee together. Nothing starts until you are happy with it.'],
-  ['IV', 'Morning sessions', 'In your café, before you open, usually finishing before 12 or 1 PM, so the team uses what they learned at lunch.'],
+  ['IV', 'Morning sessions', 'In your café, before you open, usually finishing before 12 or 1 PM depending on the café, so the team uses what they learned at lunch.'],
   ['V', 'A follow-up', 'A check-in once the habits have had time to settle, to see what is working and adjust what isn’t.'],
 ];
 // Set to true once Deepak confirms the session language answer.
@@ -52,7 +52,7 @@ const allFaqs = [
 ];
 const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What language'));
 ---
-<Base title="The mentorship" description="One hospitality mentorship, shaped around your café: guest experience, staff training, feedback and stock — on-site in Dehradun, in the morning before service." active="mentorship">
+<Base title="The mentorship" description="One hospitality mentorship, shaped around your café: guest experience, staff training, feedback and stock, on-site in Dehradun, in the morning before service." active="mentorship">
   <section class="m-hero" aria-labelledby="m-h">
     <div class="container center narrow">
       <p class="label in in-1">The mentorship</p>
@@ -74,7 +74,7 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
           <p class="label">What we work on</p>
           <h2 id="menu-h" class="h2" style="margin-top: 24px;">Choose what matters most <em>to your café</em>.</h2>
         </div>
-        <p class="lead" style="flex: 1 1 380px;">Most engagements focus on two or three areas. Deepak recommends where to start after he has seen your service.</p>
+        <p class="lead" style="flex: 1 1 380px;">You choose the focus together. Deepak recommends where to start once he has seen your service.</p>
       </div>
       <div class="groups">
         {groups.map((g) => (
@@ -107,8 +107,9 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
   <section class="section" aria-labelledby="flow-h">
     <div class="container split">
       <div style="flex: 1 1 340px;">
-        <p class="label">How it runs</p>
+        <p class="label">A typical engagement</p>
         <h2 id="flow-h" class="h2" style="margin-top: 24px;">From the first chai <em>to the follow-up</em>.</h2>
+        <p class="muted" style="margin-top: 24px;">The exact steps and the number of sessions are agreed with each café.</p>
       </div>
       <ol class="flow" style="flex: 1.6 1 560px;">
         {flow.map(([n, t, d]) => <li class="reveal"><span class="flow__n">{n}</span><div><h3 class="h3">{t}</h3><p>{d}</p></div></li>)}
