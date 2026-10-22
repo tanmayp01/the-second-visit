@@ -41,24 +41,32 @@ const faqs = [
 <Base title="Home" active="home">
   <!-- 1. DEEPAK -->
   <section class="intro" aria-labelledby="intro-h">
-    <div class="container intro__grid">
-      <div class="intro__photo">
-        <Photo class="unveil" eager tag="Portrait of Deepak" ratio="4 / 5" alt="Portrait of Deepak Thapliyal in a café" brief="Deepak in a café before opening, in natural morning light. Looking at the room, not posed against a backdrop." sizes="(max-width: 900px) 100vw, 46vw" />
+    <div class="container">
+      <div class="intro__top in in-1">
+        <p class="label">Hospitality mentor · {site.city}</p>
+        <p class="label only-wide">The Second Visit</p>
       </div>
-      <div class="intro__text">
-        <p class="label in in-1">Hospitality mentor · {site.city}</p>
-        <h1 id="intro-h" class="h1 in in-2">Deepak <em>Thapliyal</em></h1>
-        <hr class="rule in in-3" />
-        <p class="intro__lead in in-3">More than fifteen years in hospitality and management, learning how hotels, restaurants and cafés work from the ground up. Today he works in guest experience, listening to guests, identifying concerns and helping teams improve.</p>
-        <p class="lead in in-4">Through <strong>The Second Visit</strong>, he now brings that experience to the café and restaurant owners of {site.city}, in their own cafés, in the morning, before service.</p>
-        <dl class="facts in in-4">
-          <div><dt class="label">Experience</dt><dd>15+ years</dd></div>
-          <div><dt class="label">Range</dt><dd>Front &amp; back of house</dd></div>
-          <div><dt class="label">Today</dt><dd>Guest experience</dd></div>
-        </dl>
-        <div class="intro__ctas in in-5">
-          <a class="btn btn--solid" href="#enquire">Book a consultation <Icon name="arrow" size={16} stroke={1.5} /></a>
-          <a class="link" href="/about/">His story</a>
+      <h1 id="intro-h" class="intro__name" data-split="now">
+        <span class="intro__l1">Deepak</span>
+        <span class="intro__l2"><em>Thapliyal</em></span>
+      </h1>
+      <div class="intro__grid">
+        <div class="intro__photo">
+          <Photo class="unveil" eager tag="Portrait of Deepak" ratio="4 / 5" alt="Portrait of Deepak Thapliyal in a café" brief="Deepak in a café before opening, in natural morning light. Looking at the room, not posed against a backdrop." sizes="(max-width: 900px) 100vw, 42vw" />
+        </div>
+        <div class="intro__text">
+          <hr class="rule in in-3" />
+          <p class="intro__lead in in-3">More than fifteen years in hospitality and management, learning how hotels, restaurants and cafés work from the ground up. Today he works in guest experience, listening to guests, identifying concerns and helping teams improve.</p>
+          <p class="lead in in-4">Through <strong>The Second Visit</strong>, he now brings that experience to the café and restaurant owners of {site.city}, in their own cafés, in the morning, before service.</p>
+          <dl class="facts in in-4">
+            <div><dt class="label">Experience</dt><dd>15+ years</dd></div>
+            <div><dt class="label">Range</dt><dd>Front &amp; back of house</dd></div>
+            <div><dt class="label">Today</dt><dd>Guest experience</dd></div>
+          </dl>
+          <div class="intro__ctas in in-5">
+            <a class="btn btn--solid" href="#enquire">Book a consultation <Icon name="arrow" size={16} stroke={1.5} /></a>
+            <a class="link" href="/about/">His story</a>
+          </div>
         </div>
       </div>
     </div>
@@ -205,16 +213,18 @@ const faqs = [
 
 <style>
   /* intro */
-  .intro { padding: clamp(24px, 4vw, 64px) 0 clamp(72px, 9vw, 140px); }
-  .intro__grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 104px); align-items: center; }
-  .intro__photo :global(.photo) { max-height: 86vh; width: 100%; }
-  .intro__text .h1 { margin-top: 28px; }
-  .intro__text .rule { margin-top: 36px; }
-  .intro__lead { margin-top: 32px; font-family: var(--font-display); font-size: clamp(24px, 2.2vw, 31px); line-height: 1.38; color: var(--ink); max-width: 30em; }
+  .intro { padding: clamp(28px, 4vw, 56px) 0 clamp(80px, 10vw, 152px); }
+  .intro__top { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .intro__name { margin-top: clamp(20px, 3vw, 40px); font-family: var(--font-display); font-weight: 400; color: var(--ink); font-size: clamp(64px, 12.6vw, 196px); line-height: 0.88; letter-spacing: -0.035em; }
+  .intro__l1, .intro__l2 { display: block; }
+  .intro__l2 { text-align: right; margin-top: -0.04em; }
+  .intro__grid { margin-top: clamp(36px, 5vw, 72px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 7vw, 120px); align-items: end; }
+  .intro__photo :global(.photo) { width: 100%; max-height: 82vh; }
+  .intro__lead { margin-top: 32px; font-size: clamp(19px, 1.55vw, 22px); line-height: 1.6; color: var(--ink); max-width: 34em; }
   .intro__text .lead { margin-top: 20px; }
   .facts { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
   .facts div { padding: 20px 16px 0 0; }
-  .facts dd { margin-top: 8px; font-family: var(--font-display); font-size: clamp(20px, 1.7vw, 24px); line-height: 1.25; color: var(--ink); }
+  .facts dd { margin-top: 8px; font-family: var(--font-display); font-size: clamp(19px, 1.6vw, 23px); line-height: 1.25; color: var(--ink); }
   .intro__ctas { margin-top: 44px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px 36px; }
   @media (max-width: 899px) {
     .intro__grid { grid-template-columns: 1fr; }
@@ -227,7 +237,7 @@ const faqs = [
   .thesis__p { margin: 36px auto 0; }
 
   /* film content */
-  .film-quote p { margin: 32px auto 0; max-width: 20ch; font-family: var(--font-display); font-weight: 300; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.1; color: var(--on-dark); text-wrap: balance; }
+  .film-quote p { margin: 32px auto 0; max-width: 20ch; font-family: var(--font-display); font-weight: 400; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.1; color: var(--on-dark); text-wrap: balance; }
   .film-hindi { margin-top: 36px; font-size: 22px; color: var(--gold-soft); }
   .film-h { margin-top: 24px; max-width: 14ch; color: var(--on-dark) !important; }
   .film-p { margin-top: 24px; max-width: 34em; font-size: 18px; color: var(--on-dark); opacity: .9; }
@@ -246,7 +256,9 @@ const faqs = [
 
   /* pillars */
   .pillars { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 48px; }
-  .pillar { background: var(--white); padding: clamp(32px, 3.5vw, 48px); }
+  .pillar { position: relative; background: var(--white); padding: clamp(32px, 3.5vw, 48px); }
+  .pillar::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease); }
+  .pillar:hover::before { transform: scaleX(1); }
   .pillar .h3 { margin-top: 16px; }
   .pillar ul { margin-top: 28px; }
   .pillar li { padding: 13px 0; border-top: 1px solid var(--line); font-size: 16px; }

@@ -4,7 +4,7 @@ Hospitality mentorship by **Deepak Thapliyal**, Dehradun. Built by Klytos Labs w
 
 - **Pages:** Home, The mentorship, About Deepak, Contact, Privacy Policy, Terms and Conditions, 404
 - **No server needed.** Enquiries are emailed through [Web3Forms](https://web3forms.com).
-- **Fonts:** Cormorant Garamond (headings) and Jost (body), both free Google Fonts, self-hosted via Fontsource so there are no external font requests. Tiro Devanagari Hindi for the Hindi touches.
+- **Fonts:** Bodoni Moda (headings) and Hanken Grotesk (body), both open-source (SIL Open Font License), self-hosted via Fontsource so there are no external font requests. Tiro Devanagari Hindi for the Hindi touches.
 - **Background videos:** three full-width film bands. See *Videos* below.
 
 ## Launch rules

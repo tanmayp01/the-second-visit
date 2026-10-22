@@ -1,6 +1,6 @@
 /* =========================================================
    The Second Visit: design system v2
-   White space, a refined Garamond for headings, Jost for text.
+   White space, Bodoni Moda for headings, Hanken Grotesk for text.
    ========================================================= */
 
 :root {
@@ -21,8 +21,8 @@
   --error: #A3321E;
 
   /* type */
-  --font-display: 'Cormorant Garamond', 'Cormorant', Garamond, 'Times New Roman', serif;
-  --font-body: 'Jost Variable', 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, 'Bodoni 72', Georgia, serif;
+  --font-body: 'Hanken Grotesk Variable', 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --font-hindi: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
 
   /* layout */
@@ -40,9 +40,10 @@ body {
   background: var(--white);
   color: var(--body);
   font-family: var(--font-body);
-  font-weight: 350;
+  font-weight: 400;
   font-size: 17px;
-  line-height: 1.75;
+  line-height: 1.72;
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -73,13 +74,13 @@ strong { font-weight: 500; color: var(--ink); }
 .split > * { min-width: 0; }
 
 /* ---------- type ---------- */
-.h1, .h2, .h3, .display { font-family: var(--font-display); font-weight: 400; color: var(--ink); text-wrap: balance; letter-spacing: -0.01em; }
-.h1 { font-size: clamp(54px, 7.4vw, 112px); line-height: 0.98; font-weight: 300; }
-.h2 { font-size: clamp(38px, 4.6vw, 68px); line-height: 1.06; font-weight: 300; }
-.h3 { font-size: clamp(24px, 2.2vw, 30px); line-height: 1.2; }
+.h1, .h2, .h3, .display { font-family: var(--font-display); font-weight: 400; color: var(--ink); text-wrap: balance; letter-spacing: -0.02em; font-optical-sizing: auto; }
+.h1 { font-size: clamp(52px, 7.2vw, 108px); line-height: 0.96; }
+.h2 { font-size: clamp(36px, 4.4vw, 64px); line-height: 1.04; }
+.h3 { font-size: clamp(22px, 1.9vw, 27px); line-height: 1.22; letter-spacing: -0.01em; }
 .h1 em, .h2 em, .h3 em { font-style: italic; }
 .lead { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.7; color: var(--body); max-width: 36em; }
-.label { font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+.label { font-family: var(--font-body); font-size: 11.5px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
 .dark .label { color: var(--gold-soft); }
 .muted { color: var(--muted); }
 .small { font-size: 15px; }
@@ -143,8 +144,8 @@ strong { font-weight: 500; color: var(--ink); }
 /* ---------- forms ---------- */
 .field-group { display: flex; flex-direction: column; gap: 10px; }
 .field-label { font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
-.field-label .opt { letter-spacing: 0.05em; text-transform: none; font-weight: 350; color: var(--muted); }
-.field { width: 100%; min-height: 52px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--line-strong); border-radius: 0; background: transparent; color: var(--ink); font-size: 18px; font-weight: 350; transition: border-color .2s ease; }
+.field-label .opt { letter-spacing: 0.05em; text-transform: none; font-weight: 400; color: var(--muted); }
+.field { width: 100%; min-height: 52px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--line-strong); border-radius: 0; background: transparent; color: var(--ink); font-size: 18px; font-weight: 400; transition: border-color .2s ease; }
 textarea.field { resize: vertical; min-height: 96px; line-height: 1.6; }
 select.field { appearance: none; -webkit-appearance: none; padding-right: 32px; cursor: pointer; }
 .field:hover { border-bottom-color: var(--muted); }
@@ -208,6 +209,11 @@ select.field { appearance: none; -webkit-appearance: none; padding-right: 32px; 
   .js [data-reveal="rule"].is-in { transform: scaleX(1); }
 
   .faq details[open] .faq__a { animation: fade-up .5s var(--ease) both; }
+
+  /* Headline words rise out of a mask */
+  .is-split .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.08em 0.16em; margin: 0 -0.08em -0.16em; }
+  .is-split .wi { display: inline-block; transform: translateY(108%); transition: transform 1.15s cubic-bezier(.19, 1, .22, 1); transition-delay: calc(var(--i, 0) * 60ms); }
+  .is-split.is-in .wi { transform: none; }
 
   /* Smooth cross-fade between pages (browsers that support it) */
   @view-transition { navigation: auto; }

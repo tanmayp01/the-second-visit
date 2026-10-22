@@ -31,6 +31,6 @@ Do not launch until all of these are true. `npm run launch-check` verifies them:
 
 ## Design system
 
-- Headings: Cormorant Garamond. Body: Jost. Self-hosted via Fontsource.
+- Headings: Bodoni Moda (high-contrast display serif, use at 22px and up only). Body and long text: Hanken Grotesk. Both self-hosted via Fontsource.
 - White and ivory backgrounds, ink text, one gold accent, deep evergreen for dark bands.
-- Motion is restrained: short fade-ins, button fills, a slow video zoom. Everything respects `prefers-reduced-motion`.
+- Motion is restrained: headline words rising from a mask, short fade-ins, button fills, a slow video zoom, cross-fade page transitions. Everything respects `prefers-reduced-motion`.
