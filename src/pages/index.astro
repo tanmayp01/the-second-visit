@@ -8,24 +8,25 @@ import EnquiryForm from '../components/EnquiryForm.astro';
 import Compare from '../components/Compare.astro';
 import { site, telHref, mailHref, phHtml } from '../config/site';
 import { films } from '../config/media';
+import { photo } from '../config/photos';
 
 const price = phHtml(site.priceFrom, 'X,XXX');
 const phone = phHtml(site.phoneDisplay, '+91 XXXXX XXXXX');
 
 const areas = [
-  { tag: 'The guest', title: 'The welcome and the goodbye', text: 'How guests are greeted, seated, served and seen off, and the small details that make a place feel like theirs.', brief: 'A guest being greeted at the door of a Dehradun café, morning light.' },
-  { tag: 'The guest', title: 'Feedback and complaints', text: 'Collecting feedback, reading it honestly, and recovering well when something goes wrong.', brief: 'A team member listening to a seated guest, notebook in hand.' },
-  { tag: 'The team', title: 'Training your team', text: 'Hands-on coaching for teams of any size, even one or two people.', brief: 'Deepak walking a two-person team through service at the counter.' },
-  { tag: 'The team', title: 'Service standards', text: 'Simple, shared habits so every shift delivers the same café.', brief: 'A neatly set table and a printed one-page service checklist.' },
-  { tag: 'The operation', title: 'Stock and inventory', text: 'Stock control, ordering and cutting waste, without complicated software.', brief: 'Labelled shelves in a café storeroom, a clipboard stock count.' },
-  { tag: 'The operation', title: 'Workflows and routines', text: 'Opening, closing and service routines that make the day run smoother.', brief: 'Chairs coming down and a team setting up before opening.' },
+  { img: 'area-welcome', tag: 'The guest', title: 'The welcome and the goodbye', text: 'How guests are greeted, seated, served and seen off, and the small details that make a place feel like theirs.', brief: 'A guest being greeted at the door of a Dehradun café, morning light.' },
+  { img: 'area-feedback', tag: 'The guest', title: 'Feedback and complaints', text: 'Collecting feedback, reading it honestly, and recovering well when something goes wrong.', brief: 'A team member listening to a seated guest, notebook in hand.' },
+  { img: 'area-training', tag: 'The team', title: 'Training your team', text: 'Hands-on coaching for teams of any size, even one or two people.', brief: 'Two team members practising service at the counter before opening.' },
+  { img: 'area-standards', tag: 'The team', title: 'Service standards', text: 'Simple, shared habits so every shift delivers the same café.', brief: 'A neatly set table and a printed one-page service checklist.' },
+  { img: 'area-stock', tag: 'The operation', title: 'Stock and inventory', text: 'Stock control, ordering and cutting waste, without complicated software.', brief: 'Labelled shelves in a café storeroom, a clipboard stock count.' },
+  { img: 'area-routines', tag: 'The operation', title: 'Workflows and routines', text: 'Opening, closing and service routines that make the day run smoother.', brief: 'Chairs coming down and a team setting up before opening.' },
 ];
 const journey = [
-  { n: 'I', title: 'A first conversation', text: 'Free and without obligation, by phone or over chai. You talk about your café; Deepak listens.', brief: 'Two cups of chai on a café table.' },
-  { n: 'II', title: 'Deepak visits', text: 'He sees your café during service, the way a guest would: the welcome, the wait, the bill, the goodbye.', brief: 'The café entrance seen from the street.' },
-  { n: 'III', title: 'A plan and a quote', text: 'You agree the focus, the number of sessions and the fee together. Nothing starts until you are happy with it.', brief: 'A handwritten plan on a notebook page.' },
-  { n: 'IV', title: 'Morning sessions', text: 'In your café before you open, usually finishing before 12 or 1 PM depending on the café, so the team uses what they learned at lunch.', brief: 'A team practising at the counter before opening.' },
-  { n: 'V', title: 'A follow-up', text: 'Once the new habits have settled, Deepak checks what is working and adjusts the rest.', brief: 'A busy, well-run service at lunchtime.' },
+  { img: 'journey-1-chai', n: 'I', title: 'A first conversation', text: 'Free and without obligation, by phone or over chai. You talk about your café; Deepak listens.', brief: 'Two cups of chai on a café table.' },
+  { img: 'journey-2-entrance', n: 'II', title: 'Deepak visits', text: 'He sees your café during service, the way a guest would: the welcome, the wait, the bill, the goodbye.', brief: 'The café entrance seen from the street.' },
+  { img: 'journey-3-plan', n: 'III', title: 'A plan and a quote', text: 'You agree the focus, the number of sessions and the fee together. Nothing starts until you are happy with it.', brief: 'A handwritten plan on a notebook page.' },
+  { img: 'journey-4-session', n: 'IV', title: 'Morning sessions', text: 'In your café before you open, usually finishing before 12 or 1 PM depending on the café, so the team uses what they learned at lunch.', brief: 'A team practising at the counter before opening.' },
+  { img: 'journey-5-lunch', n: 'V', title: 'A follow-up', text: 'Once the new habits have settled, Deepak checks what is working and adjusts the rest.', brief: 'A busy, well-run service at lunchtime.' },
 ];
 const faqs = [
   { q: 'Is the first conversation really free?', a: 'Yes. The first conversation, on the phone or over a cup of chai, is free and comes with no obligation. It is a chance for Deepak to understand your café, and for you to decide whether the mentorship is right for you.' },
@@ -102,7 +103,7 @@ const faqs = [
         <div class="reveal-list__preview" id="area-preview" aria-live="polite">
           {areas.map((a, i) => (
             <div class:list={['reveal-list__frame', { 'is-active': i === 0 }]} data-frame={i}>
-              <Photo tag={a.title} ratio="4 / 5" alt={a.title} brief={a.brief} />
+              <Photo src={photo(a.img)} tag={a.title} ratio="4 / 5" alt={a.brief} brief={a.brief} sizes="(max-width: 900px) 0px, 40vw" />
             </div>
           ))}
         </div>
@@ -141,7 +142,7 @@ const faqs = [
         <ol class="journey__track" data-journey-track>
           {journey.map((j) => (
             <li class="stop">
-              <Photo class="stop__photo" tag={`Step ${j.n}`} ratio="4 / 3" alt={j.title} brief={j.brief} sizes="(max-width: 900px) 80vw, 34vw" />
+              <Photo src={photo(j.img)} class="stop__photo" tag={`Step ${j.n}`} ratio="4 / 3" alt={j.brief} brief={j.brief} sizes="(max-width: 900px) 80vw, 34vw" />
               <div class="stop__text">
                 <span class="stop__n">{j.n}</span>
                 <h3 class="h3">{j.title}</h3>
@@ -168,8 +169,8 @@ const faqs = [
       </div>
       <div style="flex: 1.3 1 520px;">
         <Compare
-          before={{ tag: 'Before', brief: 'Staged photograph: a guest waiting at the counter, staff busy with their backs turned.' }}
-          after={{ tag: 'After', brief: 'Same café, same angle: a team member greeting the guest with a smile, menu in hand.' }}
+          before={{ src: photo('compare-before'), alt: 'A guest waiting at the counter while staff are busy with their backs turned', tag: 'Before', brief: 'Staged photograph: a guest waiting at the counter, staff busy with their backs turned.' }}
+          after={{ src: photo('compare-after'), alt: 'The same guest greeted by a smiling team member who offers a table', tag: 'After', brief: 'Same café, same angle: a team member greeting the guest with a smile, menu in hand.' }}
         />
       </div>
     </div>

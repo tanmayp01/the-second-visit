@@ -60,19 +60,22 @@ Held back until approved (switch on in code once confirmed):
 
 ## Photos
 
-Until photos are added, hatched placeholders describe each intended shot. To add one:
+Home page photos are picked up by name from `src/assets/photos/`, so adding one is just dropping in a file with the right name (JPG, PNG or WebP, at least 1600 px on the long side). Astro resizes it to modern formats automatically.
 
-1. Put the file in `src/assets/photos/` (JPG or PNG, at least 1600 px on the long side).
-2. Import it in the page and pass it to `<Photo>`:
+| File name | Where | Shape |
+|---|---|---|
+| `area-welcome` | Mentorship list: the welcome and the goodbye | 4:5 |
+| `area-feedback` | Mentorship list: feedback and complaints | 4:5 |
+| `area-training` | Mentorship list: training your team | 4:5 |
+| `area-standards` | Mentorship list: service standards | 4:5 |
+| `area-stock` | Mentorship list: stock and inventory | 4:5 |
+| `area-routines` | Mentorship list: workflows and routines | 4:5 |
+| `journey-1-chai` to `journey-5-lunch` | Journey steps I to V (`journey-1-chai`, `journey-2-entrance`, `journey-3-plan`, `journey-4-session`, `journey-5-lunch`) | 4:3 |
+| `compare-before`, `compare-after` | Before / after slider. Same café, same camera position | 4:3 |
 
-```astro
----
-import hero from '../assets/photos/hero.jpg';
----
-<Photo src={hero} alt="Deepak briefing a café team at the counter" brief="…" ratio="4 / 5" />
-```
+**Stand-in images.** `src/assets/photos/temporary/` holds AI stand-ins with the same names (never of Deepak). A real photo with the same name in `src/assets/photos/` always wins. `npm run launch-check` fails until the temporary folder is empty. The stand-ins also live in the Figma file "The Second Visit: site photos", one frame per file name, ready to export as JPG.
 
-Astro resizes it to modern formats automatically. Shots needed: hero 4:5 (home), portrait 1:1 (home), portrait 4:5 (about), session 21:9 (mentorship).
+Photos of Deepak (home intro, About, Mentorship) stay as placeholders until real photographs exist. They are passed to `<Photo>` directly in the page.
 
 ## Videos
 

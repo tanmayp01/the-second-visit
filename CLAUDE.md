@@ -13,7 +13,7 @@ Never use:
 - emoji or emoji icons
 - em dashes in visitor-facing copy
 - over-the-top scroll animation, cursor animation, preloaders or curtains
-- AI-generated photos, videos or copy
+- AI-generated photos, videos or copy in the launched site. Stand-in AI photos (never of Deepak) may sit in `src/assets/photos/temporary/` during design only; the launch check fails until real photos replace them
 
 Facts about Deepak come only from the brief or from him. Anything unconfirmed stays a visible placeholder in `src/config/site.ts`.
 
@@ -28,6 +28,7 @@ Do not launch until all of these are true. `npm run launch-check` verifies them:
 - every placeholder in `src/config/site.ts` is filled in
 - the Web3Forms key is set
 - background videos are self-hosted in `public/video/`
+- no stand-in photos remain in `src/assets/photos/temporary/`
 
 ## Design system
 

@@ -50,7 +50,12 @@ check(Boolean(process.env.PUBLIC_WEB3FORMS_KEY), 'Web3Forms key provided.', 'PUB
 const mediaTs = read('src/config/media.ts');
 check(!/src:\s*'https?:/.test(mediaTs), 'Background videos are self-hosted.', 'Background videos still load from Pixabay. Download them into public/video/ and update media.ts.');
 
-// 7. No "made with" badges, em dashes or emoji in what visitors see
+// 7. Stand-in photos replaced with real ones
+const tempDir = join(root, 'src/assets/photos/temporary');
+const tempLeft = existsSync(tempDir) ? readdirSync(tempDir).filter((f) => /\.(jpe?g|png|webp)$/i.test(f)) : [];
+check(tempLeft.length === 0, 'No stand-in photos left.', `Stand-in AI photos still in src/assets/photos/temporary/: ${tempLeft.join(', ')}. Replace them with real photographs.`);
+
+// 8. No "made with" badges, em dashes or emoji in what visitors see
 const walk = (dir) => readdirSync(dir).flatMap((f) => {
   const p = join(dir, f);
   return statSync(p).isDirectory() ? walk(p) : /\.(astro|ts)$/.test(p) ? [p] : [];
