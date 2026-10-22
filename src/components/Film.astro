@@ -29,7 +29,7 @@ const { film, size = 'tall', align = 'center', id } = Astro.props;
   .film { position: relative; overflow: hidden; display: flex; align-items: center; isolation: isolate; background: var(--deep); }
   .film--tall { min-height: clamp(560px, 92vh, 880px); }
   .film--medium { min-height: clamp(460px, 70vh, 680px); }
-  .film__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(.85); }
+  .film__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(.85); transform: scale(var(--zoom, 1)); will-change: transform; }
   .film__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,14,12,.55) 0%, rgba(10,14,12,.35) 45%, rgba(10,14,12,.7) 100%); }
   .film__inner { width: 100%; padding-block: clamp(88px, 10vw, 140px); color: var(--on-dark); }
   .film--center .film__inner { text-align: center; }
@@ -58,5 +58,18 @@ const { film, size = 'tall', align = 'center', id } = Astro.props;
       if (userPaused) return;
       if (entry.isIntersecting) video.play().catch(() => {}); else video.pause();
     }, { threshold: 0.1 }).observe(band);
+
+    // Slow zoom-out as the band scrolls through the window.
+    if (!reduce.matches) {
+      let ticking = false;
+      const update = () => {
+        const r = band.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (window.innerHeight - r.top) / (window.innerHeight + r.height)));
+        band.style.setProperty('--zoom', (1.16 - p * 0.16).toFixed(4));
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      update();
+    }
   });
 </script>

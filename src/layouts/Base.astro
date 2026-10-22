@@ -75,9 +75,22 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
     <meta name="twitter:card" content="summary_large_image" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!calm && !sessionStorage.getItem('tsv-curtain')) { d.classList.add('has-curtain'); sessionStorage.setItem('tsv-curtain', '1'); }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="curtain" aria-hidden="true" data-curtain>
+      <span class="curtain__mark"><span class="curtain__name">The Second Visit</span><span class="curtain__by">by {site.owner}</span><span class="curtain__line"></span></span>
+    </div>
     <Header active={active} />
     <main id="main">
       <slot />
@@ -89,6 +102,35 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
         <a class="mobile-bar__main" href={active === 'home' ? '#enquire' : '/contact/'}>Book a consultation</a>
       </div>
     )}
+    <script>
+      // Curtain: only on the first page of a visit.
+      const curtain = document.querySelector<HTMLElement>('[data-curtain]');
+      if (curtain) {
+        if (!document.documentElement.classList.contains('has-curtain')) curtain.remove();
+        else curtain.addEventListener('animationend', (e) => { if (e.target === curtain) curtain.remove(); });
+        setTimeout(() => curtain.isConnected && curtain.remove(), 3500);
+      }
+
+      // Scroll reveals: tag the building blocks of every section after the first,
+      // with a short stagger between siblings.
+      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+        const sections = document.querySelectorAll('main > section:not(:first-of-type), main > .film');
+        const pick = '.label, .h2, .h3, .lead, .rule, .photo, blockquote, .film-p, .film-hindi, .timeline li, .pillar, .group, .steps li, .flow li, .gaps > div, .who__list li, .who > div, .knows > div, .faq details, .path li, .price-row, .fee, .contacts > div, .enq, .btn, .link, .story > p';
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        sections.forEach((sec) => {
+          sec.querySelectorAll<HTMLElement>(pick).forEach((el) => {
+            // Skip anything nested in an already-animated block or in hidden UI (e.g. the form's thank-you state).
+            if (el.parentElement?.closest('[data-reveal], [hidden]')) return;
+            el.dataset.reveal = el.classList.contains('photo') ? 'photo' : el.classList.contains('rule') ? 'rule' : 'up';
+            const sibs = Array.from(el.parentElement?.children ?? []).filter((c) => c.matches(pick));
+            el.style.setProperty('--stagger', `${Math.min(sibs.indexOf(el), 5) * 0.09}s`);
+            io.observe(el);
+          });
+        });
+      }
+    </script>
     <style>
       .mobile-bar { position: sticky; bottom: 0; z-index: 40; background: var(--ink); padding-bottom: env(safe-area-inset-bottom); }
       .mobile-bar a { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 56px; color: var(--white); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
