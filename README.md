@@ -4,7 +4,7 @@ Hospitality mentorship by **Deepak Thapliyal**, Dehradun. Built by Klytos Labs w
 
 - **Pages:** Home, The mentorship, About Deepak, Contact, Privacy Policy, Terms and Conditions, 404
 - **No server needed.** Enquiries are emailed through [Web3Forms](https://web3forms.com).
-- **Fonts:** Gilda Display (headings), Tenor Sans (labels, navigation, buttons) and Hanken Grotesk (body), all open-source (SIL Open Font License), self-hosted via Fontsource so there are no external font requests. Tiro Devanagari Hindi for the Hindi touches.
+- **Fonts:** Libre Caslon Display (headings), Jost (labels, navigation, buttons) and Libre Franklin (body), all open-source (SIL Open Font License), self-hosted via Fontsource so there are no external font requests. Tiro Devanagari Hindi for the Hindi touches.
 - **Background videos:** three full-width film bands. See *Videos* below.
 
 ## Launch rules
@@ -91,7 +91,7 @@ Before launch:
 2. Download the chosen files, put them in `public/video/`, and change each `src` to `/video/<file>.mp4`. Keep them under about 8 MB each, at 1080p.
 3. Better still, film 10–15 second clips at a real café in Dehradun (Deepak greeting a guest, a team briefing, chai being poured) and use those instead.
 
-Videos play muted and looped, only while on screen, and have a pause button. Visitors with "reduce motion" switched on see a still frame.
+Videos play muted and looped, only while on screen. There is no on-screen pause control. Visitors with "reduce motion" switched on see a still frame.
 
 ## Enquiry form (Web3Forms)
 

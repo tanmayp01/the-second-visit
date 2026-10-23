@@ -32,6 +32,6 @@ Do not launch until all of these are true. `npm run launch-check` verifies them:
 
 ## Design system
 
-- Three-tier type, modelled on luxury hotel sites: Gilda Display for headings (no italic; emphasis is gold), Tenor Sans in spaced capitals for labels, navigation and buttons, Hanken Grotesk for body text. All self-hosted via Fontsource.
+- Three-tier type, modelled on luxury hotel sites: Libre Caslon Display for headings (no italic; emphasis is gold), Jost in spaced capitals for labels, navigation and buttons, Libre Franklin for body text. All self-hosted via Fontsource.
 - White and ivory backgrounds, ink text, one gold accent, deep evergreen for dark bands.
 - Motion is restrained: headline words rising from a mask, short fade-ins, button fills, a slow video zoom, cross-fade page transitions. Home page interactions: full-screen video hero, mentorship list with picture reveal, horizontal journey (pinned on desktop, swipe on phones), before/after slider (keyboard accessible). Everything respects `prefers-reduced-motion`.
