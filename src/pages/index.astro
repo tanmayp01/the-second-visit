@@ -69,49 +69,46 @@ const faqs = [
           <div><dt class="label">Range</dt><dd>Front &amp; back of house</dd></div>
           <div><dt class="label">Today</dt><dd>Guest experience</dd></div>
         </dl>
-        <a class="link" href="/about/" style="margin-top: 40px;">His story</a>
+        <a class="link intro__more" href="/about/">His story</a>
       </div>
     </div>
   </section>
 
   <!-- 3. THE MENTORSHIP: hover reveal -->
   <section class="section section--ivory" aria-labelledby="m-h">
-    <div class="container">
-      <div class="split" style="align-items: flex-end;">
-        <div style="flex: 1 1 460px;">
-          <p class="label">The mentorship</p>
-          <h2 id="m-h" class="h2" style="margin-top: 24px;">One mentorship, <em>shaped around your café</em>.</h2>
-        </div>
-        <p class="lead" style="flex: 1 1 360px;">No fixed course and no slides. You choose the focus together, and Deepak works with you and your team on what matters most.</p>
-      </div>
-      <div class="reveal-list" data-reveal-list>
+    <div class="container m-grid" data-reveal-list>
+      <div class="m-left">
+        <p class="label">The mentorship</p>
+        <h2 id="m-h" class="h2">One mentorship, <em>shaped around your café</em>.</h2>
         <ol class="reveal-list__items">
           {areas.map((a, i) => (
             <li>
               <button class="area" type="button" aria-pressed={i === 0 ? 'true' : 'false'} aria-controls="area-preview" data-area={i}>
                 <span class="area__num">{String(i + 1).padStart(2, '0')}</span>
                 <span class="area__body">
-                  <span class="area__tag">{a.tag}</span>
                   <span class="area__title">{a.title}</span>
                   <span class="area__text"><span>{a.text}</span></span>
                 </span>
-                <span class="area__arrow" aria-hidden="true"><Icon name="arrow" size={18} stroke={1.3} /></span>
+                <span class="area__tag">{a.tag}</span>
               </button>
             </li>
           ))}
         </ol>
+      </div>
+      <div class="m-right">
+        <p class="lead">No fixed course and no slides. You choose the focus together, and Deepak works with you and your team on what matters most.</p>
         <div class="reveal-list__preview" id="area-preview" aria-live="polite">
           {areas.map((a, i) => (
             <div class:list={['reveal-list__frame', { 'is-active': i === 0 }]} data-frame={i}>
-              <Photo src={photo(a.img)} tag={a.title} ratio="4 / 5" alt={a.brief} brief={a.brief} sizes="(max-width: 900px) 0px, 40vw" />
+              <Photo src={photo(a.img)} tag={a.title} ratio="auto" alt={a.brief} brief={a.brief} sizes="(max-width: 900px) 0px, 40vw" />
             </div>
           ))}
         </div>
-      </div>
-      <div class="price-row">
-        <p><span class="label">From</span> <span class="price">₹<span set:html={price} /></span></p>
-        <p class="muted small">Agreed with you after the first visit, before anything begins.</p>
-        <a class="link" href="/mentorship/">The full mentorship</a>
+        <div class="price-row">
+          <p><span class="label">From</span> <span class="price">₹<span set:html={price} /></span></p>
+          <p class="muted small">Agreed with you after the first visit, before anything begins.</p>
+          <a class="link" href="/mentorship/">The full mentorship</a>
+        </div>
       </div>
     </div>
   </section>
@@ -131,7 +128,7 @@ const faqs = [
       <div class="container journey__head">
         <div>
           <p class="label">A typical engagement</p>
-          <h2 id="journey-h" class="h2" style="margin-top: 20px;">From the first chai <em>to the follow-up</em>.</h2>
+          <h2 id="journey-h" class="h2" style="margin-top: 16px;">From the first chai <em>to the follow-up</em>.</h2>
         </div>
         <div class="journey__meta">
           <p class="muted small">The exact steps and the number of sessions are agreed with each café.</p>
@@ -157,17 +154,17 @@ const faqs = [
 
   <!-- 6. BEFORE / AFTER -->
   <section class="section section--ivory" aria-labelledby="ba-h">
-    <div class="container split" style="align-items: center;">
+    <div class="container split ba-wrap" style="align-items: center;">
       <div style="flex: 1 1 360px;">
         <p class="label">The difference</p>
-        <h2 id="ba-h" class="h2" style="margin-top: 24px;">The same café. <em>A different welcome.</em></h2>
-        <p class="lead" style="margin-top: 28px;">Drag the line to compare. Nothing about the room changes; only how the guest is received.</p>
+        <h2 id="ba-h" class="h2" style="margin-top: 16px;">The same café. <em>A different welcome.</em></h2>
+        <p class="lead" style="margin-top: var(--gap);">Drag the line to compare. Nothing about the room changes; only how the guest is received.</p>
         <dl class="ba-key">
           <div><dt class="label">Before</dt><dd>The guest waits at the counter while staff finish another task.</dd></div>
           <div><dt class="label">After</dt><dd>A greeting within moments, eye contact, and a table offered.</dd></div>
         </dl>
       </div>
-      <div style="flex: 1.3 1 520px;">
+      <div class="ba-media" style="flex: 1.3 1 520px;">
         <Compare
           before={{ src: photo('compare-before'), alt: 'A guest waiting just inside the door while the team stays busy behind the counter', tag: 'Before', brief: 'Staged photograph: a guest waiting at the counter, staff busy with their backs turned.' }}
           after={{ src: photo('compare-after'), alt: 'A team member walking over to greet a guest with a smile', tag: 'After', brief: 'Same café, same angle: a team member greeting the guest with a smile, menu in hand.' }}
@@ -181,7 +178,7 @@ const faqs = [
     <div class="container split">
       <div style="flex: 1 1 380px;">
         <p class="label">Who it is for</p>
-        <h2 id="who-h" class="h2" style="margin-top: 24px;">For owners who care <em>how it feels</em>.</h2>
+        <h2 id="who-h" class="h2" style="margin-top: 16px;">For owners who care <em>how it feels</em>.</h2>
       </div>
       <div style="flex: 1.3 1 520px;">
         <ul class="who__list">
@@ -200,8 +197,8 @@ const faqs = [
     <div class="container split">
       <div style="flex: 1 1 320px;">
         <p class="label">Questions</p>
-        <h2 id="faq-h" class="h2" style="margin-top: 24px;">What owners <em>usually ask</em>.</h2>
-        <p style="margin-top: 28px;">Something else? Call or WhatsApp <a class="ulink" href={telHref()} set:html={phone} />.</p>
+        <h2 id="faq-h" class="h2" style="margin-top: 16px;">What owners <em>usually ask</em>.</h2>
+        <p style="margin-top: var(--gap);">Something else? Call or WhatsApp <a class="ulink" href={telHref()} set:html={phone} />.</p>
       </div>
       <div style="flex: 1.6 1 560px;">
         <Faq group="home-faq" items={faqs} />
@@ -214,8 +211,8 @@ const faqs = [
     <div class="container split">
       <div style="flex: 1 1 360px;">
         <p class="label">Free first conversation</p>
-        <h2 id="enq-h" class="h2" style="margin-top: 24px;">Begin with <em>a conversation</em>.</h2>
-        <p class="lead" style="margin-top: 28px;">Tell Deepak a little about your café. He will call you to arrange a first conversation, free and without obligation.</p>
+        <h2 id="enq-h" class="h2" style="margin-top: 16px;">Begin with <em>a conversation</em>.</h2>
+        <p class="lead enq-lead" style="margin-top: var(--gap);">Tell Deepak a little about your café. He will call you to arrange a first conversation, free and without obligation.</p>
         <dl class="contacts">
           <div><dt class="label">Call or WhatsApp</dt><dd><a href={telHref()} set:html={phone} /></dd></div>
           <div><dt class="label">Email</dt><dd><a href={mailHref()} set:html={phHtml(site.email, 'email address')} /></dd></div>
@@ -244,42 +241,71 @@ const faqs = [
   }
 
   /* intro */
-  .intro__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(40px, 7vw, 120px); align-items: center; }
-  .intro__photo :global(.photo) { width: 100%; max-height: 84vh; }
-  .intro__text .h2 { margin-top: 24px; }
-  .intro__text .rule { margin-top: 36px; }
-  .intro__lead { margin-top: 32px; font-size: clamp(19px, 1.55vw, 22px); line-height: 1.6; color: var(--ink); max-width: 34em; }
-  .intro__text .lead { margin-top: 20px; }
-  .facts { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
-  .facts div { padding: 20px 16px 0 0; }
-  .facts dd { margin-top: 8px; font-family: var(--font-display); font-size: clamp(19px, 1.6vw, 23px); line-height: 1.25; color: var(--ink); }
-  @media (max-width: 899px) { .intro__grid { grid-template-columns: 1fr; } .intro__photo :global(.photo) { aspect-ratio: 4 / 4.4 !important; max-height: none; } }
-  @media (max-width: 480px) { .facts { grid-template-columns: 1fr; } .facts div { padding: 14px 0; border-bottom: 1px solid var(--line); } }
+  .intro__grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(40px, 5vw, 88px); align-items: center; }
+  .intro__photo :global(.photo) { height: min(calc(var(--screen) - 2 * var(--section)), 600px); width: auto; aspect-ratio: 4 / 5; }
+  .intro__text .h2 { margin-top: 16px; }
+  .intro__text .rule { margin-top: var(--gap); }
+  .intro__lead { margin-top: var(--gap); font-size: clamp(16px, min(1.4vw, 2.4svh), 19px); line-height: 1.55; color: var(--ink); max-width: 34em; }
+  .intro__text .lead { margin-top: 12px; }
+  .facts { margin-top: var(--gap); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+  .facts div { padding: 14px 16px 0 0; }
+  .facts dd { margin-top: 6px; font-family: var(--font-display); font-size: clamp(17px, min(1.6vw, 2.8svh), 22px); line-height: 1.25; color: var(--ink); }
+  .intro__more { margin-top: var(--gap); }
+  @media (max-width: 899px) {
+    .intro__grid { grid-template-columns: 1fr; gap: 20px; }
+    .intro__photo :global(.photo) { width: 100%; height: auto; aspect-ratio: 16 / 10 !important; max-height: 17svh; }
+    .intro__photo :global(.photo__brief) { font-size: 15px; }
+    .intro__text .rule { display: none; }
+    .intro__lead { margin-top: 14px; font-size: 16px; }
+    .facts { margin-top: 14px; }
+    .facts div { padding-top: 10px; }
+    .intro__more { margin-top: 10px; }
+    .intro__text .lead { font-size: 15px; }
+    .facts dd { font-size: 16px; }
+    .facts .label { font-size: 10px; letter-spacing: .18em; }
+  }
 
   /* mentorship hover reveal */
-  .reveal-list { margin-top: clamp(48px, 6vw, 88px); display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
-  .reveal-list__items { border-top: 1px solid var(--line-strong); }
+  .m-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); }
+  .m-left .h2 { margin-top: 16px; }
+  .m-right { display: flex; flex-direction: column; gap: var(--gap); }
+  .reveal-list__items { margin-top: var(--gap); border-top: 1px solid var(--line-strong); }
   .reveal-list__items li { border-bottom: 1px solid var(--line-strong); }
-  .area { width: 100%; display: grid; grid-template-columns: 56px minmax(0, 1fr) 32px; gap: 16px; align-items: start; padding: 26px 0; border: 0; background: none; text-align: left; cursor: pointer; color: var(--ink); }
-  .area__num { padding-top: 8px; font-family: var(--font-ui); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); transition: color .3s ease; }
-  .area__tag { display: block; font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
-  .area__title { display: block; margin-top: 8px; font-family: var(--font-display); font-size: clamp(24px, 2.4vw, 34px); line-height: 1.15; transition: transform .5s var(--ease), color .3s ease; }
+  .area { width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: clamp(10px, 1.7svh, 18px) 0; border: 0; background: none; text-align: left; cursor: pointer; color: var(--ink); }
+  .area__num { font-family: var(--font-ui); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); transition: color .3s ease; }
+  .area__tag { font-family: var(--font-ui); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .area__title { display: block; font-family: var(--font-display); font-size: clamp(20px, min(2.1vw, 3.4svh), 28px); line-height: 1.2; transition: transform .5s var(--ease), color .3s ease; }
   .area__text > span { min-height: 0; overflow: hidden; }
-  .area__text { display: grid; grid-template-rows: 0fr; overflow: hidden; margin-top: 0; font-size: 16px; color: var(--body); opacity: 0; transition: grid-template-rows .5s var(--ease), opacity .4s ease, margin-top .5s var(--ease); }
-  .area__arrow { padding-top: 10px; color: var(--muted); opacity: 0; transform: translateX(-8px); transition: opacity .35s ease, transform .35s var(--ease); }
-  .area[aria-pressed='true'] .area__num { color: var(--gold); }
+  .area__text { display: grid; grid-template-rows: 0fr; overflow: hidden; margin-top: 0; font-size: 15px; line-height: 1.55; color: var(--body); opacity: 0; transition: grid-template-rows .5s var(--ease), opacity .4s ease, margin-top .5s var(--ease); }
+  .area[aria-pressed='true'] .area__num, .area[aria-pressed='true'] .area__tag { color: var(--gold); }
   .area[aria-pressed='true'] .area__title { transform: translateX(6px); }
-  .area[aria-pressed='true'] .area__text { grid-template-rows: 1fr; opacity: 1; margin-top: 10px; }
-  .area[aria-pressed='true'] .area__arrow { opacity: 1; transform: none; color: var(--gold); }
+  .area[aria-pressed='true'] .area__text { grid-template-rows: 1fr; opacity: 1; margin-top: 6px; }
   .area:hover .area__title { color: var(--gold); }
   .area:focus-visible { outline-offset: -2px; }
-  .reveal-list__preview { position: sticky; top: 120px; aspect-ratio: 4 / 5; }
+  .reveal-list__preview { position: relative; flex: 1 1 auto; min-height: 200px; }
   .reveal-list__frame { position: absolute; inset: 0; opacity: 0; transform: scale(1.03); transition: opacity .6s ease, transform 1.2s var(--ease); }
   .reveal-list__frame.is-active { opacity: 1; transform: none; }
   .reveal-list__frame :global(.photo) { height: 100%; }
-  @media (max-width: 899px) { .reveal-list { grid-template-columns: 1fr; } .reveal-list__preview { display: none; } .area .area__text { grid-template-rows: 1fr; opacity: 1; margin-top: 10px; } .area__arrow { display: none; } }
-  .price-row { margin-top: clamp(48px, 6vw, 72px); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 12px 40px; text-align: center; }
-  .price { font-family: var(--font-display); font-size: clamp(34px, 3.4vw, 46px); color: var(--ink); margin-left: 10px; }
+  .price-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 24px; }
+  .price-row .small { flex: 1 1 100%; order: 3; }
+  .price { font-family: var(--font-display); font-size: clamp(28px, min(3vw, 4.6svh), 40px); color: var(--ink); margin-left: 10px; }
+  @media (max-width: 899px) {
+    .m-grid { grid-template-columns: 1fr; gap: 16px; }
+    .m-right { display: contents; }
+    .m-left { display: contents; }
+    .m-left .label { order: 1; } .m-left .h2 { order: 2; margin-top: 0; }
+    .m-right .lead { order: 3; font-size: 15px; }
+    .reveal-list__items { order: 4; }
+    .price-row { order: 5; }
+    .reveal-list__preview { display: none; }
+    .reveal-list__items { margin-top: 0; }
+    .area__title { font-size: 18px; }
+    .area { padding: 9px 0; }
+    .area__tag { display: none; }
+    .price-row { justify-content: space-between; align-items: center; }
+    .price { font-size: 26px; }
+    .price-row .small { font-size: 13px; }
+  }
 
   /* film quote */
   .film-quote em { color: var(--gold-soft); }
@@ -288,38 +314,43 @@ const faqs = [
 
   /* journey */
   .journey { position: relative; background: var(--white); }
-  .journey__sticky { padding-block: clamp(80px, 9vw, 128px); }
+  .journey__sticky { padding-block: var(--section); }
   .journey__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px 64px; }
   .journey__head > div:first-child { flex: 1 1 520px; }
   .journey__meta { flex: 0 1 320px; }
   .journey__bar { margin-top: 18px; height: 1px; background: var(--line-strong); }
   .journey__bar span { display: block; height: 100%; width: 100%; background: var(--ink); transform: scaleX(var(--p, 0)); transform-origin: left; }
-  .journey__viewport { margin-top: clamp(40px, 5vw, 64px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); scroll-padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); }
+  .journey__viewport { margin-top: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); scroll-padding-inline: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); }
   .journey__viewport::-webkit-scrollbar { display: none; }
   .journey__track { display: flex; gap: clamp(24px, 3vw, 48px); width: max-content; }
-  .stop { width: min(78vw, 440px); scroll-snap-align: start; }
-  .stop__text { margin-top: 24px; display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 12px; }
+  .stop { width: min(78vw, 440px, calc((var(--screen) - 330px) * 4 / 3)); scroll-snap-align: start; }
+  @media (max-width: 899px) { .stop { width: min(78vw, 440px); } .journey__meta { display: none; } }
+  .stop__text { margin-top: 16px; display: grid; grid-template-columns: 56px minmax(0, 1fr); column-gap: 12px; }
   .stop__n { grid-row: span 2; font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--gold); }
-  .stop p { margin-top: 10px; font-size: 16px; }
+  .stop p { margin-top: 6px; font-size: 15px; line-height: 1.55; }
   /* Scroll-driven horizontal mode (desktop, motion allowed): set by script */
   .journey.is-pinned { height: var(--journey-h, 300vh); }
-  .journey.is-pinned .journey__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding-block: 88px 0; }
+  .journey.is-pinned .journey__sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding-block: 72px 0; }
   .journey.is-pinned .journey__viewport { overflow: visible; scroll-snap-type: none; }
   .journey.is-pinned .journey__track { transform: translate3d(calc(var(--x, 0) * -1px), 0, 0); will-change: transform; }
 
   /* before / after key */
-  .ba-key { margin-top: 36px; display: grid; gap: 20px; }
-  .ba-key div { border-top: 1px solid var(--line-strong); padding-top: 16px; }
+  .ba-key { margin-top: var(--gap); display: grid; gap: 12px; }
+  .ba-key dd { font-size: 15px; line-height: 1.5; }
+  .ba-media :global(.cmp) { max-height: calc(var(--screen) - 2 * var(--section)); width: 100%; }
+  @media (max-width: 899px) { .ba-wrap { gap: 20px; } .ba-key { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .ba-key div { border-top: 1px solid var(--line-strong); padding-top: 10px; }
   .ba-key dd { margin-top: 6px; }
 
   /* who */
-  .who__list li { padding: 22px 0 22px 36px; border-top: 1px solid var(--line-strong); position: relative; font-size: 18px; color: var(--ink); }
-  .who__list li::before { content: ""; position: absolute; left: 0; top: 34px; width: 18px; height: 1px; background: var(--gold); }
-  .who__not { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line-strong); font-size: 16px; }
+  .who__list li { padding: clamp(10px, 2svh, 20px) 0 clamp(10px, 2svh, 20px) 36px; border-top: 1px solid var(--line-strong); position: relative; font-size: clamp(16px, 2.4svh, 18px); line-height: 1.5; color: var(--ink); }
+  .who__list li::before { content: ""; position: absolute; left: 0; top: calc(clamp(10px, 2svh, 20px) + .75em); width: 18px; height: 1px; background: var(--gold); }
+  .who__not { margin-top: var(--gap); padding-top: var(--gap); border-top: 1px solid var(--line-strong); font-size: 16px; }
 
   /* enquiry */
-  .contacts { margin-top: 48px; display: flex; flex-direction: column; gap: 24px; }
-  .contacts dd { margin-top: 6px; font-family: var(--font-display); font-size: 24px; color: var(--ink); }
+  .contacts { margin-top: var(--gap); display: flex; flex-direction: column; gap: 14px; }
+  @media (max-width: 899px) { .contacts, .enq-lead { display: none; } .enquire .split { gap: 20px; } }
+  .contacts dd { margin-top: 2px; font-family: var(--font-display); font-size: clamp(19px, 3svh, 24px); color: var(--ink); }
   .contacts a { text-decoration: none; }
 </style>
 

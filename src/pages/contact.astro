@@ -6,50 +6,71 @@ import { site, telHref, waHref, mailHref, phHtml } from '../config/site';
 ---
 <Base title="Contact" description="Book a free, no-obligation conversation with Deepak Thapliyal about your café or restaurant in Dehradun." active="contact" mobileBar={false}>
   <section class="c-page" aria-labelledby="c-h">
-    <div class="container split">
-      <div class="c-side" style="flex: 1 1 360px;">
-        <p class="label in in-1">Contact</p>
-        <h1 id="c-h" class="h1 in in-2">Begin with <em>a conversation</em>.</h1>
-        <p class="lead in in-3">Tell Deepak a little about your café. The first conversation is free, and there is nothing to prepare or sign.</p>
+    <div class="container">
+      <div class="c-side">
+        <div>
+          <p class="label in in-1">Contact</p>
+          <h1 id="c-h" class="h1 in in-2">Begin with <em>a conversation</em>.</h1>
+        </div>
+        <div>
+          <p class="lead in in-3">Tell Deepak a little about your café. The first conversation is free, and there is nothing to prepare or sign.</p>
+          <a class="link in in-4 c-skip" href="#reach">Other ways to reach Deepak</a>
+        </div>
+      </div>
+      <div class="c-form">
+        <EnquiryForm id="contact" />
+      </div>
+    </div>
+  </section>
 
-        <ol class="next in in-4">
+  <section id="reach" class="section section--ivory" aria-labelledby="reach-h">
+    <div class="container split">
+      <div style="flex: 1 1 360px;">
+        <p class="label">What happens next</p>
+        <h2 id="reach-h" class="h2" style="margin-top: 16px;">Simple, <em>and personal</em>.</h2>
+        <ol class="next">
           <li><span>I</span><p>Deepak calls or messages you within <span set:html={phHtml(site.replyDays, 'X')} /> working days.</p></li>
           <li><span>II</span><p>You talk about your café, over the phone or over chai.</p></li>
           <li><span>III</span><p>If it is a good fit, he suggests a plan and a clear quote.</p></li>
         </ol>
-
-        <dl class="contacts in in-5">
-          <div>
-            <dt class="label">Call or WhatsApp</dt>
-            <dd><a href={telHref()} set:html={phHtml(site.phoneDisplay, '+91 XXXXX XXXXX')} /></dd>
-            <dd class="contacts__more">
-              <a class="link" href={waHref()} target={site.phoneE164 ? '_blank' : undefined} rel={site.phoneE164 ? 'noopener' : undefined}><Icon name="chat" size={15} /> WhatsApp</a>
-              <span class="muted small">Best time: <span set:html={phHtml(site.bestTimeToCall, 'e.g. 3 to 6 PM, Mon to Sat')} /></span>
-            </dd>
-          </div>
-          <div><dt class="label">Email</dt><dd><a href={mailHref()} set:html={phHtml(site.email, 'email address')} /></dd></div>
-          <div><dt class="label">Social</dt><dd class="contacts__social"><a href={site.instagram?.url ?? '#'}>Instagram</a><a href={site.linkedin?.url ?? '#'}>LinkedIn</a></dd></div>
-          <div><dt class="label">Based in</dt><dd>{site.city}, {site.region}</dd></div>
-        </dl>
       </div>
-      <div class="c-form" style="flex: 1.4 1 520px;">
-        <EnquiryForm id="contact" />
-      </div>
+      <dl class="contacts" style="flex: 1.2 1 480px;">
+        <div>
+          <dt class="label">Call or WhatsApp</dt>
+          <dd><a href={telHref()} set:html={phHtml(site.phoneDisplay, '+91 XXXXX XXXXX')} /></dd>
+          <dd class="contacts__more">
+            <a class="link" href={waHref()} target={site.phoneE164 ? '_blank' : undefined} rel={site.phoneE164 ? 'noopener' : undefined}><Icon name="chat" size={15} /> WhatsApp</a>
+            <span class="muted small">Best time: <span set:html={phHtml(site.bestTimeToCall, 'e.g. 3 to 6 PM, Mon to Sat')} /></span>
+          </dd>
+        </div>
+        <div><dt class="label">Email</dt><dd><a href={mailHref()} set:html={phHtml(site.email, 'email address')} /></dd></div>
+        <div><dt class="label">Social</dt><dd class="contacts__social"><a href={site.instagram?.url ?? '#'}>Instagram</a><a href={site.linkedin?.url ?? '#'}>LinkedIn</a></dd></div>
+        <div><dt class="label">Based in</dt><dd>{site.city}, {site.region}</dd></div>
+      </dl>
     </div>
   </section>
 </Base>
 
 <style>
-  .c-page { padding: clamp(40px, 6vw, 96px) 0 var(--section); }
-  .c-side .h1 { margin-top: 28px; font-size: clamp(48px, 5.6vw, 84px); }
-  .c-side .lead { margin-top: 32px; }
-  .c-form { background: var(--ivory); padding: clamp(28px, 4.5vw, 64px); align-self: flex-start; }
-  .next { margin-top: 48px; border-top: 1px solid var(--line); }
-  .next li { display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  .c-page { padding: clamp(12px, 2.5svh, 40px) 0 clamp(24px, 6svh, 96px); }
+  .c-side { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px clamp(40px, 6vw, 96px); align-items: end; }
+  .c-side .h1 { margin-top: 12px; font-size: clamp(34px, min(5vw, 8svh), 76px); }
+  .c-skip { margin-top: 12px; }
+  .c-form { margin-top: clamp(16px, 3.5svh, 40px); background: var(--ivory); padding: clamp(20px, min(3.5vw, 4svh), 44px); }
+  /* On wide screens the form runs in two columns so the whole page fits one screen */
+  @media (min-width: 900px) {
+    .c-form :global(.enq__form) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(32px, 4vw, 64px); grid-auto-flow: row dense; align-items: start; }
+    .c-form :global(.enq__form > .enq__pair), .c-form :global(.enq__form > .field-group:not(:has(textarea))) { grid-column: 1; }
+    .c-form :global(.enq__form > .field-group:has(textarea)), .c-form :global(.enq__form > .enq__radios), .c-form :global(.enq__form > .enq__submit), .c-form :global(.enq__form > .enq__fail) { grid-column: 2; }
+  }
+  @media (max-width: 899px) { .c-side { grid-template-columns: 1fr; } .c-side .lead, .c-skip { display: none; } .c-form { margin-inline: calc(var(--gutter) * -1); margin-top: 12px; } .c-page { padding-bottom: 0; } }
+  .next { margin-top: var(--gap); border-top: 1px solid var(--line-strong); }
+  .next li { display: flex; gap: 20px; padding: clamp(10px, 2svh, 18px) 0; border-bottom: 1px solid var(--line-strong); font-size: 16px; line-height: 1.5; }
   .next li > span:first-child { flex: none; width: 28px; font-family: var(--font-display); font-size: 22px; line-height: 1.2; color: var(--gold); }
-  .contacts { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 32px; }
-  .contacts dd { margin-top: 8px; font-family: var(--font-display); font-size: 23px; color: var(--ink); }
+  .contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: clamp(16px, 3svh, 32px); align-content: center; }
+  .contacts dd { margin-top: 4px; font-family: var(--font-display); font-size: clamp(19px, 3svh, 23px); color: var(--ink); }
   .contacts a { text-decoration: none; }
-  .contacts__more { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; font-family: var(--font-body) !important; font-size: 15px !important; }
+  .contacts__more { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; font-family: var(--font-body) !important; font-size: 15px !important; }
   .contacts__social { display: flex; gap: 20px; }
+  @media (max-width: 599px) { .contacts { grid-template-columns: 1fr 1fr; } .contacts > div:first-child { grid-column: 1 / -1; } }
 </style>

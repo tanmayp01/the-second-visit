@@ -91,6 +91,16 @@ if (import.meta.env.PROD && !g.__tsvWarned) {
       </div>
     )}
     <script>
+      // "Read more" on phones: extra paragraphs stay folded until tapped.
+      document.querySelectorAll<HTMLElement>('[data-more]').forEach((box) => {
+        const btn = box.querySelector<HTMLButtonElement>('[data-more-btn]');
+        btn?.addEventListener('click', () => {
+          const open = box.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', String(open));
+          btn.textContent = open ? 'Read less' : 'Read more';
+        });
+      });
+
       // Headline reveal: split big headings into words that rise out of a mask.
       const splitWords = (el: HTMLElement) => {
         let i = 0;

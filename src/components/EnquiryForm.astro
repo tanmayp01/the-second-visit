@@ -62,7 +62,7 @@ const replyHtml = phHtml(site.replyDays, 'X');
 
     <div class="field-group">
       <label class="field-label" for={`${id}-msg`}>What would you like help with? <span class="opt">(optional)</span></label>
-      <textarea class="field" id={`${id}-msg`} name="message" rows="3" placeholder="For example, our weekend service feels rushed"></textarea>
+      <textarea class="field" id={`${id}-msg`} name="message" rows="2" placeholder="For example, our weekend service feels rushed"></textarea>
     </div>
 
     <fieldset class="enq__radios">
@@ -89,13 +89,17 @@ const replyHtml = phHtml(site.replyDays, 'X');
 </div>
 
 <style>
-  .enq__form { display: flex; flex-direction: column; gap: 36px; }
-  .enq__pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 36px 40px; }
+  .enq__form { display: flex; flex-direction: column; gap: clamp(14px, 2.6svh, 28px); }
+  .enq__pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2.6svh, 28px) 32px; }
   .enq__radios { border: 0; margin: 0; padding: 0; }
   .enq__radios legend { padding: 0; margin-bottom: 8px; }
-  .enq__choices { display: flex; flex-wrap: wrap; gap: 8px 36px; }
+  .enq__choices { display: flex; flex-wrap: wrap; gap: 0 36px; }
+  .enq__radios .choice { min-height: 40px; }
   .enq__submit { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; padding-top: 8px; }
-  .enq__note { flex: 1 1 260px; font-size: 14px; color: var(--muted); }
+  .enq__note { flex: 1 1 220px;
+  }
+  @media (max-width: 899px) { .enq__form { gap: 12px; } .enq__form .field { font-size: 16px; min-height: 40px; } .enq__form textarea.field { min-height: 44px; } .enq__note { font-size: 12px; } .enq__pair { gap: 12px 16px; } .enq__form .field-label { font-size: 10px; letter-spacing: .14em; } .enq__form .field-hint { font-size: 12px; } .enq__submit { gap: 10px; padding-top: 0; } .enq__submit .btn { width: 100%; } }
+  .enq__note { font-size: 13px; line-height: 1.5; color: var(--muted); }
   .enq__fail a { color: var(--error); font-weight: 500; }
   .enq__done { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; outline: none; padding-block: 24px; }
   .enq__done .link { border: 0; cursor: pointer; }

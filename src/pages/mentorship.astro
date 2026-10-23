@@ -57,7 +57,7 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
     <div class="container center narrow">
       <p class="label in in-1">The mentorship</p>
       <h1 id="m-h" class="h1 in in-2">Built around your café, <em>not a syllabus</em>.</h1>
-      <p class="lead in in-3" style="margin: 36px auto 0;">Deepak sees how your café works, agrees the focus with you, and trains you and your team on-site, in the morning, before service.</p>
+      <p class="lead in in-3" style="margin: var(--gap) auto 0;">Deepak sees how your café works, agrees the focus with you, and trains you and your team on-site, in the morning, before service.</p>
       <div class="in in-4 m-hero__cta">
         <a class="btn btn--solid" href="/contact/">Book a consultation <Icon name="arrow" size={16} stroke={1.5} /></a>
       </div>
@@ -72,11 +72,11 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
       <div class="split" style="align-items: flex-end;">
         <div style="flex: 1 1 420px;">
           <p class="label">What we work on</p>
-          <h2 id="menu-h" class="h2" style="margin-top: 24px;">Choose what matters most <em>to your café</em>.</h2>
+          <h2 id="menu-h" class="h2" style="margin-top: 16px;">Choose what matters most <em>to your café</em>.</h2>
         </div>
         <p class="lead" style="flex: 1 1 380px;">You choose the focus together. Deepak recommends where to start once he has seen your service.</p>
       </div>
-      <div class="groups">
+      <div class="groups swipe">
         {groups.map((g) => (
           <div class="group reveal">
             <p class="label">{g.label}</p>
@@ -85,13 +85,14 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
           </div>
         ))}
       </div>
+      <span class="swipe-hint" aria-hidden="true">Swipe for more</span>
     </div>
   </section>
 
   <section class="section" aria-labelledby="who-h">
     <div class="container">
       <p class="label">Who takes part</p>
-      <h2 id="who-h" class="h2" style="margin-top: 24px;">You, your team, <em>or both</em>.</h2>
+      <h2 id="who-h" class="h2" style="margin-top: 16px;">You, your team, <em>or both</em>.</h2>
       <div class="who">
         {who.map(([t, d]) => <div class="reveal"><h3 class="h3">{t}</h3><p>{d}</p></div>)}
       </div>
@@ -108,22 +109,22 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
     <div class="container split">
       <div style="flex: 1 1 340px;">
         <p class="label">A typical engagement</p>
-        <h2 id="flow-h" class="h2" style="margin-top: 24px;">From the first chai <em>to the follow-up</em>.</h2>
-        <p class="muted" style="margin-top: 24px;">The exact steps and the number of sessions are agreed with each café.</p>
+        <h2 id="flow-h" class="h2" style="margin-top: 16px;">From the first chai <em>to the follow-up</em>.</h2>
+        <p class="muted" style="margin-top: var(--gap);">The exact steps and the number of sessions are agreed with each café.</p>
       </div>
-      <ol class="flow" style="flex: 1.6 1 560px;">
+      <div style="flex: 1.6 1 560px; min-width: 0;"><ol class="flow swipe">
         {flow.map(([n, t, d]) => <li class="reveal"><span class="flow__n">{n}</span><div><h3 class="h3">{t}</h3><p>{d}</p></div></li>)}
-      </ol>
+      </ol><span class="swipe-hint" aria-hidden="true">Swipe for more</span></div>
     </div>
   </section>
 
   <section class="section section--ivory" aria-labelledby="fee-h">
     <div class="container center narrow">
       <p class="label">Fees</p>
-      <h2 id="fee-h" class="h2" style="margin-top: 24px;">Clear pricing, <em>agreed up front</em>.</h2>
+      <h2 id="fee-h" class="h2" style="margin-top: 16px;">Clear pricing, <em>agreed up front</em>.</h2>
       <p class="fee"><span class="label">From</span> ₹<span set:html={price} /></p>
       <p class="lead" style="margin: 0 auto;">The first conversation is always free. The fee depends on your team size, the number of sessions and your location, and you receive a clear quote before anything begins.</p>
-      <a class="btn btn--line" href="/contact/" style="margin-top: 44px;">Ask for a quote</a>
+      <a class="btn btn--line" href="/contact/" style="margin-top: var(--gap);">Ask for a quote</a>
     </div>
   </section>
 
@@ -131,7 +132,7 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
     <div class="container split">
       <div style="flex: 1 1 320px;">
         <p class="label">Practical details</p>
-        <h2 id="mfaq-h" class="h2" style="margin-top: 24px;">Logistics, <em>answered</em>.</h2>
+        <h2 id="mfaq-h" class="h2" style="margin-top: 16px;">Logistics, <em>answered</em>.</h2>
       </div>
       <div style="flex: 1.6 1 560px;">
         <Faq group="m-faq" items={faqs} />
@@ -141,27 +142,30 @@ const faqs = allFaqs.filter((f) => languageConfirmed || !f.q.startsWith('What la
 </Base>
 
 <style>
-  .m-hero { padding: clamp(40px, 6vw, 96px) 0 clamp(72px, 9vw, 140px); }
-  .m-hero .h1 { margin-top: 28px; }
-  .m-hero__cta { margin-top: 44px; }
-  .m-hero__photo { margin-top: clamp(56px, 7vw, 96px); }
-  @media (max-width: 899px) { .m-hero__photo :global(.photo) { aspect-ratio: 4 / 3 !important; } }
-  .groups { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 32px; }
-  .group { background: var(--white); padding: clamp(32px, 3.5vw, 48px); }
-  .group .h3 { margin-top: 16px; }
-  .group dl { margin-top: 28px; }
-  .group dl div { padding: 16px 0; border-top: 1px solid var(--line); }
+  .m-hero { padding: clamp(16px, 3svh, 48px) 0 var(--section); }
+  .m-hero .h1 { margin-top: 16px; font-size: clamp(38px, min(6vw, 8.5svh), 88px); }
+  .m-hero__cta { margin-top: var(--gap); }
+  .m-hero__photo { margin-top: var(--gap); }
+  .m-hero__photo :global(.photo) { aspect-ratio: auto !important; height: clamp(160px, calc(var(--screen) - 88px - 30svh - 250px), 500px); }
+  @media (max-width: 899px) { .m-hero__photo :global(.photo) { height: 26svh; } }
+  .groups { margin-top: var(--gap); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 32px; }
+  .group { background: var(--white); padding: clamp(18px, min(3vw, 3.4svh), 40px); }
+  .group .h3 { margin-top: 10px; }
+  .group dl { margin-top: 14px; }
+  .group dl div { padding: clamp(7px, 1.2svh, 14px) 0; border-top: 1px solid var(--line); }
   .group dt { color: var(--ink); font-weight: 450; }
-  .group dd { margin-top: 4px; font-size: 15px; }
-  .who { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 48px; }
-  .who div { border-top: 1px solid var(--ink); padding-top: 28px; }
-  .who p { margin-top: 14px; font-size: 16px; }
+  @media (max-width: 899px) { .group { padding: 18px; } .group dl { margin-top: 10px; } .group dl div { padding: 7px 0; } }
+  .group dt { line-height: 1.4; } .group dd { margin-top: 2px; font-size: 14px; line-height: 1.5; }
+  .who { margin-top: var(--gap); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: clamp(16px, 4svh, 48px); }
+  .who div { border-top: 1px solid var(--ink); padding-top: clamp(12px, 2.4svh, 24px); }
+  .who p { margin-top: 8px; font-size: 16px; line-height: 1.55; }
   .film-h { margin-top: 24px; color: var(--on-dark) !important; }
-  .film-p { margin: 24px auto 0; max-width: 34em; font-size: 18px; color: var(--on-dark); }
-  .flow li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 28px 0; border-top: 1px solid var(--line); }
+  .film-p { margin: var(--gap) auto 0; max-width: 34em; font-size: 18px; color: var(--on-dark); }
+  .flow li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: clamp(10px, 2svh, 22px) 0; border-top: 1px solid var(--line); }
   .flow li:last-child { border-bottom: 1px solid var(--line); }
   .flow__n { font-family: var(--font-display); font-size: 30px; line-height: 1; color: var(--gold); }
-  .flow p { margin-top: 10px; font-size: 16px; max-width: 52ch; }
-  .fee { margin: 44px 0 32px; font-family: var(--font-display); font-weight: 400; font-size: clamp(56px, 7vw, 96px); line-height: 1; color: var(--ink); }
-  .fee .label { display: block; margin-bottom: 16px; }
+  .flow p { margin-top: 4px; font-size: 15px; line-height: 1.55; max-width: 52ch; }
+  @media (max-width: 899px) { .flow li { grid-template-columns: 1fr; gap: 8px; border: 1px solid var(--line) !important; padding: 20px; } }
+  .fee { margin: var(--gap) 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(48px, min(7vw, 10svh), 90px); line-height: 1; color: var(--ink); }
+  .fee .label { display: block; margin-bottom: 10px; }
 </style>

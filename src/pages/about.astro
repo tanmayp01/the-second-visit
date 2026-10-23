@@ -31,13 +31,14 @@ const quoteApproved = false;
     <div class="container split">
       <div style="flex: 1 1 320px;">
         <p class="label">The story</p>
-        <h2 id="story-h" class="h2" style="margin-top: 24px;">The long <em>way round</em>.</h2>
+        <h2 id="story-h" class="h2" style="margin-top: 16px;">The long <em>way round</em>.</h2>
       </div>
-      <div class="story" style="flex: 1.6 1 560px;">
+      <div class="story" style="flex: 1.6 1 560px;" data-more>
         <p class="story__lead">Deepak has more than fifteen years of experience in hospitality and management. He has worked across different levels of the industry, learning how hotels, restaurants, cafés, teams and day-to-day operations work from the ground up.</p>
-        <p>His experience covers both sides of the business. On the guest side: understanding what guests expect, building relationships, collecting and acting on feedback, and encouraging repeat visits. On the operational side: training and coaching staff, keeping service consistent, managing inventory and stock, and working with hospitality software and workflows.</p>
-        <p>The Second Visit rests on one belief: a beautiful café alone does not bring guests back. The everyday details do, and they can be taught to any team, however small.</p>
-        <p class="muted">He also has an educational background in science.</p>
+        <p class="more-hide">His experience covers both sides of the business. On the guest side: understanding what guests expect, building relationships, collecting and acting on feedback, and encouraging repeat visits. On the operational side: training and coaching staff, keeping service consistent, managing inventory and stock, and working with hospitality software and workflows.</p>
+        <p class="more-hide">The Second Visit rests on one belief: a beautiful café alone does not bring guests back. The everyday details do, and they can be taught to any team, however small.</p>
+        <p class="muted more-hide">He also has an educational background in science.</p>
+        <button class="link more-btn" type="button" data-more-btn aria-expanded="false">Read more</button>
       </div>
     </div>
   </section>
@@ -47,7 +48,7 @@ const quoteApproved = false;
       <div class="split" style="align-items: flex-end;">
         <div style="flex: 1 1 420px;">
           <p class="label">Career</p>
-          <h2 id="path-h" class="h2" style="margin-top: 24px;">Where he has <em>worked</em>.</h2>
+          <h2 id="path-h" class="h2" style="margin-top: 16px;">Where he has <em>worked</em>.</h2>
         </div>
         {!site.previousRoles.length && <p style="flex: 0 1 auto;"><span class="ph small">Earlier roles to be confirmed with Deepak</span></p>}
       </div>
@@ -71,20 +72,21 @@ const quoteApproved = false;
     <div class="container">
       <div class="center narrow" style="margin-inline: auto; padding: 0;">
         <p class="label">Expertise</p>
-        <h2 id="knows-h" class="h2" style="margin-top: 24px;">The guest, the team <em>and the back office</em>.</h2>
+        <h2 id="knows-h" class="h2" style="margin-top: 16px;">The guest, the team <em>and the back office</em>.</h2>
       </div>
-      <div class="knows">
+      <div class="knows swipe">
         {expertise.map(([t, items]) => (
           <div class="reveal"><h3 class="h3">{t}</h3><ul>{items.map((i) => <li>{i}</li>)}</ul></div>
         ))}
       </div>
+      <span class="swipe-hint" aria-hidden="true">Swipe for more</span>
       {quoteApproved && (
         <blockquote class="quote">
           <p>“{site.city} is full of beautiful new cafés. I want the people who open them to still be serving their regulars years from now.”</p>
           <footer class="label">{site.owner}</footer>
         </blockquote>
       )}
-      <div class="center" style="margin-top: clamp(64px, 8vw, 112px);">
+      <div class="center" style="margin-top: var(--gap);">
         <a class="btn btn--solid" href="/contact/">Book a consultation <Icon name="arrow" size={16} stroke={1.5} /></a>
       </div>
     </div>
@@ -92,26 +94,27 @@ const quoteApproved = false;
 </Base>
 
 <style>
-  .a-hero { padding: clamp(24px, 4vw, 64px) 0 clamp(72px, 9vw, 140px); }
+  .a-hero { padding: clamp(16px, 3svh, 48px) 0 clamp(24px, 6svh, 96px); }
   .a-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(40px, 7vw, 120px); align-items: end; }
-  .a-hero__text .h1 { margin-top: 28px; font-size: clamp(48px, 6.2vw, 96px); }
-  .a-hero__text .rule { margin-top: 40px; }
-  .a-hero__text .lead { margin-top: 32px; }
-  @media (max-width: 899px) { .a-hero__grid { grid-template-columns: 1fr; } }
-  .story { display: flex; flex-direction: column; gap: 22px; max-width: 680px; }
-  .story__lead { font-size: clamp(19px, 1.55vw, 22px); line-height: 1.6; color: var(--ink); }
-  .path { margin-top: clamp(48px, 6vw, 72px); border-top: 1px solid var(--ink); }
-  .path li { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr) minmax(0, 1.2fr); gap: 8px 32px; padding: 28px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .a-hero__grid > :global(.photo) { height: min(calc(var(--screen) - 96px - clamp(16px, 3svh, 48px) - clamp(24px, 6svh, 96px)), 640px); width: auto; justify-self: end; }
+  .a-hero__text .h1 { margin-top: 20px; font-size: clamp(40px, min(6.2vw, 9.5svh), 92px); }
+  .a-hero__text .rule { margin-top: var(--gap); }
+  .a-hero__text .lead { margin-top: var(--gap); }
+  @media (max-width: 899px) { .a-hero__grid { grid-template-columns: 1fr; gap: 20px; } .a-hero__grid > :global(.photo) { width: 100%; height: auto; aspect-ratio: 16 / 10 !important; max-height: 26svh; } }
+  .story { display: flex; flex-direction: column; gap: var(--gap); max-width: 680px; }
+  .story__lead { font-size: clamp(17px, min(1.55vw, 2.6svh), 21px); line-height: 1.6; color: var(--ink); }
+  .path { margin-top: var(--gap); border-top: 1px solid var(--ink); }
+  .path li { display: grid; grid-template-columns: minmax(100px, 1fr) minmax(0, 2fr) minmax(0, 1.2fr); gap: 4px 32px; padding: clamp(12px, 2.4svh, 24px) 0; border-bottom: 1px solid var(--line); align-items: baseline; }
   .path__when { font-family: var(--font-ui); font-size: 12px; font-weight: 450; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
-  .path__role { font-family: var(--font-display); font-size: clamp(22px, 2vw, 28px); color: var(--ink); }
+  .path__role { font-family: var(--font-display); font-size: clamp(20px, min(2vw, 3.4svh), 28px); color: var(--ink); }
   .path--ph > * { color: var(--muted) !important; }
   @media (max-width: 700px) { .path li { grid-template-columns: 1fr; } }
   .film-h { margin-top: 24px; color: var(--on-dark) !important; }
-  .film-p { margin: 28px auto 0; max-width: 40em; font-size: 18px; color: var(--on-dark); }
-  .film-note { margin: 28px auto 0; max-width: 40em; font-size: 13px; color: var(--on-dark-muted); }
-  .knows { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 48px; }
-  .knows .h3 { padding-bottom: 20px; border-bottom: 1px solid var(--ink); }
-  .knows li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  .film-p { margin: var(--gap) auto 0; max-width: 40em; font-size: clamp(16px, 2.4svh, 18px); color: var(--on-dark); }
+  .film-note { margin: var(--gap) auto 0; max-width: 40em; font-size: 13px; color: var(--on-dark-muted); }
+  .knows { margin-top: var(--gap); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 48px; }
+  .knows .h3 { padding-bottom: 12px; border-bottom: 1px solid var(--ink); }
+  .knows li { padding: clamp(8px, 1.4svh, 14px) 0; line-height: 1.5; border-bottom: 1px solid var(--line); font-size: 16px; }
   .quote { margin: clamp(72px, 9vw, 128px) auto 0; max-width: 900px; text-align: center; }
   .quote p { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.6vw, 50px); line-height: 1.2; color: var(--ink); }
   .quote footer { margin-top: 28px; }
