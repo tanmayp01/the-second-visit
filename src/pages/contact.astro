@@ -18,7 +18,7 @@ import { site, telHref, waHref, mailHref, phHtml } from '../config/site';
         </div>
       </div>
       <div class="c-form">
-        <EnquiryForm id="contact" />
+        <EnquiryForm id="contact" wide />
       </div>
     </div>
   </section>
@@ -52,17 +52,11 @@ import { site, telHref, waHref, mailHref, phHtml } from '../config/site';
 </Base>
 
 <style>
-  .c-page { padding: clamp(12px, 2.5svh, 40px) 0 clamp(24px, 6svh, 96px); }
+  .c-page { padding: clamp(8px, 2svh, 40px) 0 clamp(12px, 4svh, 96px); }
   .c-side { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px clamp(40px, 6vw, 96px); align-items: end; }
-  .c-side .h1 { margin-top: 12px; font-size: clamp(34px, min(5vw, 8svh), 76px); }
+  .c-side .h1 { margin-top: 12px; font-size: clamp(34px, min(5vw, 7svh), 76px); }
   .c-skip { margin-top: 12px; }
-  .c-form { margin-top: clamp(16px, 3.5svh, 40px); background: var(--ivory); padding: clamp(20px, min(3.5vw, 4svh), 44px); }
-  /* On wide screens the form runs in two columns so the whole page fits one screen */
-  @media (min-width: 900px) {
-    .c-form :global(.enq__form) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(32px, 4vw, 64px); grid-auto-flow: row dense; align-items: start; }
-    .c-form :global(.enq__form > .enq__pair), .c-form :global(.enq__form > .field-group:not(:has(textarea))) { grid-column: 1; }
-    .c-form :global(.enq__form > .field-group:has(textarea)), .c-form :global(.enq__form > .enq__radios), .c-form :global(.enq__form > .enq__submit), .c-form :global(.enq__form > .enq__fail) { grid-column: 2; }
-  }
+  .c-form { margin-top: clamp(12px, 2.5svh, 40px); background: var(--ivory); padding: clamp(16px, min(3.5vw, 3.4svh), 44px); }
   @media (max-width: 899px) { .c-side { grid-template-columns: 1fr; } .c-side .lead, .c-skip { display: none; } .c-form { margin-inline: calc(var(--gutter) * -1); margin-top: 12px; } .c-page { padding-bottom: 0; } }
   .next { margin-top: var(--gap); border-top: 1px solid var(--line-strong); }
   .next li { display: flex; gap: 20px; padding: clamp(10px, 2svh, 18px) 0; border-bottom: 1px solid var(--line-strong); font-size: 16px; line-height: 1.5; }

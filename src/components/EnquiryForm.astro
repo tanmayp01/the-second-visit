@@ -2,12 +2,12 @@
 import Icon from './Icon.astro';
 import { site, telHref, phHtml } from '../config/site';
 
-interface Props { id?: string }
-const { id = 'enquiry' } = Astro.props;
+interface Props { id?: string; wide?: boolean }
+const { id = 'enquiry', wide = false } = Astro.props;
 const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
 const replyHtml = phHtml(site.replyDays, 'X');
 ---
-<div class="enq" data-enquiry data-key={accessKey} data-dev={import.meta.env.DEV ? '1' : ''} data-call={telHref()}>
+<div class:list={["enq", { "enq--wide": wide }]} data-enquiry data-key={accessKey} data-dev={import.meta.env.DEV ? '1' : ''} data-call={telHref()}>
   <form class="enq__form" action="https://api.web3forms.com/submit" method="POST" novalidate aria-label="Request a consultation" data-form>
     <input type="hidden" name="access_key" value={accessKey} />
     <input type="hidden" name="subject" value="New enquiry from The Second Visit website" />
@@ -89,8 +89,16 @@ const replyHtml = phHtml(site.replyDays, 'X');
 </div>
 
 <style>
-  .enq__form { display: flex; flex-direction: column; gap: clamp(14px, 2.6svh, 28px); }
-  .enq__pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2.6svh, 28px) 32px; }
+  .enq__form { display: flex; flex-direction: column; gap: clamp(10px, 2.2svh, 28px); }
+  .enq__form .field { min-height: clamp(36px, 6.4svh, 44px); }
+  .enq__form textarea.field { min-height: clamp(40px, 8svh, 64px); }
+  /* Wide: two columns, so the whole form fits one screen */
+  @media (min-width: 900px) {
+    .enq--wide .enq__form { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(32px, 4vw, 64px); row-gap: clamp(10px, 2.2svh, 28px); grid-auto-flow: row dense; align-items: start; }
+    .enq--wide .enq__form > .enq__pair, .enq--wide .enq__form > .field-group:not(:has(textarea)) { grid-column: 1; }
+    .enq--wide .enq__form > .field-group:has(textarea), .enq--wide .enq__form > .enq__radios, .enq--wide .enq__form > .enq__submit, .enq--wide .enq__form > .enq__fail { grid-column: 2; }
+  }
+  .enq__pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 2.2svh, 28px) 32px; }
   .enq__radios { border: 0; margin: 0; padding: 0; }
   .enq__radios legend { padding: 0; margin-bottom: 8px; }
   .enq__choices { display: flex; flex-wrap: wrap; gap: 0 36px; }

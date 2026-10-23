@@ -44,7 +44,7 @@ const links = [
   .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: transform .45s var(--ease), border-color .3s ease; }
   .site-header.is-hidden { transform: translateY(-100%); }
   .site-header { --hdr: 88px; }
-  .site-header--overlay { margin-bottom: calc(-1 * var(--hdr)); }
+  .site-header--overlay { margin-bottom: calc(-1 * var(--hdr) - 1px); }
   .site-header--overlay:not(.is-solid) { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom-color: rgba(244,240,233,.18); }
   .site-header--overlay:not(.is-solid) :is(.brand, .nav__link, .menu-btn) { color: var(--on-dark); }
   .site-header--overlay:not(.is-solid) .brand__by { color: var(--gold-soft); }

@@ -23,14 +23,14 @@ const { film, size = 'tall', align = 'center', id } = Astro.props;
 
 <style>
   .film { position: relative; overflow: hidden; display: flex; align-items: center; isolation: isolate; background: var(--deep); }
-  .film--tall { min-height: clamp(560px, 92vh, 880px); }
-  .film--medium { min-height: clamp(460px, 70vh, 680px); }
+  .film--tall { min-height: min(92svh, 880px); }
+  .film--medium { min-height: min(70svh, 680px); }
   .film--full { min-height: 100vh; min-height: 100svh; }
   @media (max-width: 899px) { .film--full { min-height: calc(100svh - 56px); } }
-  .film--full .film__inner { padding-top: clamp(140px, 18vh, 200px); }
+  .film--full .film__inner { padding-top: clamp(80px, 15svh, 200px); }
   .film__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(.85); transform: scale(var(--zoom, 1)); will-change: transform; }
   .film__shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,14,12,.55) 0%, rgba(10,14,12,.35) 45%, rgba(10,14,12,.7) 100%); }
-  .film__inner { width: 100%; padding-block: clamp(88px, 10vw, 140px); color: var(--on-dark); }
+  .film__inner { width: 100%; padding-block: clamp(48px, 10svh, 140px); color: var(--on-dark); }
   .film--center .film__inner { text-align: center; }
 </style>
 

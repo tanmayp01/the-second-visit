@@ -169,6 +169,8 @@ select.field { appearance: none; -webkit-appearance: none; padding-right: 32px; 
 .choice input { width: 18px; height: 18px; accent-color: var(--ink); margin: 0; }
 
 /* ---------- fit-to-screen helpers ---------- */
+/* Desktop: two-column sections never drop into one tall column */
+@media (min-width: 900px) { .split { flex-wrap: nowrap; } }
 .h1 { font-size: clamp(42px, min(7vw, 10svh), 100px); }
 .more-btn { display: none; }
 @media (max-width: 899px) {
