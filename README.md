@@ -17,7 +17,7 @@ We do not launch until all of these are done. Run the gate to check:
 SITE_URL=https://yourdomain.in PUBLIC_WEB3FORMS_KEY=your-key npm run launch-check
 ```
 
-It fails until: a custom domain is set, the favicons exist, there are no "made with" or AI tags, the Privacy Policy and Terms pages exist, every placeholder in `src/config/site.ts` (including the `legal` details) is filled in, the form key is set and the videos are self-hosted.
+It fails until: a custom domain is set, the favicons exist, there are no "made with" or AI tags, the Privacy Policy and Terms pages exist and a lawyer has reviewed them, Deepak has approved all the copy, every placeholder in `src/config/site.ts` (including the `legal` and `signOff` details) is filled in, the form key is set, the videos are self-hosted and no stand-in photos are left.
 
 The Privacy Policy (`/privacy/`) and Terms and Conditions (`/terms/`) were written to match exactly what this site does. They are not legal advice: have a lawyer review both before launch, and update them if you add analytics, cookies or payments.
 

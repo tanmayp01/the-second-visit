@@ -48,6 +48,22 @@ export const site = {
     /** How long enquiries are kept if the person does not become a client, e.g. "12 months". */
     retention: null as string | null,
   },
+
+  /**
+   * Sign-offs needed before launch. Write who signed off and when,
+   * e.g. "Deepak Thapliyal, 2 December 2026".
+   */
+  signOff: {
+    /**
+     * Deepak has read and approved every line on the site. The headlines,
+     * the hero line ("Beautiful cafés win the first visit. Hospitality wins
+     * the second.") and the philosophy quote were written for the site from
+     * the brief, not by him, so they need his approval or his own words.
+     */
+    copyApprovedBy: null as string | null,
+    /** A lawyer has reviewed the Privacy Policy and the Terms and Conditions. */
+    legalReviewedBy: null as string | null,
+  },
 };
 
 export const telHref = () => (site.phoneE164 ? `tel:${site.phoneE164}` : '/contact/');
@@ -79,6 +95,8 @@ export const missingContent = () =>
     'legal.address': site.legal.address,
     'legal.effectiveDate': site.legal.effectiveDate,
     'legal.retention': site.legal.retention,
+    'signOff.copyApprovedBy': site.signOff.copyApprovedBy,
+    'signOff.legalReviewedBy': site.signOff.legalReviewedBy,
   })
     .filter(([, v]) => !v)
     .map(([k]) => k);

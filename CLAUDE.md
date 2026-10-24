@@ -24,7 +24,8 @@ Do not launch until all of these are true. `npm run launch-check` verifies them:
 - a custom domain is connected and `SITE_URL` points to it
 - favicon set is in place
 - no "made with" or AI tags anywhere
-- Privacy Policy (`/privacy/`) and Terms and Conditions (`/terms/`) pages exist, are complete and have been reviewed by a lawyer
+- Privacy Policy (`/privacy/`) and Terms and Conditions (`/terms/`) pages exist, are complete and have been reviewed by a lawyer (`signOff.legalReviewedBy`)
+- Deepak has approved every line of copy, including headlines written for the site (`signOff.copyApprovedBy`)
 - every placeholder in `src/config/site.ts` is filled in
 - the Web3Forms key is set
 - background videos are self-hosted in `public/video/`
